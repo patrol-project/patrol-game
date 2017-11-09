@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# We need this file to make the project portable
+!SDL2.dll
