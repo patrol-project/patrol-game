@@ -6,54 +6,113 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-//SDL-required arguments for multi-platform
-int main(int argc, char* args[])
-{
-	SDL_Window* window = NULL;
-	SDL_Surface* screenSurface = NULL;
+//Starts up SDL and creates window
+bool init();
 
-	//Initializing SDL
+//Loads media
+bool loadMedia();
+
+//Frees media and shuts down SDL
+void close();
+
+//Main window
+SDL_Window* window = NULL;
+
+//Surface contained by the window
+SDL_Surface* screenSurface = NULL;
+
+SDL_Surface* mainBackground = NULL;
+
+bool init()
+{
+	//Initialization flag
+	bool success = true;
+
+	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		//Initialization debugging
-		printf("SDL could not initialize! SDL error: %s\n", SDL_GetError());
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		success = false;
 	}
 	else
 	{
-		//Initialize window
-		window = SDL_CreateWindow(
-			"Patrol", 
-			SDL_WINDOWPOS_UNDEFINED, 
-			SDL_WINDOWPOS_UNDEFINED, 
-			SCREEN_WIDTH, 
-			SCREEN_HEIGHT, 
-			SDL_WINDOW_SHOWN);
-
+		//Create window
+		window = SDL_CreateWindow("Patrol", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (window == NULL)
 		{
-			printf("Window could not be initialized! SDL_Error: %s\n", SDL_GetError());
+			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			success = false;
 		}
 		else
 		{
 			//Get window surface
 			screenSurface = SDL_GetWindowSurface(window);
+		}
+	}
 
-			//Fill the surface with red
-			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 0, 0));
+	return success;
+}
 
-			//Update surface
+bool loadMedia()
+{
+	//Loading success flag
+	bool success = true;
+
+	//Load splash image
+	mainBackground = SDL_LoadBMP("Resources/mainBackground.bmp");
+	if (mainBackground == NULL)
+	{
+		printf("Unable to load image %s! SDL Error: %s\n", "Resources/mainBackground.jpp", SDL_GetError());
+		success = false;
+	}
+
+	return success;
+}
+
+void close()
+{
+	//Deallocate surface
+	SDL_FreeSurface(mainBackground);
+	mainBackground = NULL;
+
+	//Destroy window
+	SDL_DestroyWindow(window);
+	window = NULL;
+
+	//Quit SDL subsystems
+	SDL_Quit();
+}
+
+//SDL-required arguments for multi-platform
+int main(int argc, char* args[])
+{
+	//Initializing SDL
+	if (!init())
+	{
+		printf("SDL failed to initialize!\n");
+	}
+	else
+	{
+		//Load media
+		if (!loadMedia())
+		{
+			printf("Failed to load media!\n");
+		}
+		else
+		{
+			//Apply the image
+			SDL_BlitSurface(mainBackground, NULL, screenSurface, NULL);
+
+			//Update the surface
 			SDL_UpdateWindowSurface(window);
 
-			//Delay closing for 2 seconds
+			//Wait two seconds
 			SDL_Delay(2000);
 		}
 	}
 
-	//Destroy window and surface
-	SDL_DestroyWindow(window);
-
-	//Quit SDL
-	SDL_Quit();
+	//Free resources and close SDL
+	close();
 
 	return 0;
 }
