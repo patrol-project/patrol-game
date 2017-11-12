@@ -110,14 +110,31 @@ int main(int argc, char* args[])
 		}
 		else
 		{
-			//Apply the image
-			SDL_BlitSurface(mainBackgroundSurface, NULL, screenSurface, NULL);
+			//Main loop flag
+			bool shouldQuit = false;
 
-			//Update the surface
-			SDL_UpdateWindowSurface(window);
+			//Event handler
+			SDL_Event event;
 
-			//Wait two seconds
-			SDL_Delay(2000);
+			//Main loop
+			while (!shouldQuit)
+			{
+				//Handle events on queue
+				while (SDL_PollEvent(&event) != 0)
+				{
+					//User requests quit
+					if (event.type == SDL_QUIT)
+					{
+						shouldQuit = true;
+					}
+				}
+
+				//Apply the image
+				SDL_BlitSurface(mainBackgroundSurface, NULL, screenSurface, NULL);
+
+				//Update the surface
+				SDL_UpdateWindowSurface(window);
+			}
 		}
 	}
 
