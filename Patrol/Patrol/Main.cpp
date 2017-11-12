@@ -21,7 +21,7 @@ SDL_Window* window = NULL;
 //Surface contained by the window
 SDL_Surface* screenSurface = NULL;
 
-SDL_Surface* mainBackground = NULL;
+SDL_Surface* mainBackgroundSurface = NULL;
 
 bool init()
 {
@@ -37,7 +37,14 @@ bool init()
 	else
 	{
 		//Create window
-		window = SDL_CreateWindow("Patrol", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow(
+			"Patrol",
+			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED,
+			SCREEN_WIDTH, SCREEN_HEIGHT,
+			SDL_WINDOW_SHOWN);
+
+		//Initialization debugging
 		if (window == NULL)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -57,12 +64,15 @@ bool loadMedia()
 {
 	//Loading success flag
 	bool success = true;
+	
+	//Background image path
+	char* backgroundPath = "Resources/mainBackground.bmp";
 
-	//Load splash image
-	mainBackground = SDL_LoadBMP("Resources/mainBackground.bmp");
-	if (mainBackground == NULL)
+	//Load image background
+	mainBackgroundSurface = SDL_LoadBMP(backgroundPath);
+	if (mainBackgroundSurface == NULL)
 	{
-		printf("Unable to load image %s! SDL Error: %s\n", "Resources/mainBackground.jpp", SDL_GetError());
+		printf("Unable to load image %s! SDL Error: %s\n", backgroundPath, SDL_GetError());
 		success = false;
 	}
 
@@ -72,8 +82,8 @@ bool loadMedia()
 void close()
 {
 	//Deallocate surface
-	SDL_FreeSurface(mainBackground);
-	mainBackground = NULL;
+	SDL_FreeSurface(mainBackgroundSurface);
+	mainBackgroundSurface = NULL;
 
 	//Destroy window
 	SDL_DestroyWindow(window);
@@ -81,7 +91,7 @@ void close()
 
 	//Quit SDL subsystems
 	SDL_Quit();
-}
+}	
 
 //SDL-required arguments for multi-platform
 int main(int argc, char* args[])
@@ -101,7 +111,7 @@ int main(int argc, char* args[])
 		else
 		{
 			//Apply the image
-			SDL_BlitSurface(mainBackground, NULL, screenSurface, NULL);
+			SDL_BlitSurface(mainBackgroundSurface, NULL, screenSurface, NULL);
 
 			//Update the surface
 			SDL_UpdateWindowSurface(window);
