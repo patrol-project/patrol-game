@@ -6,6 +6,13 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+//Surfaces constants
+enum SurfacesEnum
+{
+	SURFACE_DEFAULT,
+	SURFACE_TOTAL
+};
+
 //Starts up SDL and creates window
 bool init();
 
@@ -15,13 +22,20 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+//Loads individual image
+SDL_Surface* loadSurface(char* path);
+
 //Main window
 SDL_Window* window = NULL;
 
 //Surface contained by the window
 SDL_Surface* screenSurface = NULL;
 
-SDL_Surface* mainBackgroundSurface = NULL;
+//Images corresponding to each surface
+SDL_Surface* surfaces[SURFACE_TOTAL];
+
+//Current displayed image
+SDL_Surface* currentSurface = NULL;
 
 bool init()
 {
@@ -65,14 +79,14 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 	
-	//Background image path
-	char* backgroundPath = "Resources/mainBackground.bmp";
+	//Default image path
+	char* defaultSurfacePath = "Resources/mainBackground.bmp";
 
-	//Load image background
-	mainBackgroundSurface = SDL_LoadBMP(backgroundPath);
-	if (mainBackgroundSurface == NULL)
+	//Load default surface
+	surfaces[SURFACE_DEFAULT] = loadSurface(defaultSurfacePath);
+	if (surfaces[SURFACE_DEFAULT] == NULL)
 	{
-		printf("Unable to load image %s! SDL Error: %s\n", backgroundPath, SDL_GetError());
+		printf("Unable to load image %s! SDL Error: %s\n", defaultSurfacePath, SDL_GetError());
 		success = false;
 	}
 
@@ -81,9 +95,12 @@ bool loadMedia()
 
 void close()
 {
-	//Deallocate surface
-	SDL_FreeSurface(mainBackgroundSurface);
-	mainBackgroundSurface = NULL;
+	//Deallocate surfaces
+	for (int i = 0; i < SURFACE_TOTAL; ++i)
+	{
+		SDL_FreeSurface(surfaces[i]);
+		surfaces[i] = NULL;
+	}
 
 	//Destroy window
 	SDL_DestroyWindow(window);
@@ -92,6 +109,18 @@ void close()
 	//Quit SDL subsystems
 	SDL_Quit();
 }	
+
+SDL_Surface* loadSurface(char* path)
+{
+	//Load image at specified path
+	SDL_Surface* loadedSurface = SDL_LoadBMP(path);
+	if (loadedSurface == NULL)
+	{
+		printf("Unable to load image %s! SDL Error: %s\n", path, SDL_GetError());
+	}
+
+	return loadedSurface;
+}
 
 //SDL-required arguments for multi-platform
 int main(int argc, char* args[])
@@ -116,6 +145,9 @@ int main(int argc, char* args[])
 			//Event handler
 			SDL_Event event;
 
+			//Set default current surface
+			currentSurface = surfaces[SURFACE_DEFAULT];
+
 			//Main loop
 			while (!shouldQuit)
 			{
@@ -127,10 +159,37 @@ int main(int argc, char* args[])
 					{
 						shouldQuit = true;
 					}
+					//User presses a key
+					else if (event.type == SDL_KEYDOWN)
+					{
+						//Handling key presses
+						switch (event.key.keysym.sym)
+						{
+						case SDLK_UP:
+							printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
+							break;
+
+						case SDLK_DOWN:
+							printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
+							break;
+
+						case SDLK_LEFT:
+							printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
+							break;
+
+						case SDLK_RIGHT:
+							printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
+							break;
+
+						default:
+							printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
+							break;
+						}
+					}
 				}
 
 				//Apply the image
-				SDL_BlitSurface(mainBackgroundSurface, NULL, screenSurface, NULL);
+				SDL_BlitSurface(currentSurface, NULL, screenSurface, NULL);
 
 				//Update the surface
 				SDL_UpdateWindowSurface(window);
