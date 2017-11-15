@@ -22,6 +22,9 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+//Apply the image stretched
+void stretchSurface();
+
 //Loads individual image
 SDL_Surface* loadSurface(char* path);
 
@@ -110,16 +113,44 @@ void close()
 	SDL_Quit();
 }	
 
+void stretchSurface()
+{
+	SDL_Rect stretchRect;
+	stretchRect.x = 0;
+	stretchRect.y = 0;
+	stretchRect.w = SCREEN_WIDTH;
+	stretchRect.h = SCREEN_HEIGHT;
+	SDL_BlitScaled(currentSurface, NULL, screenSurface, &stretchRect);
+
+	//Update the surface
+	SDL_UpdateWindowSurface(window);
+}
+
 SDL_Surface* loadSurface(char* path)
 {
+	//The final optimized image
+	SDL_Surface* optimizedSurface = NULL;
+
 	//Load image at specified path
 	SDL_Surface* loadedSurface = SDL_LoadBMP(path);
 	if (loadedSurface == NULL)
 	{
 		printf("Unable to load image %s! SDL Error: %s\n", path, SDL_GetError());
 	}
+	else
+	{
+		//Convert surface to screen format
+		optimizedSurface = SDL_ConvertSurface(loadedSurface, screenSurface->format, NULL);
+		if (optimizedSurface == NULL)
+		{
+			printf("Unable to optimize image %s! SDL Error: %s\n", path, SDL_GetError());
+		}
 
-	return loadedSurface;
+		//Get rid of old loaded surface
+		SDL_FreeSurface(loadedSurface);
+	}
+
+	return optimizedSurface;
 }
 
 //SDL-required arguments for multi-platform
