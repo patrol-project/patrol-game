@@ -1,5 +1,6 @@
 //SDL header file
 #include <SDL.h>
+#include <SDL_image.h>
 #include <stdio.h>
 
 //Window dimensions
@@ -69,8 +70,18 @@ bool init()
 		}
 		else
 		{
-			//Get window surface
-			screenSurface = SDL_GetWindowSurface(window);
+			//Initialize PNG loading
+			int imgFlags = IMG_INIT_JPG;
+			if (!(IMG_Init(imgFlags) & imgFlags))
+			{
+				printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+				success = false;
+			}
+			else
+			{
+				//Get window surface
+				screenSurface = SDL_GetWindowSurface(window);
+			}
 		}
 	}
 
@@ -83,7 +94,7 @@ bool loadMedia()
 	bool success = true;
 	
 	//Default image path
-	char* defaultSurfacePath = "Resources/mainBackground.bmp";
+	char* defaultSurfacePath = "Resources/mainBackground.jpg";
 
 	//Load default surface
 	surfaces[SURFACE_DEFAULT] = loadSurface(defaultSurfacePath);
@@ -132,10 +143,10 @@ SDL_Surface* loadSurface(char* path)
 	SDL_Surface* optimizedSurface = NULL;
 
 	//Load image at specified path
-	SDL_Surface* loadedSurface = SDL_LoadBMP(path);
+	SDL_Surface* loadedSurface = IMG_Load(path);
 	if (loadedSurface == NULL)
 	{
-		printf("Unable to load image %s! SDL Error: %s\n", path, SDL_GetError());
+		printf("Unable to load image %s! SDL Error: %s\n", path, IMG_GetError());
 	}
 	else
 	{
