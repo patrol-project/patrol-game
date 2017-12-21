@@ -70,8 +70,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\vs_dev_libs\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\vs_dev_libs\SDL2-2.0.7\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\include;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\lib\x86;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\include;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\lib\x86;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\include;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\lib\x86;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\include;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Aleks\Downloads\SDL2_image-2.0.2\lib\x86;C:\Users\Aleks\Desktop\SDL tutorial\SDL2-2.0.7\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,7 +93,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -90,6 +102,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -102,6 +118,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -115,10 +132,16 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
