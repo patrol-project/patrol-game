@@ -1,5 +1,4 @@
-#ifndef _Game_
-#define _Game_
+#pragma once
 
 #include "SDL.h"
 
@@ -35,4 +34,3 @@ private:
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
 };
-#endif // !_Game_
