@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <stdio.h>
 #include <SDL_image.h>
+#include "InputHandler.h"
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
@@ -69,46 +70,15 @@ void Game::clean()
 	SDL_Quit();
 }
 
+void Game::quit()
+{
+	running = false;
+}
+
 
 void Game::handleInput()
 {
-	SDL_Event event;
-	//Handle events on queue
-	while (SDL_PollEvent(&event) != 0)
-	{
-		//User requests quit
-		if (event.type == SDL_QUIT)
-		{
-			running = false;
-		}
-		//User presses a key
-		else if (event.type == SDL_KEYDOWN)
-		{
-			//Handling key presses
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_UP:
-				printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
-				break;
-
-			case SDLK_DOWN:
-				printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
-				break;
-
-			case SDLK_LEFT:
-				printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
-				break;
-
-			case SDLK_RIGHT:
-				printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
-				break;
-
-			default:
-				printf("Key pressed: [%s]\n", SDL_GetKeyName(event.key.keysym.sym));
-				break;
-			}
-		}
-	}
+	InputHandler::Instance()->update();
 }
 
 

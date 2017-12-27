@@ -10,6 +10,7 @@ public:
 	bool loadMedia();
 	void update();
 	void clean();
+	void quit();
 	bool get_running() const;
 	SDL_Renderer* getRenderer() const { return renderer; }
 
