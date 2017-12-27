@@ -11,6 +11,7 @@ public:
 	void update();
 	void clean();
 	bool get_running() const;
+	SDL_Renderer* getRenderer() const { return renderer; }
 
 	// Make Game class singleton to ensure there is no second 
 	// instance of the same class
