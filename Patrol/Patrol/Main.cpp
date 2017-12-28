@@ -32,7 +32,7 @@ int main(int argc, char* args[])
 		return 2;
 	}
 
-	//Main loop
+		//Main loop
 	while (Game::Instance().get_running())
 	{
 		Game::Instance().handleInput();

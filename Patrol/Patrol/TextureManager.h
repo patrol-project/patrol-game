@@ -5,26 +5,29 @@
 #include <map>
 
 using namespace std;
+
 class TextureManager
 {
 public:
-	bool load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
+	bool load(string fileName, string id, SDL_Renderer* pRenderer);
 	// draw
 	void draw(string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	//draw frame
 	void drawFrame(string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	// clears all textures from the textureMap
+	void clearAllTexturesFromMap();
 
 	static TextureManager* Instance()
 	{
-		if (s_pInstance == 0)
+		if (texture_instance == 0)
 		{
-			s_pInstance = new TextureManager();
-			return s_pInstance;
+			texture_instance = new TextureManager();
+			return texture_instance;
 		}
-		return s_pInstance;
+		return texture_instance;
 	}
 private:
-	map<string, SDL_Texture*> m_textureMap;
+	map<string, SDL_Texture*> textureMap;
 	TextureManager() {}
-	static TextureManager* s_pInstance;
+	static TextureManager* texture_instance;
 };

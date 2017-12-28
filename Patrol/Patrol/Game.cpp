@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <SDL_image.h>
 #include "InputHandler.h"
+#include "TextureManager.h"
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
@@ -55,9 +56,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 void Game::clean()
 {
-	//Free loaded image
-	SDL_DestroyTexture(texture);
-	texture = NULL;
+	//Free loaded images
+	TextureManager::Instance()->clearAllTexturesFromMap();
 
 	//Destroy window	
 	SDL_DestroyRenderer(renderer);
@@ -75,57 +75,20 @@ void Game::quit()
 	running = false;
 }
 
-
 void Game::handleInput()
 {
 	InputHandler::Instance()->update();
 }
 
-
 bool Game::loadMedia()
 {
-	//Loading success flag
-	bool success = true;
-
 	//Default image path
 	char* defaultTexturePath = "Resources/mainBackground.jpg";
 
 	//Load PNG texture
-	texture = loadTexture(defaultTexturePath);
-	if (texture == NULL)
-	{
-		printf("Failed to load texture image!\n");
-		success = false;
-	}
+	bool success = TextureManager::Instance()->load(defaultTexturePath, "background", Game::Instance().getRenderer());
 
 	return success;
-}
-
-SDL_Texture* Game::loadTexture(char* path)
-{
-	//The final optimized//The final texture
-	SDL_Texture* newTexture = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load(path);
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path, IMG_GetError());
-	}
-	else
-	{
-		//Create texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
-		if (newTexture == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", path, SDL_GetError());
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface(loadedSurface);
-	}
-
-	return newTexture;
 }
 
 void Game::update()
@@ -133,8 +96,8 @@ void Game::update()
 	//Clear screen
 	SDL_RenderClear(renderer);
 
-	//Render texture to screen
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	// draw background
+	TextureManager::Instance()->draw("background", 0, 0, 640, 480, Game::Instance().getRenderer());
 
 	//Update screen
 	SDL_RenderPresent(renderer);

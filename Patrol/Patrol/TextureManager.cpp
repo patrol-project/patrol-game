@@ -1,22 +1,24 @@
 #include "TextureManager.h"
 #include <SDL_image.h>
 
-bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer * pRenderer)
-{
-	SDL_Surface* pTempSurface = IMG_Load(fileName.c_str());
+TextureManager* TextureManager::texture_instance = 0;
 
-	if (pTempSurface == 0) {
+bool TextureManager::load(string fileName, string id, SDL_Renderer * renderer)
+{
+	SDL_Surface* tempSurface = IMG_Load(fileName.c_str());
+
+	if (tempSurface == 0) {
 		return false;
 	}
 
-	SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
-	SDL_FreeSurface(pTempSurface);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+	SDL_FreeSurface(tempSurface);
 
 	// everything went ok, add the texture to our list
 
-	if (pTexture != 0)
+	if (texture != 0)
 	{
-		m_textureMap[id] = pTexture;
+		textureMap[id] = texture;
 		return true;
 	}
 
@@ -24,7 +26,7 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer * p
 	return false;
 }
 
-void TextureManager::draw(string id, int x, int y, int width, int height, SDL_Renderer * pRenderer, SDL_RendererFlip flip)
+void TextureManager::draw(string id, int x, int y, int width, int height, SDL_Renderer * renderer, SDL_RendererFlip flip)
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
@@ -36,11 +38,10 @@ void TextureManager::draw(string id, int x, int y, int width, int height, SDL_Re
 	destRect.x = x;
 	destRect.y = y;
 
-	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, flip);
-
+	SDL_RenderCopyEx(renderer, textureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
-void TextureManager::drawFrame(string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer * pRenderer, SDL_RendererFlip flip)
+void TextureManager::drawFrame(string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer * renderer, SDL_RendererFlip flip)
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
@@ -50,8 +51,17 @@ void TextureManager::drawFrame(string id, int x, int y, int width, int height, i
 	srcRect.h = destRect.h = height;
 	destRect.x = x;
 	destRect.y = y;
-	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect,
+	SDL_RenderCopyEx(renderer, textureMap[id], &srcRect,
 		&destRect, 0, 0, flip);
 }
 
-TextureManager* TextureManager::s_pInstance = 0;
+void TextureManager::clearAllTexturesFromMap()
+{
+	for (auto i = textureMap.begin(); i != textureMap.end(); i++) {
+		if (i->second != nullptr) {
+			SDL_DestroyTexture(i->second);
+			i->second = nullptr;
+		}
+	}
+	textureMap.clear();
+}

@@ -30,8 +30,6 @@ private:
 
 	bool running;
 
-	SDL_Texture* loadTexture(char * path);
-
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
