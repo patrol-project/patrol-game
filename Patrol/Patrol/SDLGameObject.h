@@ -16,12 +16,12 @@ public:
 	virtual void update();
 	virtual void clean();
 protected:
-	Vector2D m_position;
-	Vector2D m_velocity;
-	Vector2D m_acceleration;
-	int m_width;
-	int m_height;
-	int m_currentRow;
-	int m_currentFrame;
-	string m_textureID;
+	Vector2D position;
+	Vector2D velocity;
+	Vector2D acceleration;
+	int width;
+	int height;
+	int currentRow;
+	int currentFrame;
+	string textureID;
 };
