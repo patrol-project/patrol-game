@@ -1,6 +1,8 @@
 #pragma once
 
 #include"GameState.h"
+#include "GameObject.h"
+#include <vector>
 
 class MenuState : public GameState
 {
@@ -12,4 +14,5 @@ public:
 	virtual string getStateID() const { return menuId; }
 private:
 	static const string menuId;
+	vector<GameObject*> gameObjects;
 };

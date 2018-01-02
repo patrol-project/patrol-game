@@ -65,3 +65,9 @@ void TextureManager::clearAllTexturesFromMap()
 	}
 	textureMap.clear();
 }
+
+void TextureManager::clearFromTextureMap(string id)
+{
+	SDL_DestroyTexture(textureMap[id]);
+	textureMap.erase(id);
+}

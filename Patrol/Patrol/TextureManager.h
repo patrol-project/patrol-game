@@ -16,6 +16,8 @@ public:
 	void drawFrame(string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	// clears all textures from the textureMap
 	void clearAllTexturesFromMap();
+	// clears texture by given id
+	void clearFromTextureMap(string id);
 
 	static TextureManager* Instance()
 	{

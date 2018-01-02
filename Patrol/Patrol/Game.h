@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.h"
+#include "GameStateMachine.h"
 
 class Game
 {
@@ -11,6 +12,7 @@ public:
 	void update();
 	void clean();
 	void quit();
+	void render();
 	bool get_running() const;
 	SDL_Renderer* getRenderer() const { return renderer; }
 
@@ -33,4 +35,6 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
+
+	GameStateMachine* gameStateMachine;
 };

@@ -38,6 +38,8 @@ int main(int argc, char* args[])
 		Game::Instance().handleInput();
 
 		Game::Instance().update();
+
+		Game::Instance().render();
 	}
 
 	//Free resources and close SDL

@@ -3,6 +3,8 @@
 #include <SDL_image.h>
 #include "InputHandler.h"
 #include "TextureManager.h"
+#include "MenuState.h"
+#include "PlayState.h"
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
@@ -48,6 +50,10 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return false;
 	}
 
+	// initialize the GameStateMachine
+	gameStateMachine = new GameStateMachine();
+	gameStateMachine->changeState(new MenuState());
+
 	// start game loop
 	running = true;
 
@@ -91,16 +97,20 @@ bool Game::loadMedia()
 	return success;
 }
 
-void Game::update()
+void Game::render()
 {
 	//Clear screen
 	SDL_RenderClear(renderer);
 
-	// draw background
-	TextureManager::Instance()->draw("background", 0, 0, 640, 480, Game::Instance().getRenderer());
+	gameStateMachine->render();
 
 	//Update screen
 	SDL_RenderPresent(renderer);
+}
+
+void Game::update()
+{
+	gameStateMachine->update();
 }
 
 bool Game::get_running() const
