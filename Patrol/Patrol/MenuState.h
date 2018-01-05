@@ -15,4 +15,6 @@ public:
 private:
 	static const string menuId;
 	vector<GameObject*> gameObjects;
+	static void menuToPlay();
+	static void exitFromMenu();
 };

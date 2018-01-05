@@ -15,6 +15,7 @@ public:
 	void render();
 	bool get_running() const;
 	SDL_Renderer* getRenderer() const { return renderer; }
+	GameStateMachine* getStateMachine() const { return gameStateMachine; }
 
 	// Make Game class singleton to ensure there is no second 
 	// instance of the same class
