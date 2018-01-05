@@ -32,6 +32,7 @@ public:
 	// update and clean the input handler
 	void update();
 	void clean();
+	void reset();
 
 	// keyboard events
 	bool isKeyDown(SDL_Scancode key) const;
@@ -44,8 +45,6 @@ private:
 
 	InputHandler();
 	~InputHandler();
-
-	void reset();
 
 	InputHandler(const InputHandler&);
 	InputHandler& operator=(const InputHandler&);
