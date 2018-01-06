@@ -4,15 +4,23 @@
 #include <stdio.h>
 #include "Game.h"
 
-//Window dimensions
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-const char* GAME_NAME = "Patrol";
+const int SCREEN_WIDTH = 640; ///< window width
+const int SCREEN_HEIGHT = 480; ///< window height
+const char* GAME_NAME = "Patrol"; ///< window title
 
-//SDL-required arguments for multi-platform
+/**
+ * @brief SDL-required arguments for multi-platform
+ * 
+ * @param argc 
+ * @param args 
+ * @return int 
+ */
 int main(int argc, char* args[])
 {
-	//Initializing SDL
+	/**
+	 * @brief Initialize the Game Instance
+	 * 
+	 */
 	if (!Game::Instance().init(GAME_NAME,
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
@@ -25,14 +33,20 @@ int main(int argc, char* args[])
 		return 1;
 	}
 
-	//Load media
+	/**
+	 * @brief Load media needed for the start of the game
+	 * 
+	 */
 	if (!Game::Instance().loadMedia())
 	{
 		printf("Failed to load media!\n");
 		return 2;
 	}
 
-		//Main loop
+	/**
+	 * @brief Main game loop
+	 * 
+	 */
 	while (Game::Instance().get_running())
 	{
 		Game::Instance().handleInput();
@@ -42,7 +56,10 @@ int main(int argc, char* args[])
 		Game::Instance().render();
 	}
 
-	//Free resources and close SDL
+	/**
+	 * @brief Free resources and clean SDL
+	 * 
+	 */
 	Game::Instance().clean();
 
 	return 0;

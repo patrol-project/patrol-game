@@ -2,10 +2,11 @@
 
 #include "LoaderParams.h"
 
-// Abstract base class with pure virtual functions
-// to set a blueprint for all the game objects
-// we are creating
-
+/**
+ * @brief Abstract base class with pure virtual functions to 
+ * set a blueprint for all the game objects we are creating.
+ * 
+ */
 class GameObject
 {
 public:
