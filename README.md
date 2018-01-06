@@ -6,28 +6,28 @@ Patrol game C++/SDL project
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`enum `[`mouse_buttons`](#_input_handler_8h_1a7e5f61c59f658d9196d15f3b98f1e56e)            | Easier to use this enum than only numbers.Needed for SDL [InputHandler](#class_inputhandler) methods.
+`enum `[`mouse_buttons`](#_input_handler_8h_1a7e5f61c59f658d9196d15f3b98f1e56e)            | Easier to use this enum than only numbers.Needed for SDL [InputHandler](#class-inputhandler) methods.
 `public int `[`main`](#_main_8cpp_1a700a0caa5b70a06d1064e576f9f3cf65)`(int argc,char * args)`            | SDL-required arguments for multi-platform.
 `class `[`Game`](#class-game) | 
 `class `[`GameObject`](#class-gameobject) | Abstract base class with pure virtual functions to set a blueprint for all the game objects we are creating.
-`class `[`GameState`](#class_gamestate) | Abstract base class with pure virtual functions which serves as a blueprint for all [Game](#class-game) states.
-`class `[`GameStateMachine`](#class_gamestatemachine) | Responsible for controlling and managing all game states.
-`class `[`InputHandler`](#class_inputhandler) | Responsible for listening to input and it's handling. Singleton approach.
-`class `[`LoaderParams`](#class_loaderparams) | Instead of changing all [GameObject](#class-gameobject) classes when a parameter changes we use [LoaderParams](#class_loaderparams) so that we change the parameters here only. And it is easier to read and maintain.
+`class `[`GameState`](#class-gamestate) | Abstract base class with pure virtual functions which serves as a blueprint for all [Game](#class-game) states.
+`class `[`GameStateMachine`](#class-gamestatemachine) | Responsible for controlling and managing all game states.
+`class `[`InputHandler`](#class-inputhandler) | Responsible for listening to input and it's handling. Singleton approach.
+`class `[`LoaderParams`](#class-loaderparams) | Instead of changing all [GameObject](#class-gameobject) classes when a parameter changes we use [LoaderParams](#class-loaderparams) so that we change the parameters here only. And it is easier to read and maintain.
 `class `[`MenuButton`](#class_menubutton) | [Game](#class-game) object which is a button in the game.
 `class `[`MenuState`](#class_menu_state) | In this state the menu is showed on the screen with corresponding game object on it.
 `class `[`PauseState`](#class_pause_state) | This is the state when the game is paused with the ESCAPE key.
 `class `[`Player`](#class_player) | 
 `class `[`PlayState`](#class_play_state) | 
 `class `[`SDLGameObject`](#class_s_d_l_game_object) | 
-`class `[`TextureManager`](#class_texturemanager) | 
-`class `[`Vector2D`](#class_vector2d) | 
+`class `[`TextureManager`](#class-texturemanager) | 
+`class `[`Vector2D`](#class-vector2d) | 
 
 ## Members
 
 #### `enum `[`mouse_buttons`](#_input_handler_8h_1a7e5f61c59f658d9196d15f3b98f1e56e) 
 
-Easier to use this enum than only numbers.Needed for SDL [InputHandler](#class_inputhandler) methods.
+Easier to use this enum than only numbers.Needed for SDL [InputHandler](#class-inputhandler) methods.
 
  Values                         | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -53,16 +53,16 @@ int
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public bool `[`init`](#class_game_1a63254562bdd2a3d7f53e071564066a38)`(const char * title,int xpos,int ypos,int width,int height,bool showWindow)` | [Game::init](#class_game_1a63254562bdd2a3d7f53e071564066a38) initializes SDL and [GameStateMachine](#class_gamestatemachine) and prepares everything for starting the game.
-`public void `[`handleInput`](#class_game_1aa5abc4e07a1f5abce24e473c5567300b)`()` | Listens for input and delegates the work to the [InputHandler](#class_inputhandler) class.
-`public bool `[`loadMedia`](#class_game_1af4b6b1d9f209d7b08b7c6c8556898ecb)`()` | Uses [TextureManager](#class_texturemanager) to load all the needed pictures for the game to start.
-`public void `[`update`](#class_game_1a79df6376b332d63c9eca0dcee30305c3)`()` | Responsible for updating the game every frame. Delegates the work to the [GameStateMachine](#class_gamestatemachine) class.
+`public bool `[`init`](#class_game_1a63254562bdd2a3d7f53e071564066a38)`(const char * title,int xpos,int ypos,int width,int height,bool showWindow)` | [Game::init](#class_game_1a63254562bdd2a3d7f53e071564066a38) initializes SDL and [GameStateMachine](#class-gamestatemachine) and prepares everything for starting the game.
+`public void `[`handleInput`](#class_game_1aa5abc4e07a1f5abce24e473c5567300b)`()` | Listens for input and delegates the work to the [InputHandler](#class-inputhandler) class.
+`public bool `[`loadMedia`](#class_game_1af4b6b1d9f209d7b08b7c6c8556898ecb)`()` | Uses [TextureManager](#class-texturemanager) to load all the needed pictures for the game to start.
+`public void `[`update`](#class_game_1a79df6376b332d63c9eca0dcee30305c3)`()` | Responsible for updating the game every frame. Delegates the work to the [GameStateMachine](#class-gamestatemachine) class.
 `public void `[`clean`](#class_game_1ad4f36a72a2d06696f7973788606f57fc)`()` | Destroys all the loaded images, closes the window and quits SDL.
 `public void `[`quit`](#class_game_1a8272be134d16c277bb014ad6a22fc357)`()` | Stops the game loop.
-`public void `[`render`](#class_game_1a15ddd769261d923827a3cdf41499c843)`()` | Responsible for drawing all the game objects to the screen. Delegates the work to [GameStateMachine](#class_gamestatemachine) class.
+`public void `[`render`](#class_game_1a15ddd769261d923827a3cdf41499c843)`()` | Responsible for drawing all the game objects to the screen. Delegates the work to [GameStateMachine](#class-gamestatemachine) class.
 `public bool `[`get_running`](#class_game_1a0100e360773a67a44fd38abdf7b8233b)`() const` | Returns the status of the game loop.
 `public inline SDL_Renderer * `[`getRenderer`](#class_game_1a8048a134ab883974e0c4d0147d4ba473)`() const` | Returns the SDL renderer.
-`public inline `[`GameStateMachine`](#class_gamestatemachine)` * `[`getStateMachine`](#class_game_1a582a1d2d18d6a5ed53fc75e388c79bec)`() const` | Returns the current game state from [GameStateMachine](#class_gamestatemachine).
+`public inline `[`GameStateMachine`](#class-gamestatemachine)` * `[`getStateMachine`](#class_game_1a582a1d2d18d6a5ed53fc75e388c79bec)`() const` | Returns the current game state from [GameStateMachine](#class-gamestatemachine).
 `public  `[`Game`](#class_game_1a586a831ed5ff1283fcf1b96f4eff065c)`(`[`Game`](#class-game)` const &) = delete` | 
 `public void `[`operator=`](#class_game_1aa4c0eacd8656e54ec4e94877c453e531)`(`[`Game`](#class-game)` const &) = delete` | 
 
@@ -70,7 +70,7 @@ int
 
 #### `public bool `[`init`](#class_game_1a63254562bdd2a3d7f53e071564066a38)`(const char * title,int xpos,int ypos,int width,int height,bool showWindow)` 
 
-[Game::init](#class_game_1a63254562bdd2a3d7f53e071564066a38) initializes SDL and [GameStateMachine](#class_gamestatemachine) and prepares everything for starting the game.
+[Game::init](#class_game_1a63254562bdd2a3d7f53e071564066a38) initializes SDL and [GameStateMachine](#class-gamestatemachine) and prepares everything for starting the game.
 
 #### Parameters
 * `title` the title of the game window 
@@ -93,11 +93,11 @@ false if any of the SDL systems failed to load properly
 
 #### `public void `[`handleInput`](#class_game_1aa5abc4e07a1f5abce24e473c5567300b)`()` 
 
-Listens for input and delegates the work to the [InputHandler](#class_inputhandler) class.
+Listens for input and delegates the work to the [InputHandler](#class-inputhandler) class.
 
 #### `public bool `[`loadMedia`](#class_game_1af4b6b1d9f209d7b08b7c6c8556898ecb)`()` 
 
-Uses [TextureManager](#class_texturemanager) to load all the needed pictures for the game to start.
+Uses [TextureManager](#class-texturemanager) to load all the needed pictures for the game to start.
 
 #### Returns
 true if everything loaded successfully 
@@ -107,7 +107,7 @@ false if some of the media couldn't load
 
 #### `public void `[`update`](#class_game_1a79df6376b332d63c9eca0dcee30305c3)`()` 
 
-Responsible for updating the game every frame. Delegates the work to the [GameStateMachine](#class_gamestatemachine) class.
+Responsible for updating the game every frame. Delegates the work to the [GameStateMachine](#class-gamestatemachine) class.
 
 #### `public void `[`clean`](#class_game_1ad4f36a72a2d06696f7973788606f57fc)`()` 
 
@@ -119,7 +119,7 @@ Stops the game loop.
 
 #### `public void `[`render`](#class_game_1a15ddd769261d923827a3cdf41499c843)`()` 
 
-Responsible for drawing all the game objects to the screen. Delegates the work to [GameStateMachine](#class_gamestatemachine) class.
+Responsible for drawing all the game objects to the screen. Delegates the work to [GameStateMachine](#class-gamestatemachine) class.
 
 #### `public bool `[`get_running`](#class_game_1a0100e360773a67a44fd38abdf7b8233b)`() const` 
 
@@ -138,9 +138,9 @@ Returns the SDL renderer.
 #### Returns
 SDL_Renderer* getRenderer
 
-#### `public inline `[`GameStateMachine`](#class_gamestatemachine)` * `[`getStateMachine`](#class_game_1a582a1d2d18d6a5ed53fc75e388c79bec)`() const` 
+#### `public inline `[`GameStateMachine`](#class-gamestatemachine)` * `[`getStateMachine`](#class_game_1a582a1d2d18d6a5ed53fc75e388c79bec)`() const` 
 
-Returns the current game state from [GameStateMachine](#class_gamestatemachine).
+Returns the current game state from [GameStateMachine](#class-gamestatemachine).
 
 #### Returns
 GameStateMachine* getStateMachine
@@ -160,7 +160,7 @@ Abstract base class with pure virtual functions to set a blueprint for all the g
 `public void `[`draw`](#class_game_object_1a59f11cba9071a39ba2f486a8364ed536)`()` | 
 `public void `[`update`](#class_game_object_1ae83128d0e0efef691417779605ee037c)`()` | 
 `public void `[`clean`](#class_game_object_1a8e8c897a0be1966cfb6488ce97206d60)`()` | 
-`protected inline  `[`GameObject`](#class_game_object_1a90daf6c63db960904650c2fe8d6085cc)`(const `[`LoaderParams`](#class_loaderparams)` * pParams)` | 
+`protected inline  `[`GameObject`](#class_game_object_1a90daf6c63db960904650c2fe8d6085cc)`(const `[`LoaderParams`](#class-loaderparams)` * pParams)` | 
 `protected inline virtual  `[`~GameObject`](#class_game_object_1a224d4f6d9dd75c8a6f9d022eaf586fd9)`()` | 
 
 ## Members
@@ -171,7 +171,7 @@ Abstract base class with pure virtual functions to set a blueprint for all the g
 
 #### `public void `[`clean`](#class_game_object_1a8e8c897a0be1966cfb6488ce97206d60)`()` 
 
-#### `protected inline  `[`GameObject`](#class_game_object_1a90daf6c63db960904650c2fe8d6085cc)`(const `[`LoaderParams`](#class_loaderparams)` * pParams)` 
+#### `protected inline  `[`GameObject`](#class_game_object_1a90daf6c63db960904650c2fe8d6085cc)`(const `[`LoaderParams`](#class-loaderparams)` * pParams)` 
 
 #### `protected inline virtual  `[`~GameObject`](#class_game_object_1a224d4f6d9dd75c8a6f9d022eaf586fd9)`()` 
 
@@ -234,22 +234,22 @@ Responsible for controlling and managing all game states.
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public void `[`pushState`](#class_game_state_machine_1aff2a05d4c45dafa7988c43deb385c0f7)`(`[`GameState`](#class_gamestate)` * state)` | Adds the given state to the vector and runs it.
-`public void `[`changeState`](#class_game_state_machine_1a1305926cd932c708a75a950f99b6dd1e)`(`[`GameState`](#class_gamestate)` * state)` | Changes from current to the given state First call onExit() on the current state, then onEnter() on the given state and continues it's work with the new given state.
+`public void `[`pushState`](#class_game_state_machine_1aff2a05d4c45dafa7988c43deb385c0f7)`(`[`GameState`](#class-gamestate)` * state)` | Adds the given state to the vector and runs it.
+`public void `[`changeState`](#class_game_state_machine_1a1305926cd932c708a75a950f99b6dd1e)`(`[`GameState`](#class-gamestate)` * state)` | Changes from current to the given state First call onExit() on the current state, then onEnter() on the given state and continues it's work with the new given state.
 `public void `[`popState`](#class_game_state_machine_1a691905effed30b630c3971fb5bbfcc4f)`()` | Checks if there are states in the vector. If yes calls onExit() and removes it from the vector If no returns doing nothing.
 `public void `[`update`](#class_game_state_machine_1a7a3be350727fff550f09cc0499398ece)`()` | Calls the update method on the current state.
 `public void `[`render`](#class_game_state_machine_1abfad06d5c6aa2f7d96a18e405f6d56c5)`()` | Calls the render method on the current state.
 
 ## Members
 
-#### `public void `[`pushState`](#class_game_state_machine_1aff2a05d4c45dafa7988c43deb385c0f7)`(`[`GameState`](#class_gamestate)` * state)` 
+#### `public void `[`pushState`](#class_game_state_machine_1aff2a05d4c45dafa7988c43deb385c0f7)`(`[`GameState`](#class-gamestate)` * state)` 
 
 Adds the given state to the vector and runs it.
 
 #### Parameters
 * `state` some game state
 
-#### `public void `[`changeState`](#class_game_state_machine_1a1305926cd932c708a75a950f99b6dd1e)`(`[`GameState`](#class_gamestate)` * state)` 
+#### `public void `[`changeState`](#class_game_state_machine_1a1305926cd932c708a75a950f99b6dd1e)`(`[`GameState`](#class-gamestate)` * state)` 
 
 Changes from current to the given state First call onExit() on the current state, then onEnter() on the given state and continues it's work with the new given state.
 
@@ -281,7 +281,7 @@ Responsible for listening to input and it's handling. Singleton approach.
 `public void `[`reset`](#class_input_handler_1a1e7028e9c3c69eaf9749a2b6cc8d5967)`()` | Sets all mouse button states to false.
 `public bool `[`isKeyDown`](#class_input_handler_1ab60a988015ec0b4d983dc305062d5b95)`(SDL_Scancode key) const` | Given a SDL_Scancode(all of which can be found on SDL site documentation) checks if the given key is pressed or not.
 `public bool `[`getMouseButtonState`](#class_input_handler_1a36651253a9aec2310ce2c06f647b9609)`(int buttonNumber) const` | Using the mouse_buttons enum we can check the state of every mouse button.
-`public `[`Vector2D`](#class_vector2d)` * `[`getMousePosition`](#class_input_handler_1ac80f65f61e0c17894adec36e86ce768d)`() const` | Returns the position of the mouse.
+`public `[`Vector2D`](#class-vector2d)` * `[`getMousePosition`](#class_input_handler_1ac80f65f61e0c17894adec36e86ce768d)`() const` | Returns the position of the mouse.
 
 ## Members
 
@@ -321,7 +321,7 @@ true if pressed
 #### Returns
 false if not pressed
 
-#### `public `[`Vector2D`](#class_vector2d)` * `[`getMousePosition`](#class_input_handler_1ac80f65f61e0c17894adec36e86ce768d)`() const` 
+#### `public `[`Vector2D`](#class-vector2d)` * `[`getMousePosition`](#class_input_handler_1ac80f65f61e0c17894adec36e86ce768d)`() const` 
 
 Returns the position of the mouse.
 
@@ -330,7 +330,7 @@ Vector2D* X and Y position of the mouse
 
 # class `LoaderParams` 
 
-Instead of changing all [GameObject](#class-gameobject) classes when a parameter changes we use [LoaderParams](#class_loaderparams) so that we change the parameters here only. And it is easier to read and maintain.
+Instead of changing all [GameObject](#class-gameobject) classes when a parameter changes we use [LoaderParams](#class-loaderparams) so that we change the parameters here only. And it is easier to read and maintain.
 
 ## Summary
 
@@ -406,14 +406,14 @@ class MenuButton
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`MenuButton`](#class_menu_button_1aa0f55f2084bb269c5ab3840637c97ccf)`(const `[`LoaderParams`](#class_loaderparams)` * params,void(*)() callback)` | Constructor accepting two arguments.
+`public  `[`MenuButton`](#class_menu_button_1aa0f55f2084bb269c5ab3840637c97ccf)`(const `[`LoaderParams`](#class-loaderparams)` * params,void(*)() callback)` | Constructor accepting two arguments.
 `public virtual void `[`draw`](#class_menu_button_1a3e854949b52808f9d6092e149a116f5c)`()` | Draw the button to the screen.
 `public virtual void `[`update`](#class_menu_button_1a86b038172871555da45606e20fa6bad7)`()` | Update button status if hovered or clicked.
 `public virtual void `[`clean`](#class_menu_button_1a970fc154ec16a7c0c9ad7f3626199bba)`()` | Free resources.
 
 ## Members
 
-#### `public  `[`MenuButton`](#class_menu_button_1aa0f55f2084bb269c5ab3840637c97ccf)`(const `[`LoaderParams`](#class_loaderparams)` * params,void(*)() callback)` 
+#### `public  `[`MenuButton`](#class_menu_button_1aa0f55f2084bb269c5ab3840637c97ccf)`(const `[`LoaderParams`](#class-loaderparams)` * params,void(*)() callback)` 
 
 Constructor accepting two arguments.
 
@@ -557,7 +557,7 @@ class Player
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`Player`](#class_player_1ad247c148ef8c104bec6a22c194e0a8d5)`(const `[`LoaderParams`](#class_loaderparams)` * pParams)` | 
+`public  `[`Player`](#class_player_1ad247c148ef8c104bec6a22c194e0a8d5)`(const `[`LoaderParams`](#class-loaderparams)` * pParams)` | 
 `public virtual void `[`draw`](#class_player_1ac18c9d30d2997765321c62030a4b20b7)`()` | 
 `public virtual void `[`update`](#class_player_1a82c3476f3e65a4e2ac6bcd040771bdd4)`()` | 
 `public virtual void `[`clean`](#class_player_1a883c81df5be3b931ecfa6c8de08acfbd)`()` | 
@@ -565,7 +565,7 @@ class Player
 
 ## Members
 
-#### `public  `[`Player`](#class_player_1ad247c148ef8c104bec6a22c194e0a8d5)`(const `[`LoaderParams`](#class_loaderparams)` * pParams)` 
+#### `public  `[`Player`](#class_player_1ad247c148ef8c104bec6a22c194e0a8d5)`(const `[`LoaderParams`](#class-loaderparams)` * pParams)` 
 
 #### `public virtual void `[`draw`](#class_player_1ac18c9d30d2997765321c62030a4b20b7)`()` 
 
@@ -640,13 +640,13 @@ class SDLGameObject
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`SDLGameObject`](#class_s_d_l_game_object_1a21c807a03e8002aa2ca6239916586021)`(const `[`LoaderParams`](#class_loaderparams)` * pParams)` | 
+`public  `[`SDLGameObject`](#class_s_d_l_game_object_1a21c807a03e8002aa2ca6239916586021)`(const `[`LoaderParams`](#class-loaderparams)` * pParams)` | 
 `public virtual void `[`draw`](#class_s_d_l_game_object_1ab703854bfb62a291ad23dc1f01d5190d)`()` | 
 `public virtual void `[`update`](#class_s_d_l_game_object_1a9322e790f0515760f36b62ce35d4a090)`()` | 
 `public virtual void `[`clean`](#class_s_d_l_game_object_1afa6c3cdc5dc42f1f67a14d5d140f20d3)`()` | 
-`protected `[`Vector2D`](#class_vector2d)` `[`position`](#class_s_d_l_game_object_1a6f9a5729fff7eb602523f5eb72e2cf96) | 
-`protected `[`Vector2D`](#class_vector2d)` `[`velocity`](#class_s_d_l_game_object_1a31bca8ce640d00909d9f2155a5c454f7) | 
-`protected `[`Vector2D`](#class_vector2d)` `[`acceleration`](#class_s_d_l_game_object_1ad52bc69122455b41a2b1b6b600e560c6) | 
+`protected `[`Vector2D`](#class-vector2d)` `[`position`](#class_s_d_l_game_object_1a6f9a5729fff7eb602523f5eb72e2cf96) | 
+`protected `[`Vector2D`](#class-vector2d)` `[`velocity`](#class_s_d_l_game_object_1a31bca8ce640d00909d9f2155a5c454f7) | 
+`protected `[`Vector2D`](#class-vector2d)` `[`acceleration`](#class_s_d_l_game_object_1ad52bc69122455b41a2b1b6b600e560c6) | 
 `protected int `[`width`](#class_s_d_l_game_object_1afbc0aee47190300a36bb69d7936eb307) | 
 `protected int `[`height`](#class_s_d_l_game_object_1aff33890e3aa92fa57f98d286b37e84b9) | 
 `protected int `[`currentRow`](#class_s_d_l_game_object_1ae8ad8a9a77809ff4c1336db52b9382cd) | 
@@ -655,7 +655,7 @@ class SDLGameObject
 
 ## Members
 
-#### `public  `[`SDLGameObject`](#class_s_d_l_game_object_1a21c807a03e8002aa2ca6239916586021)`(const `[`LoaderParams`](#class_loaderparams)` * pParams)` 
+#### `public  `[`SDLGameObject`](#class_s_d_l_game_object_1a21c807a03e8002aa2ca6239916586021)`(const `[`LoaderParams`](#class-loaderparams)` * pParams)` 
 
 #### `public virtual void `[`draw`](#class_s_d_l_game_object_1ab703854bfb62a291ad23dc1f01d5190d)`()` 
 
@@ -663,11 +663,11 @@ class SDLGameObject
 
 #### `public virtual void `[`clean`](#class_s_d_l_game_object_1afa6c3cdc5dc42f1f67a14d5d140f20d3)`()` 
 
-#### `protected `[`Vector2D`](#class_vector2d)` `[`position`](#class_s_d_l_game_object_1a6f9a5729fff7eb602523f5eb72e2cf96) 
+#### `protected `[`Vector2D`](#class-vector2d)` `[`position`](#class_s_d_l_game_object_1a6f9a5729fff7eb602523f5eb72e2cf96) 
 
-#### `protected `[`Vector2D`](#class_vector2d)` `[`velocity`](#class_s_d_l_game_object_1a31bca8ce640d00909d9f2155a5c454f7) 
+#### `protected `[`Vector2D`](#class-vector2d)` `[`velocity`](#class_s_d_l_game_object_1a31bca8ce640d00909d9f2155a5c454f7) 
 
-#### `protected `[`Vector2D`](#class_vector2d)` `[`acceleration`](#class_s_d_l_game_object_1ad52bc69122455b41a2b1b6b600e560c6) 
+#### `protected `[`Vector2D`](#class-vector2d)` `[`acceleration`](#class_s_d_l_game_object_1ad52bc69122455b41a2b1b6b600e560c6) 
 
 #### `protected int `[`width`](#class_s_d_l_game_object_1afbc0aee47190300a36bb69d7936eb307) 
 
@@ -715,12 +715,12 @@ class SDLGameObject
 `public inline void `[`setX`](#class_vector2_d_1ac458bd997d2f0c6c7234cf1e8a7b73b8)`(float x)` | 
 `public inline void `[`setY`](#class_vector2_d_1a9b47adcbdf2c10f3ba893285b5c34709)`(float y)` | 
 `public inline float `[`length`](#class_vector2_d_1ae9c6666151cd09a233f35c13cdfd9049)`()` | 
-`public inline `[`Vector2D`](#class_vector2d)` `[`operator+`](#class_vector2_d_1aa98d8882a429397b69d246a996191a92)`(const `[`Vector2D`](#class_vector2d)` & v2) const` | 
-`public inline `[`Vector2D`](#class_vector2d)` `[`operator*`](#class_vector2_d_1afe8ec16d5f9fa65bf22489c0e0102f33)`(float scalar)` | 
-`public inline `[`Vector2D`](#class_vector2d)` & `[`operator*=`](#class_vector2_d_1ac512b056ccd633ffd78c589ab835b980)`(float scalar)` | 
-`public inline `[`Vector2D`](#class_vector2d)` `[`operator-`](#class_vector2_d_1a251772bc24e826046ad093cbd08ae346)`(const `[`Vector2D`](#class_vector2d)` & v2) const` | 
-`public inline `[`Vector2D`](#class_vector2d)` `[`operator/`](#class_vector2_d_1a8cd7cab406efc12492645757a88443dd)`(float scalar)` | 
-`public inline `[`Vector2D`](#class_vector2d)` & `[`operator/=`](#class_vector2_d_1a76e18d3294066c50ec2a29f0667358fb)`(float scalar)` | 
+`public inline `[`Vector2D`](#class-vector2d)` `[`operator+`](#class_vector2_d_1aa98d8882a429397b69d246a996191a92)`(const `[`Vector2D`](#class-vector2d)` & v2) const` | 
+`public inline `[`Vector2D`](#class-vector2d)` `[`operator*`](#class_vector2_d_1afe8ec16d5f9fa65bf22489c0e0102f33)`(float scalar)` | 
+`public inline `[`Vector2D`](#class-vector2d)` & `[`operator*=`](#class_vector2_d_1ac512b056ccd633ffd78c589ab835b980)`(float scalar)` | 
+`public inline `[`Vector2D`](#class-vector2d)` `[`operator-`](#class_vector2_d_1a251772bc24e826046ad093cbd08ae346)`(const `[`Vector2D`](#class-vector2d)` & v2) const` | 
+`public inline `[`Vector2D`](#class-vector2d)` `[`operator/`](#class_vector2_d_1a8cd7cab406efc12492645757a88443dd)`(float scalar)` | 
+`public inline `[`Vector2D`](#class-vector2d)` & `[`operator/=`](#class_vector2_d_1a76e18d3294066c50ec2a29f0667358fb)`(float scalar)` | 
 `public inline void `[`normalize`](#class_vector2_d_1a39a3335f33d7e9850b99e4498ba4d856)`()` | 
 
 ## Members
@@ -737,17 +737,17 @@ class SDLGameObject
 
 #### `public inline float `[`length`](#class_vector2_d_1ae9c6666151cd09a233f35c13cdfd9049)`()` 
 
-#### `public inline `[`Vector2D`](#class_vector2d)` `[`operator+`](#class_vector2_d_1aa98d8882a429397b69d246a996191a92)`(const `[`Vector2D`](#class_vector2d)` & v2) const` 
+#### `public inline `[`Vector2D`](#class-vector2d)` `[`operator+`](#class_vector2_d_1aa98d8882a429397b69d246a996191a92)`(const `[`Vector2D`](#class-vector2d)` & v2) const` 
 
-#### `public inline `[`Vector2D`](#class_vector2d)` `[`operator*`](#class_vector2_d_1afe8ec16d5f9fa65bf22489c0e0102f33)`(float scalar)` 
+#### `public inline `[`Vector2D`](#class-vector2d)` `[`operator*`](#class_vector2_d_1afe8ec16d5f9fa65bf22489c0e0102f33)`(float scalar)` 
 
-#### `public inline `[`Vector2D`](#class_vector2d)` & `[`operator*=`](#class_vector2_d_1ac512b056ccd633ffd78c589ab835b980)`(float scalar)` 
+#### `public inline `[`Vector2D`](#class-vector2d)` & `[`operator*=`](#class_vector2_d_1ac512b056ccd633ffd78c589ab835b980)`(float scalar)` 
 
-#### `public inline `[`Vector2D`](#class_vector2d)` `[`operator-`](#class_vector2_d_1a251772bc24e826046ad093cbd08ae346)`(const `[`Vector2D`](#class_vector2d)` & v2) const` 
+#### `public inline `[`Vector2D`](#class-vector2d)` `[`operator-`](#class_vector2_d_1a251772bc24e826046ad093cbd08ae346)`(const `[`Vector2D`](#class-vector2d)` & v2) const` 
 
-#### `public inline `[`Vector2D`](#class_vector2d)` `[`operator/`](#class_vector2_d_1a8cd7cab406efc12492645757a88443dd)`(float scalar)` 
+#### `public inline `[`Vector2D`](#class-vector2d)` `[`operator/`](#class_vector2_d_1a8cd7cab406efc12492645757a88443dd)`(float scalar)` 
 
-#### `public inline `[`Vector2D`](#class_vector2d)` & `[`operator/=`](#class_vector2_d_1a76e18d3294066c50ec2a29f0667358fb)`(float scalar)` 
+#### `public inline `[`Vector2D`](#class-vector2d)` & `[`operator/=`](#class_vector2_d_1a76e18d3294066c50ec2a29f0667358fb)`(float scalar)` 
 
 #### `public inline void `[`normalize`](#class_vector2_d_1a39a3335f33d7e9850b99e4498ba4d856)`()` 
 
