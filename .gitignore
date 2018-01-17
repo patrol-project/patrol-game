@@ -9,6 +9,10 @@
 *.userosscache
 *.sln.docstates
 
+# Include Dependencies - SDL
+!/Patrol/Dependencies/
+!/Patrol/Dependencies/SDL2_image-2.0.2/lib/x86/**
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -17,8 +21,14 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-x64/
-x86/
+
+# Ignore all folders with names x64 or x86 but not those in SDL
+*/x64/*
+!*/SDL2_image-2.0.2/lib/x64/*
+!*/SDL2-2.0.7/lib/x64/*
+*/x86/*
+!*/SDL2_image-2.0.2/lib/x86/*
+!*/SDL2-2.0.7/lib/x86/*
 bld/
 [Bb]in/
 [Oo]bj/
@@ -77,7 +87,11 @@ ipch/
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+*/*.dll
+!*/SDL2_image-2.0.2/lib/x64/*.dll
+!*/SDL2_image-2.0.2/lib/x86/*.dll
+!*/SDL2-2.0.7/lib/x64/*.dll
+!*/SDL2-2.0.7/lib/x86/*.dll
 
 # Fortran module files
 *.mod
@@ -87,7 +101,11 @@ ipch/
 *.lai
 *.la
 *.a
-*.lib
+*/*.lib
+!*/SDL2_image-2.0.2/lib/x64/*.lib
+!*/SDL2_image-2.0.2/lib/x86/*.lib
+!*/SDL2-2.0.7/lib/x64/*.lib
+!*/SDL2-2.0.7/lib/x86/*.lib
 
 # Executables
 *.exe
