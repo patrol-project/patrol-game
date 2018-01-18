@@ -9,7 +9,7 @@ const std::string PauseState::pauseID = "PAUSE";
 
 void PauseState::pauseToMain()
 {
-	Game::Instance().getStateMachine()->set_next_state(STATE_MAIN_MENU);
+	Game::Instance().getStateMachine()->set_next_state(STATE_RESET_GAME);
 }
 
 void PauseState::resumePlay()

@@ -2,6 +2,7 @@
 
 #include "GameState.h"
 #include <vector>
+#include <map>
 
 // Game states
 enum GameStates
@@ -11,7 +12,8 @@ enum GameStates
 	STATE_PLAY,
 	STATE_PAUSE_MENU,
 	STATE_GAME_OVER,
-	STATE_EXIT
+	STATE_EXIT,
+	STATE_RESET_GAME
 };
 
 /**
@@ -51,5 +53,6 @@ private:
 	int nextState;
 
 	//Game state object
+	map<GameStates, GameState*> gameStatesMap;
 	GameState *currentState;
 };

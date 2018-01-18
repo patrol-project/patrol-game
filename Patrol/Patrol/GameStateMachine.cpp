@@ -5,11 +5,13 @@
 #include "PauseState.h"
 #include "GameOverState.h"
 
-
 GameStateMachine::GameStateMachine()
 {
 	int nextState = STATE_NULL;
-	currentState = new MenuState();
+	gameStatesMap[STATE_MAIN_MENU] = new MenuState();
+	gameStatesMap[STATE_PAUSE_MENU] = new PauseState();
+	gameStatesMap[STATE_GAME_OVER] = new GameOverState();
+	gameStatesMap[STATE_PLAY] = new PlayState();
 }
 
 void GameStateMachine::changeState()
@@ -18,28 +20,34 @@ void GameStateMachine::changeState()
 	if (nextState != STATE_NULL)
 	{
 		//Delete the current state
-		if (nextState != STATE_EXIT)
+		/*if (nextState != STATE_EXIT && currentState != 0)
 		{
 			currentState->onExit();
 			delete currentState;
-		}//Change the state
+		}*/
+		//Change the state
 		switch (nextState)
 		{
 		case STATE_MAIN_MENU:
-			currentState = new MenuState();
+			currentState = gameStatesMap[STATE_MAIN_MENU];
 			break;
 
 		case STATE_PLAY:
-			currentState = new PlayState();
+			currentState = gameStatesMap[STATE_PLAY];
 			break;
 
 		case STATE_PAUSE_MENU:
-			currentState = new PauseState();
+			currentState = gameStatesMap[STATE_PAUSE_MENU];
 			break;
 
 		case STATE_GAME_OVER:
-			currentState = new GameOverState();
+			currentState = gameStatesMap[STATE_GAME_OVER];
 			break;
+		case STATE_RESET_GAME:
+			gameStatesMap[STATE_PLAY]->onExit();
+			delete gameStatesMap[STATE_PLAY];
+			gameStatesMap[STATE_PLAY] = new PlayState();
+			currentState = gameStatesMap[STATE_MAIN_MENU];
 		}
 
 		currentState->onEnter();
