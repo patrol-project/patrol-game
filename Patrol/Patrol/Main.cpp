@@ -53,6 +53,8 @@ int main(int argc, char* args[])
 
 		Game::Instance().update();
 
+		Game::Instance().getStateMachine()->changeState();
+
 		Game::Instance().render();
 	}
 

@@ -13,7 +13,7 @@ void PlayState::update()
 {
 	if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
-		Game::Instance().getStateMachine()->pushState(new PauseState());
+		Game::Instance().getStateMachine()->set_next_state(STATE_PAUSE_MENU);
 	}
 	for (int i = 0; i < gameObjects.size(); i++)
 	{

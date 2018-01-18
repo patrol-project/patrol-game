@@ -52,8 +52,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	// initialize the GameStateMachine
 	gameStateMachine = new GameStateMachine();
-	gameStateMachine->changeState(new MenuState());
-
+	gameStateMachine->set_next_state(STATE_MAIN_MENU);
+	gameStateMachine->changeState();
 	// start game loop
 	running = true;
 

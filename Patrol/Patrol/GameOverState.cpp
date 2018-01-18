@@ -11,11 +11,11 @@ const std::string GameOverState::gameOverID = "GAMEOVER";
 
 void GameOverState::gameOverToMain()
 {
-	Game::Instance().getStateMachine()->changeState(new MenuState());
+	Game::Instance().getStateMachine()->set_next_state(STATE_MAIN_MENU);
 }
 void GameOverState::restartPlay()
 {
-	Game::Instance().getStateMachine()->changeState(new PlayState());
+	Game::Instance().getStateMachine()->set_next_state(STATE_PLAY);
 }
 
 void GameOverState::update()

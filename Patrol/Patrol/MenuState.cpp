@@ -59,7 +59,7 @@ bool MenuState::onExit()
 
 void MenuState::menuToPlay()
 {
-	Game::Instance().getStateMachine()->changeState(new PlayState());
+	Game::Instance().getStateMachine()->set_next_state(STATE_PLAY);
 }
 void MenuState::exitFromMenu()
 {

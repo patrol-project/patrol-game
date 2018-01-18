@@ -1,56 +1,79 @@
 #include "GameStateMachine.h"
 #include <iostream>
+#include "MenuState.h"
+#include "PlayState.h"
+#include "PauseState.h"
+#include "GameOverState.h"
 
-void GameStateMachine::pushState(GameState *state)
+
+GameStateMachine::GameStateMachine()
 {
-	gameStates.push_back(state);
-	gameStates.back()->onEnter();
+	int nextState = STATE_NULL;
+	currentState = new MenuState();
 }
 
-void GameStateMachine::popState()
+void GameStateMachine::changeState()
 {
-	if (!gameStates.empty())
+	//If the state needs to be changed
+	if (nextState != STATE_NULL)
 	{
-		if (gameStates.back()->onExit())
+		//Delete the current state
+		if (nextState != STATE_EXIT)
 		{
-			delete gameStates.back();
-			gameStates.pop_back();
+			currentState->onExit();
+			delete currentState;
+		}//Change the state
+		switch (nextState)
+		{
+		case STATE_MAIN_MENU:
+			currentState = new MenuState();
+			break;
+
+		case STATE_PLAY:
+			currentState = new PlayState();
+			break;
+
+		case STATE_PAUSE_MENU:
+			currentState = new PauseState();
+			break;
+
+		case STATE_GAME_OVER:
+			currentState = new GameOverState();
+			break;
 		}
+
+		currentState->onEnter();
+
+		//Change the current state ID
+		stateID = nextState;
+
+		//NULL the next state ID
+		nextState = STATE_NULL;
 	}
 }
 
-void GameStateMachine::changeState(GameState *state)
+void GameStateMachine::set_next_state(int newState)
 {
-	if (!gameStates.empty())
+	//If the user doesn't want to exit
+	if (nextState != STATE_EXIT)
 	{
-		if (gameStates.back()->getStateID() == state->getStateID())
-		{
-			return; // do nothing
-		}
-		if (gameStates.back()->onExit())
-		{
-			delete gameStates.back();
-			gameStates.pop_back();
-		}
+		//Set the next state
+		nextState = newState;
 	}
-	// push back our new state
-	gameStates.push_back(state);
-	// initialise it
-	gameStates.back()->onEnter();
 }
 
 void GameStateMachine::update()
 {
-	if (!gameStates.empty())
+	if (currentState != 0)
 	{
-		gameStates.back()->update();
+		currentState->update();
 	}
 }
 
 void GameStateMachine::render()
 {
-	if (!gameStates.empty())
+	if (currentState != 0)
 	{
-		gameStates.back()->render();
+		currentState->render();
 	}
 }

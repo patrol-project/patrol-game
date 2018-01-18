@@ -9,12 +9,12 @@ const std::string PauseState::pauseID = "PAUSE";
 
 void PauseState::pauseToMain()
 {
-	Game::Instance().getStateMachine()->changeState(new MenuState());
+	Game::Instance().getStateMachine()->set_next_state(STATE_MAIN_MENU);
 }
 
 void PauseState::resumePlay()
 {
-	Game::Instance().getStateMachine()->popState();
+	Game::Instance().getStateMachine()->set_next_state(STATE_PLAY);
 }
 
 void PauseState::update()
