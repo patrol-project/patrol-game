@@ -1,7 +1,9 @@
 #include "AnimatedGraphic.h"
 
-AnimatedGraphic::AnimatedGraphic(const LoaderParams* pParams, int animSpeed) : SDLGameObject(pParams), animationSpeed(animSpeed)
+void AnimatedGraphic::load(const LoaderParams * pParams)
 {
+	SDLGameObject::load(pParams);
+	animationSpeed = pParams->getAnimSpeed();
 }
 
 void AnimatedGraphic::draw()

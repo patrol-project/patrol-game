@@ -1,9 +1,14 @@
 #include "MenuButton.h"
 #include "InputHandler.h"
 
-MenuButton::MenuButton(const LoaderParams * params, void(*passedCallback)()):
-	SDLGameObject(params), callback(passedCallback)
+MenuButton::MenuButton() : SDLGameObject(), m_callback(0), isReleased(true)
 {
+}
+
+void MenuButton::load(const LoaderParams * pParams)
+{
+	SDLGameObject::load(pParams);
+	callbackID = pParams->getCallbackID();
 	currentFrame = MOUSE_OUT; // start at frame 0
 }
 
@@ -25,7 +30,7 @@ void MenuButton::update()
 		{
 			currentFrame = CLICKED;
 
-			callback(); // calling the purpose of this button
+			m_callback(); // calling the purpose of this button
 
 			isReleased = false;
 		}

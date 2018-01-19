@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameState.h"
+#include "MenuState.h"
 #include "GameObject.h"
 #include <vector>
 
@@ -8,7 +8,7 @@
  * @brief This is the state when the game is paused with the ESCAPE key
  * 
  */
-class PauseState : public GameState
+class PauseState : public MenuState
 {
 public:
 	/**
@@ -46,6 +46,7 @@ public:
 	 */
 	virtual string getStateID() const { return pauseID; }
 private:
+	virtual void setCallbacks(const std::vector<Callback>& callbacks);
 	static void pauseToMain(); ///< pauses the game and shows the menu
 	static void resumePlay(); ///< exits from menu and resumes the game
 	static const string pauseID; ///< returns the name of the state

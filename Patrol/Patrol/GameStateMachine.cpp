@@ -1,6 +1,6 @@
 #include "GameStateMachine.h"
 #include <iostream>
-#include "MenuState.h"
+#include "MainMenuState.h"
 #include "PlayState.h"
 #include "PauseState.h"
 #include "GameOverState.h"
@@ -8,7 +8,7 @@
 GameStateMachine::GameStateMachine()
 {
 	int nextState = STATE_NULL;
-	gameStatesMap[STATE_MAIN_MENU] = new MenuState();
+	gameStatesMap[STATE_MAIN_MENU] = new MainMenuState();
 	gameStatesMap[STATE_PAUSE_MENU] = new PauseState();
 	gameStatesMap[STATE_GAME_OVER] = new GameOverState();
 	gameStatesMap[STATE_PLAY] = new PlayState();

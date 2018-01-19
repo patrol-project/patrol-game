@@ -5,6 +5,10 @@
 #include "TextureManager.h"
 #include "MenuState.h"
 #include "PlayState.h"
+#include "GameObjectFactory.h"
+#include "MenuButton.h"
+#include "Player.h"
+#include "Enemy.h"
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
@@ -53,6 +57,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	// initialize the GameStateMachine
 	gameStateMachine = new GameStateMachine();
 	gameStateMachine->set_next_state(STATE_MAIN_MENU);
+
+	//Register types
+	GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
+	GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
+	GameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
 
 	// start game loop
 	running = true;

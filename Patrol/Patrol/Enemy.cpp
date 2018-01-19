@@ -1,9 +1,5 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
-{
-}
-
 void Enemy::draw()
 {
 	SDLGameObject::draw();
@@ -18,4 +14,8 @@ void Enemy::update()
 
 void Enemy::clean()
 {
+}
+void Enemy::load(const LoaderParams * pParams)
+{
+	SDLGameObject::load(pParams);
 }

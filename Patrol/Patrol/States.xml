@@ -11,7 +11,23 @@
     </OBJECTS>
   </MENU>
   <PLAY>
+    <TEXTURES>
+      <texture filename="Resources/alien.png" ID="alien"/>
+      <texture filename="Resources/knight.png" ID="knight"/>
+    </TEXTURES>
+    <OBJECTS>
+      <object type="Player" x="100" y="100" width="91" height="100" textureID="alien" numFrames="0" callbackID="0"/>
+      <object type="Enemy" x="400" y="100" width="100" height="120" textureID="knight" numFrames="0" callbackID="0"/>
+    </OBJECTS>
   </PLAY>
-  <GAMEOVER>
-  </GAMEOVER>
+  <PAUSE>
+    <TEXTURES>
+      <texture filename="Resources/resume.png" ID="resumebutton"/>
+      <texture filename="Resources/main.png" ID="mainbutton"/>
+    </TEXTURES>
+    <OBJECTS>
+      <object type="MenuButton" x="200" y="100" width="200" height="80" textureID="resumebutton" numFrames="0" callbackID="1"/>
+      <object type="MenuButton" x="200" y="300" width="200" height="80" textureID="mainbutton" numFrames="0" callbackID="2"/>
+    </OBJECTS>
+  </PAUSE>
 </STATES>

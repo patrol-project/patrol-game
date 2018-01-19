@@ -6,6 +6,7 @@
 #include "PauseState.h"
 #include "Enemy.h"
 #include "GameOverState.h"
+#include "StateParser.h"
 
 const string PlayState::playId = "PLAY";
 
@@ -31,21 +32,10 @@ void PlayState::render()
 
 bool PlayState::onEnter()
 {
-	if (!TextureManager::Instance()->load("Resources/alien.png", "alien", Game::Instance().getRenderer()))
-	{
-		return false;
-	}
-
-	if (!TextureManager::Instance()->load("Resources/knight.png", "knight", Game::Instance().getRenderer()))
-	{
-		return false;
-	}
-
-	GameObject* player = new Player(new LoaderParams(100, 100, 91, 100, "alien"));
-	GameObject* enemy = new Enemy(new LoaderParams(400, 100, 100, 120, "knight"));
-	
-	gameObjects.push_back(player);
-	gameObjects.push_back(enemy);
+	// parse the state
+ 	StateParser stateParser;
+	stateParser.parseState("States.xml", playId, &gameObjects, &m_textureIDList);
+	std::cout << "entering PlayState\n";
 	return true;
 }
 
@@ -56,6 +46,10 @@ bool PlayState::onExit()
 		gameObjects[i]->clean();
 	}
 	gameObjects.clear();
-	TextureManager::Instance()->clearFromTextureMap("alien");
+
+	for (int i = 0; i < m_textureIDList.size(); i++)
+	{
+		TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+	}
 	return true;
 }
