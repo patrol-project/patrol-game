@@ -55,6 +55,9 @@ public:
 	 * 
 	 */
 	void quit();
+
+	int getGameWidth() const;
+	int getGameHeight() const;
 	
 	/**
 	 * @brief Responsible for drawing all the game objects to the screen. Delegates the work to GameStateMachine class. 
@@ -104,6 +107,9 @@ private:
 	Game() { } ///< private constructor to ensure no one creates second instance of this class
 
 	bool running; ///< used to control the game loop
+
+	int gameWidth;
+	int gameHeight;
 
 	SDL_Window* window; ///< reference to the SDL window object
 	SDL_Renderer* renderer; ///< reference to the SDL renderer
