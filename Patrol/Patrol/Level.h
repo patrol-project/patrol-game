@@ -18,7 +18,6 @@ struct Tileset
 class Level
 {
 public:
-	Level();
 	~Level() {}
 	void update();
 	void render(); 
@@ -34,4 +33,6 @@ public:
 private:
 		std::vector<Tileset> m_tilesets;
 		std::vector<Layer*> m_layers;
+		friend class LevelParser;
+		Level();
 };
