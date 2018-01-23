@@ -23,14 +23,14 @@ Level* LevelParser::parseLevel(const char *levelFile)
 	}
 
 	// parse any object layers
-	for (tinyxml2::XMLElement* e = pRoot->FirstChildElement(); e != NULL; e =
-		e->NextSiblingElement())
+	for (tinyxml2::XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
 	{
 		if (e->Value() == std::string("layer"))
 		{
 			parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
 		}
 	}
+
 	return pLevel;
 }
 
@@ -55,6 +55,47 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
 	tileset.margin = pTilesetRoot->IntAttribute("margin");
 	tileset.name = pTilesetRoot->Attribute("name");
 	tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
-	
+
 	pTilesets->push_back(tileset);
+}
+
+void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector<Layer*> *pLayers, const std::vector<Tileset>* pTilesets)
+{
+	TileLayer* pTileLayer = new TileLayer(m_tileSize, *pTilesets);
+	// tile data
+	std::vector<std::vector<int>> data;
+	std::string decodedIDs;
+	tinyxml2::XMLElement* pDataNode = nullptr;
+
+	for (tinyxml2::XMLElement* e = pTileElement->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
+	{
+		if (e->Value() == std::string("data"))
+		{
+			pDataNode = e;
+		}
+	}
+
+	for (tinyxml2::XMLNode* e = pDataNode->FirstChild(); e != NULL; e = e->NextSibling())
+	{
+		tinyxml2::XMLText* text = e->ToText();
+		std::string t = text->Value();
+		decodedIDs = base64_decode(t);
+	}
+
+	std::vector<int> layerRow(m_width);
+
+	for (int j = 0; j < m_height; j++)
+	{
+		data.push_back(layerRow);
+	}
+
+	for (int rows = 0; rows < m_height; rows++)
+	{
+		for (int cols = 0; cols < m_width; cols++)
+		{
+			data[rows][cols] = decodedIDs[rows * m_width + cols];
+		}
+	}
+	pTileLayer->setTileIDs(data);
+	pLayers->push_back(pTileLayer);
 }

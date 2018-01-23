@@ -2,6 +2,8 @@
 #include "Layer.h"
 #include <vector>
 #include "Level.h"
+#include "Game.h"
+#include "TextureManager.h"
 #include "Vector2D.h"
 
 class TileLayer : public Layer

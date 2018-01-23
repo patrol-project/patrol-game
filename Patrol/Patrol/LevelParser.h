@@ -3,6 +3,9 @@
 #include "tinyxml2.h"
 #include "TextureManager.h"
 #include "Game.h"
+#include "TileLayer.h"
+#include "base64.h"
+
 class LevelParser
 {
 public:
