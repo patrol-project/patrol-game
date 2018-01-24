@@ -16,18 +16,15 @@ void PlayState::update()
 	{
 		Game::Instance().getStateMachine()->set_next_state(STATE_PAUSE_MENU);
 	}
-	for (int i = 0; i < gameObjects.size(); i++)
-	{
-		gameObjects[i]->update();
-	}
+	//for (int i = 0; i < gameObjects.size(); i++)
+	//{
+	//	gameObjects[i]->update();
+	//}
+	pLevel->update();
 }
 
 void PlayState::render()
 {
-	/*for (int i = 0; i < gameObjects.size(); i++)
-	{
-		gameObjects[i]->draw();
-	}*/
 	pLevel->render();
 }
 
@@ -36,10 +33,10 @@ bool PlayState::onEnter()
 	LevelParser levelParser;
 	pLevel = levelParser.parseLevel("tiles.tmx");
 
-	// parse the state
- 	StateParser stateParser;
-	stateParser.parseState("States.xml", playId, &gameObjects, &m_textureIDList);
-	std::cout << "entering PlayState\n";
+	//	parse the state
+	//	StateParser stateParser;
+	//	stateParser.parseState("States.xml", playId, &gameObjects, &m_textureIDList);
+	//	std::cout << "entering PlayState\n";
 	return true;
 }
 

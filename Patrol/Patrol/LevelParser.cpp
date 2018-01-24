@@ -1,5 +1,6 @@
 #include "LevelParser.h"
 
+#include <iostream>
 Level* LevelParser::parseLevel(const char *levelFile)
 {
 	// create a TinyXML document and load the map XML
@@ -79,6 +80,9 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector
 	{
 		tinyxml2::XMLText* text = e->ToText();
 		std::string t = text->Value();
+		//	First you need to base64 - decode it, then you may need to decompress it.
+		//	Now you have an array of bytes, which should be interpreted as an
+		//	array of unsigned 32 - bit integers using little - endian byte ordering.
 		decodedIDs = base64_decode(t);
 	}
 
@@ -88,13 +92,19 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector
 	{
 		data.push_back(layerRow);
 	}
-
+	int index = 0;
 	for (int rows = 0; rows < m_height; rows++)
 	{
 		for (int cols = 0; cols < m_width; cols++)
 		{
-			data[rows][cols] = decodedIDs[rows * m_width + cols];
+			// decodedIDs is a byte array where every 4 char represent int32 using little-endian byte ordering
+			// that's why we shift every char accordingly 
+			// https://stackoverflow.com/questions/17916394/converting-4-bytes-in-little-endian-order-into-an-unsigned-integer
+			uint32_t a = decodedIDs[index] | decodedIDs[index + 1] << 8 | decodedIDs[index + 2] << 16 | decodedIDs[index + 3] << 24;
+			data[rows][cols] = a;
+			index += 4;
 		}
+		cout << endl;
 	}
 	pTileLayer->setTileIDs(data);
 	pLayers->push_back(pTileLayer);
