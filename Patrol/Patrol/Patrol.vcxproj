@@ -83,13 +83,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)Dependencies\SDL2_image-2.0.2\include;$(SolutionDir)Dependencies\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2-2.0.7\lib\x86;$(SolutionDir)Dependencies\SDL2_image-2.0.2\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>F:\НБУ\3 Курс\5 Семестър Есен-Зима\Проект за разразботка на компютърна игра\patrol-game\Patrol\Dependencies\zlib\lib;$(SolutionDir)Dependencies\SDL2-2.0.7\lib\x86;$(SolutionDir)Dependencies\SDL2_image-2.0.2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -119,6 +120,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>zlibwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,12 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedGraphic.cpp" />
+    <ClCompile Include="base64.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelParser.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MenuButton.cpp" />
@@ -153,10 +158,12 @@
     <ClCompile Include="SDLGameObject.cpp" />
     <ClCompile Include="StateParser.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="TileLayer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedGraphic.h" />
+    <ClInclude Include="base64.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -165,6 +172,9 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelParser.h" />
     <ClInclude Include="LoaderParams.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MenuButton.h" />
@@ -175,6 +185,7 @@
     <ClInclude Include="SDLGameObject.h" />
     <ClInclude Include="StateParser.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="TileLayer.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>

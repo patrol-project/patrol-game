@@ -27,7 +27,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//Create window
 	int showWindowFlag = showWindow == true ? SDL_WINDOW_SHOWN : 0;
 	window = SDL_CreateWindow(title, xpos, ypos, width, height, showWindowFlag);
-
+	m_gameHeight = height;
+	m_gameWidth = width;
 	//Initialization debugging
 	if (window == NULL)
 	{

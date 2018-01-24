@@ -4,6 +4,8 @@
 #include <vector>
 #include "GameObject.h"
 #include "SDLGameObject.h"
+#include "Level.h"
+#include "LevelParser.h"
 
 class PlayState : public GameState
 {
@@ -16,4 +18,5 @@ public:
 private:
 	static const string playId;
 	vector<GameObject*> gameObjects;
+	Level* pLevel;
 };

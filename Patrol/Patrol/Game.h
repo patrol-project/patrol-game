@@ -84,6 +84,15 @@ public:
 	 */
 	GameStateMachine* getStateMachine() const { return gameStateMachine; }
 
+	int getGameWidth() const
+	{
+		return m_gameWidth;
+	}
+	int getGameHeight() const
+	{
+		return m_gameHeight;
+	}
+
 	/**
 	 * @brief Game class is following the Singleton pattern and Instance()
 	 * is returning the only instance of the class if it is already created and
@@ -104,7 +113,8 @@ private:
 	Game() { } ///< private constructor to ensure no one creates second instance of this class
 
 	bool running; ///< used to control the game loop
-
+	int m_gameWidth;
+	int m_gameHeight;
 	SDL_Window* window; ///< reference to the SDL window object
 	SDL_Renderer* renderer; ///< reference to the SDL renderer
 	SDL_Texture* texture; 
