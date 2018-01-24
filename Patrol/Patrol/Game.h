@@ -93,6 +93,11 @@ public:
 		return m_gameHeight;
 	}
 
+	float getScrollSpeed()
+	{
+		return m_scrollSpeed;
+	}
+
 	/**
 	 * @brief Game class is following the Singleton pattern and Instance()
 	 * is returning the only instance of the class if it is already created and
@@ -115,6 +120,8 @@ private:
 	bool running; ///< used to control the game loop
 	int m_gameWidth;
 	int m_gameHeight;
+
+	float m_scrollSpeed = 1;
 	SDL_Window* window; ///< reference to the SDL window object
 	SDL_Renderer* renderer; ///< reference to the SDL renderer
 	SDL_Texture* texture; 

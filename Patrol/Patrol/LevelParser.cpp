@@ -196,6 +196,8 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector
 		cout << endl;
 	}
 	pTileLayer->setTileIDs(data);
+	pTileLayer->setMapWidth(m_width);
+
 	pLayers->push_back(pTileLayer);
 }
 

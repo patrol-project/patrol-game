@@ -90,7 +90,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MP3_MUSIC_DISABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -157,6 +157,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SDLGameObject.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StateParser.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TileLayer.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SDLGameObject.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateParser.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TileLayer.h" />
