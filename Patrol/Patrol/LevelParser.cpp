@@ -6,11 +6,9 @@
 #include "TileLayer.h"
 #include "GameObjectFactory.h"
 #include "base64.h"
+#include "zlib.h"
 #include "Level.h"
-#if defined(_WIN32) && defined(_DEBUG)
-#define ZLIB_WINAPI
-#endif
-#include <zlib.h>
+
 Level* LevelParser::parseLevel(const char *levelFile)
 {
 	// create a TinyXML document and load the map XML

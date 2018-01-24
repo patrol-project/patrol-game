@@ -31,7 +31,7 @@ public:
 
 private:
 	friend class LevelParser;
-	Level() {}
+	Level();
 
 	std::vector<Tileset> m_tilesets;
 	std::vector<Tileset>* getTilesets() { return &m_tilesets; }
