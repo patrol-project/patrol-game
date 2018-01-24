@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Vector2D.h"
 #include "InputHandler.h"
-
+#include "BulletHandler.h"
 
 Player::Player() : ShooterObject(),
 m_invulnerable(false),
@@ -12,14 +12,14 @@ m_invulnerableCounter(0)
 
 void Player::collision() {
 	// if the player is not invulnerable then set to dying and change values for death animation tile sheet
-	/*if (!m_invulnerable && !Game::Instance().getLevelComplete()) {
+	if (!m_invulnerable && !Game::Instance().getLevelComplete()) {
 		m_textureID = "largeexplosion";
 		m_currentFrame = 0;
 		m_numFrames = 9;
 		m_width = 60;
 		m_height = 60;
 		m_bDying = true;
-	}*/
+	}
 }
 
 void Player::draw()
@@ -81,47 +81,47 @@ void Player::handleAnimation() {
 }
 
 void Player::update() {
-	//if (Game::Instance().getLevelComplete()) {
-	//	if (m_position.getX() >= Game::Instance().getGameWidth()) {
-	//		Game::Instance().setCurrentLevel(
-	//			Game::Instance().getCurrentLevel() + 1);
-	//	}
-	//	else {
-	//		m_velocity.setY(0);
-	//		m_velocity.setX(3);
-	//		ShooterObject::update();
-	//		handleAnimation();
-	//	}
-	//}
-	//else {
-	//	// if the player is not doing its death animation then update it normally
-	//	if (!m_bDying) {
-	//		// reset velocity
-	//		m_velocity.setX(0);
-	//		m_velocity.setY(0);
+	if (Game::Instance().getLevelComplete()) {
+		if (m_position.getX() >= Game::Instance().getGameWidth()) {
+			Game::Instance().setCurrentLevel(
+				Game::Instance().getCurrentLevel() + 1);
+		}
+		else {
+			m_velocity.setY(0);
+			m_velocity.setX(3);
+			ShooterObject::update();
+			handleAnimation();
+		}
+	}
+	else {
+		// if the player is not doing its death animation then update it normally
+		if (!m_bDying) {
+			// reset velocity
+			m_velocity.setX(0);
+			m_velocity.setY(0);
 
-	//		// get input
-	//		handleInput();
+			// get input
+			handleInput();
 
-	//		// do normal position += velocity update
-	//		ShooterObject::update();
+			// do normal position += velocity update
+			ShooterObject::update();
 
-	//		// update the animation
-	//		handleAnimation();
-	//	}
-	//	else {// if the player is doing the death animation        
-	//		m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
+			// update the animation
+			handleAnimation();
+		}
+		else {// if the player is doing the death animation        
+			m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
 
-	//		// if the death animation has completed
-	//		// ressurect the player
-	//		if (m_dyingCounter == m_dyingTime) { ressurect(); }
-	//		m_dyingCounter++;
-	//	}
-	//}
+			// if the death animation has completed
+			// ressurect the player
+			if (m_dyingCounter == m_dyingTime) { ressurect(); }
+			m_dyingCounter++;
+		}
+	}
 }
 
 void Player::ressurect() {
-	/*Game::Instance().setPlayerLives(Game::Instance().getPlayerLives() - 1);
+	Game::Instance().setPlayerLives(Game::Instance().getPlayerLives() - 1);
 
 	m_position.setX(10);
 	m_position.setY(200);
@@ -135,7 +135,7 @@ void Player::ressurect() {
 	m_height = 46;
 
 	m_dyingCounter = 0;
-	m_invulnerable = true;*/
+	m_invulnerable = true;
 }
 
 void Player::clean() { ShooterObject::clean(); }
@@ -164,9 +164,9 @@ void Player::handleInput() {
 		if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
 			if (m_bulletCounter == m_bulletFiringSpeed) {
 				SoundManager::Instance()->playSound("shoot", 0);
-				/*BulletHandler::Instance()->addPlayerBullet(
+				BulletHandler::Instance()->addPlayerBullet(
 					m_position.getX() + 90, m_position.getY() + 12, 11, 11, "bullet1", 1, Vector2D(10, 0));
-				m_bulletCounter = 0;*/
+				m_bulletCounter = 0;
 			}
 
 			m_bulletCounter++;

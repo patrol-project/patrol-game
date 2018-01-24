@@ -9,6 +9,8 @@
 #include "MenuButton.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "AnimatedGraphic.h"
+#include "ScrollingBackground.h"
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
@@ -62,7 +64,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//Register types
 	GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
 	GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
-
+	GameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
+	GameObjectFactory::Instance()->registerType("ScrollingBackground", new ScrollingBackgroundCreator());
 	// start game loop
 	running = true;
 
@@ -126,3 +129,24 @@ bool Game::get_running() const
 {
 	return running;
 }
+
+void Game::setPlayerLives(int lives) { m_playerLives = lives; }
+int Game::getPlayerLives() { return m_playerLives; }
+
+void Game::setCurrentLevel(int currentLevel) {
+	m_currentLevel = currentLevel;
+	gameStateMachine->set_next_state(STATE_GAME_OVER);
+	m_bLevelComplete = false;
+}
+const int Game::getCurrentLevel() { return m_currentLevel; }
+
+void Game::setNextLevel(int nextLevel) { m_nextLevel = nextLevel; }
+const int Game::getNextLevel() { return m_nextLevel; }
+
+void Game::setLevelComplete(bool levelComplete) { m_bLevelComplete = levelComplete; }
+const bool Game::getLevelComplete() { return m_bLevelComplete; }
+
+bool Game::changingState() { return m_bChangingState; }
+void Game::changingState(bool cs) { m_bChangingState = cs; }
+
+std::vector<std::string> Game::getLevelFiles() { return m_levelFiles; }

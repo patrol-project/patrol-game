@@ -98,6 +98,23 @@ public:
 		return m_scrollSpeed;
 	}
 
+	void setPlayerLives(int lives);
+	int getPlayerLives();
+
+	void setCurrentLevel(int currentLevel);
+	const int getCurrentLevel();
+
+	void setNextLevel(int nextLevel);
+	const int getNextLevel();
+
+	void setLevelComplete(bool levelComplete);
+	const bool getLevelComplete();
+
+	bool changingState();
+	void changingState(bool cs);
+
+	std::vector<std::string> getLevelFiles();
+
 	/**
 	 * @brief Game class is following the Singleton pattern and Instance()
 	 * is returning the only instance of the class if it is already created and
@@ -121,10 +138,19 @@ private:
 	int m_gameWidth;
 	int m_gameHeight;
 
-	float m_scrollSpeed = 1;
+	float m_scrollSpeed;
 	SDL_Window* window; ///< reference to the SDL window object
 	SDL_Renderer* renderer; ///< reference to the SDL renderer
 	SDL_Texture* texture; 
+
+	bool m_bChangingState;
+	int m_playerLives;
+
+	int m_currentLevel;
+	int m_nextLevel;
+	bool m_bLevelComplete;
+
+	std::vector<std::string> m_levelFiles;
 
 	GameStateMachine* gameStateMachine; ///< reference to the GameStateMachine object which controls the game states
 };

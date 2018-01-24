@@ -23,6 +23,8 @@ public:
 		spacing, int x, int y, int width, int height, int currentRow,
 		int currentFrame, SDL_Renderer *pRenderer);
 
+	std::map<std::string, SDL_Texture*> getTextureMap() { return textureMap; }
+
 	static TextureManager* Instance()
 	{
 		if (texture_instance == 0)
