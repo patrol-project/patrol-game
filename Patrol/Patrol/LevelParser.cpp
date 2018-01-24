@@ -1,5 +1,12 @@
+#include <string>
 #include "LevelParser.h"
-#include <iostream>
+#include "TextureManager.h"
+#include "Game.h"
+#include "ObjectLayer.h"
+#include "TileLayer.h"
+#include "GameObjectFactory.h"
+#include "base64.h"
+#include "Level.h"
 
 Level* LevelParser::parseLevel(const char *levelFile)
 {
@@ -42,7 +49,7 @@ Level* LevelParser::parseLevel(const char *levelFile)
 		{
 			if (e->FirstChildElement()->Value() == std::string("object"))
 			{
-				parseObjectLayer(e, pLevel->getLayers());
+				parseObjectLayer(e, pLevel->getLayers(), pLevel);
 			}
 			else if (e->FirstChildElement()->Value() == std::string("data"))
 			{
@@ -63,7 +70,7 @@ void LevelParser::parseTextures(tinyxml2::XMLElement* pTextureRoot)
 	);
 }
 
-void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::vector<Layer*>* pLayers)
+void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::vector<Layer*>* pLayers, Level* pLevel)
 {
 	// create an object layer
 	ObjectLayer* pObjectLayer = new ObjectLayer();
@@ -74,18 +81,21 @@ void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::v
 		if (e->Value() == std::string("object"))
 		{
 			int x, y, width, height, numFrames, callbackID, animSpeed;
-			x= y= width= height= numFrames= callbackID= animSpeed = 0;
+			x = y = width = height = numFrames = callbackID = animSpeed = 0;
 			std::string textureID;
+			std::string type;
 			// get the initial node values type, x and y
 			x = e->IntAttribute("x");
 			y = e->IntAttribute("y");
-			GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
+
+			type = e->Attribute("type");
+			GameObject* pGameObject = GameObjectFactory::Instance()->create(type);
 			// get the property values
-			for (tinyxml2::XMLElement* properties = e->FirstChildElement();properties != NULL; properties = properties->NextSiblingElement())
+			for (tinyxml2::XMLElement* properties = e->FirstChildElement(); properties != NULL; properties = properties->NextSiblingElement())
 			{
 				if (properties->Value() == std::string("properties"))
 				{
-					for (tinyxml2::XMLElement* property = properties->FirstChildElement();property != NULL; property = property->NextSiblingElement())
+					for (tinyxml2::XMLElement* property = properties->FirstChildElement(); property != NULL; property = property->NextSiblingElement())
 					{
 						if (property->Value() == std::string("property"))
 						{
@@ -118,6 +128,11 @@ void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::v
 				}
 			}
 			pGameObject->load(std::unique_ptr<LoaderParams>(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed)));
+			if (type == "Player")
+			{
+				pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
+			}
+
 			pObjectLayer->getGameObjects()->push_back(pGameObject);
 		}
 	}

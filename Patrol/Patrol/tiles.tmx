@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="60" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="9">
+<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="60" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="11">
  <properties>
   <property name="helicopter" value="helicopter.png"/>
+  <property name="turret" value="turret.png"/>
  </properties>
  <tileset firstgid="1" name="blocks" tilewidth="32" tileheight="32" spacing="2" margin="2" tilecount="198" columns="18">
   <image source="blocks1.png" width="614" height="376"/>
@@ -16,6 +17,14 @@
     <property name="textureHeight" type="int" value="55"/>
     <property name="textureID" value="helicopter"/>
     <property name="textureWidth" type="int" value="128"/>
+   </properties>
+  </object>
+  <object id="10" name="Turret1" type="Turret" x="428" y="216" width="32" height="32">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="52"/>
+    <property name="textureID" value="turret"/>
+    <property name="textureWidth" type="int" value="56"/>
    </properties>
   </object>
  </objectgroup>

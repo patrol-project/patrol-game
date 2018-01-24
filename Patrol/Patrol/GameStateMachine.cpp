@@ -86,3 +86,14 @@ void GameStateMachine::render()
 		currentState->render();
 	}
 }
+
+void GameStateMachine::clean()
+{
+	for (auto i = gameStatesMap.begin(); i != gameStatesMap.end(); i++) {
+		if (i->second != nullptr) {
+			i->second->onExit();
+			i->second = nullptr;
+		}
+	}
+	gameStatesMap.clear();
+}

@@ -95,6 +95,10 @@ void InputHandler::update()
 	}
 }
 
+void InputHandler::clean()
+{
+}
+
 void InputHandler::onKeyDown()
 {
 	keystates = SDL_GetKeyboardState(0);

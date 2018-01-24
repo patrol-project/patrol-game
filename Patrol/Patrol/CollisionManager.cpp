@@ -53,8 +53,7 @@ void CollisionManager::checkPlayerEnemyBulletCollision(Player* pPlayer) {
 	}
 }
 
-void CollisionManager::checkEnemyPlayerBulletCollision(
-	const std::vector<GameObject *> &objects) {
+void CollisionManager::checkEnemyPlayerBulletCollision(const std::vector<GameObject *> &objects) {
 	for (unsigned int i = 0; i < objects.size(); i++) {
 		auto pObject = objects[i];
 
@@ -89,8 +88,7 @@ void CollisionManager::checkEnemyPlayerBulletCollision(
 	}
 }
 
-void CollisionManager::checkPlayerEnemyCollision(Player* pPlayer,
-	const std::vector<GameObject*> &objects) {
+void CollisionManager::checkPlayerEnemyCollision(Player* pPlayer, const std::vector<GameObject*> &objects) {
 	auto pRect1 = std::make_shared<SDL_Rect>();
 	pRect1->x = pPlayer->getPosition().getX();
 	pRect1->y = pPlayer->getPosition().getY();
@@ -116,8 +114,7 @@ void CollisionManager::checkPlayerEnemyCollision(Player* pPlayer,
 	}
 }
 
-void CollisionManager::checkPlayerTileCollision(Player* pPlayer,
-	const std::vector<TileLayer*>& collisionLayers) {
+void CollisionManager::checkPlayerTileCollision(Player* pPlayer, const std::vector<TileLayer*>& collisionLayers) {
 	for (auto it = collisionLayers.begin();
 		it != collisionLayers.end(); ++it) {
 		TileLayer* pTileLayer = (*it);

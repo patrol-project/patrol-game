@@ -26,10 +26,10 @@ public:
 
 private:
 	BulletHandler();
-	~BulletHandler();
+	//~BulletHandler();
 
 	BulletHandler(const BulletHandler&);
-	BulletHandler& operator=(const BulletHandler&);
+	//BulletHandler& operator=(const BulletHandler&);
 
 	static BulletHandler* s_pInstance;
 

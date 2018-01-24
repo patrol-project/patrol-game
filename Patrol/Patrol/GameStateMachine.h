@@ -47,6 +47,8 @@ public:
 	 *
 	 */
 	void render();
+
+	void clean();
 private:
 	//State variables
 	int stateID;

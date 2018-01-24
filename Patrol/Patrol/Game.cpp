@@ -11,6 +11,7 @@
 #include "Enemy.h"
 #include "AnimatedGraphic.h"
 #include "ScrollingBackground.h"
+#include "Turret.h"
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
@@ -66,6 +67,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
 	GameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
 	GameObjectFactory::Instance()->registerType("ScrollingBackground", new ScrollingBackgroundCreator());
+	GameObjectFactory::Instance()->registerType("Turret", new TurretCreator());
 	// start game loop
 	running = true;
 
@@ -74,14 +76,19 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 void Game::clean()
 {
-	//Free loaded images
-	TextureManager::Instance()->clearAllTexturesFromMap();
+	//Free loaded images and music
+	TextureManager::Instance()->clearAllTexturesFromMap(); 
+	InputHandler::Instance()->clean();
+	SoundManager::Instance()->clearSoundMap();
 
 	//Destroy window	
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	window = NULL;
-	renderer = NULL;
+	renderer = NULL;    
+
+	gameStateMachine->clean();
+	delete gameStateMachine;
 
 	//Quit SDL subsystems
 	IMG_Quit();

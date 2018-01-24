@@ -1,16 +1,73 @@
 #include "ObjectLayer.h"
 
-void ObjectLayer::update()
-{
-	for (int i = 0; i < m_gameObjects.size(); i++)
+
+ObjectLayer::~ObjectLayer() {
+	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); ++it)// < m_gameObjects.size(); i++)
 	{
-		m_gameObjects[i]->update();
+		delete (*it);
+	}
+	m_gameObjects.clear();
+}
+
+// return a pointer to this layers objects, the level parser will fill this
+std::vector<GameObject*>* ObjectLayer::getGameObjects() { return &m_gameObjects; }
+
+void ObjectLayer::update(Level* pLevel) {
+	m_collisionManager.checkPlayerEnemyBulletCollision(pLevel->getPlayer());
+
+	m_collisionManager.checkEnemyPlayerBulletCollision((const std::vector<GameObject*>&)m_gameObjects);
+	m_collisionManager.checkPlayerEnemyCollision(pLevel->getPlayer(), (const std::vector<GameObject*>&)m_gameObjects);
+
+	if (pLevel->getPlayer()->getPosition().getX() + pLevel->getPlayer()->getWidth() < Game::Instance().getGameWidth())
+	{
+		m_collisionManager.checkPlayerTileCollision(pLevel->getPlayer(), pLevel->getCollidableLayers());
+	}
+
+	// iterate through the objects
+	if (!m_gameObjects.empty())
+	{
+		for (auto it = m_gameObjects.begin(); it != m_gameObjects.end();)// < m_gameObjects.size(); i++)
+		{
+			if ((*it)->getPosition().getX() <= Game::Instance().getGameWidth())
+			{
+				(*it)->setUpdating(true);
+				(*it)->update();
+			}
+			else
+			{
+				if ((*it)->type() != std::string("Player"))
+				{
+					(*it)->setUpdating(false);
+					(*it)->scroll(Game::Instance().getScrollSpeed());
+				}
+				else
+				{
+					(*it)->update();
+				}
+			}
+
+			// check if dead or off screen
+			if ((*it)->getPosition().getX() < (0 - (*it)->getWidth()) || (*it)->getPosition().getY() > (Game::Instance().getGameHeight()) || ((*it)->dead()))
+			{
+				delete * it;
+				it = m_gameObjects.erase(it); // erase from vector and get new iterator
+			}
+			else
+			{
+				++it; // increment if all ok
+			}
+
+		}
 	}
 }
+
 void ObjectLayer::render()
 {
-	for (int i = 0; i < m_gameObjects.size(); i++)
+	for (unsigned int i = 0; i < m_gameObjects.size(); i++)
 	{
-		m_gameObjects[i]->draw();
+		if (m_gameObjects[i]->getPosition().getX() <= Game::Instance().getGameWidth())
+		{
+			m_gameObjects[i]->draw();
+		}
 	}
 }

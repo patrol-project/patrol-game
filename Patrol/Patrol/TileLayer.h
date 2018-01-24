@@ -10,7 +10,8 @@ class TileLayer : public Layer
 {
 public:
 	TileLayer(int tileSize, const std::vector<Tileset> &tilesets);
-	virtual void update();
+	virtual ~TileLayer() {}
+	virtual void update(Level* pLevel);
 	virtual void render();
 	void setTileIDs(const std::vector<std::vector<int>>& data)
 	{

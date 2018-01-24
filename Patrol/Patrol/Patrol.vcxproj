@@ -167,6 +167,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TileLayer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Turret.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedGraphic.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TileLayer.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="Turret.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>

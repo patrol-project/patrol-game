@@ -37,17 +37,23 @@ void GameOverState::restartPlay()
 
 void GameOverState::update()
 {
-	for (int i = 0; i < gameObjects.size(); i++)
+	if (m_loadingComplete && !gameObjects.empty())
 	{
-		gameObjects[i]->update();
+		for (unsigned int i = 0; i < gameObjects.size(); i++)
+		{
+			gameObjects[i]->update();
+		}
 	}
 }
 
 void GameOverState::render()
 {
-	for (int i = 0; i < gameObjects.size(); i++)
+	if (m_loadingComplete && !gameObjects.empty())
 	{
-		gameObjects[i]->draw();
+		for (unsigned int i = 0; i < gameObjects.size(); i++)
+		{
+			gameObjects[i]->draw();
+		}
 	}
 }
 
