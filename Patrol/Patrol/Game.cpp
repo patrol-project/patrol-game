@@ -12,10 +12,6 @@
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
-	// store the game width and height
-	gameWidth = width;
-	gameHeight = height;
-
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -92,16 +88,6 @@ void Game::clean()
 void Game::quit()
 {
 	running = false;
-}
-
-int Game::getGameWidth() const
-{
-	return gameWidth;
-}
-
-int Game::getGameHeight() const
-{
-	return gameHeight;
 }
 
 void Game::handleInput()

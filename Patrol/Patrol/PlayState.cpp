@@ -7,14 +7,11 @@
 #include "Enemy.h"
 #include "GameOverState.h"
 #include "StateParser.h"
-#include "LevelParser.h"
 
 const string PlayState::playId = "PLAY";
 
 void PlayState::update()
 {
-	pLevel->render();
-
 	if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
 		Game::Instance().getStateMachine()->set_next_state(STATE_PAUSE_MENU);
@@ -27,24 +24,18 @@ void PlayState::update()
 
 void PlayState::render()
 {
-	pLevel->render();
-
-	/*for (int i = 0; i < gameObjects.size(); i++)
+	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->draw();
-	}*/
+	}
 }
 
 bool PlayState::onEnter()
 {
-	LevelParser levelParser;
-	pLevel = levelParser.parseLevel("Resources/levels/level1.tmx");
-
 	// parse the state
  	StateParser stateParser;
 	stateParser.parseState("States.xml", playId, &gameObjects, &m_textureIDList);
 	std::cout << "entering PlayState\n";
-
 	return true;
 }
 

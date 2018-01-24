@@ -9,15 +9,11 @@ using namespace std;
 class TextureManager
 {
 public:
-
 	bool load(string fileName, string id, SDL_Renderer* pRenderer);
 	// draw
 	void draw(string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	//draw frame
 	void drawFrame(string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-
-	void drawTile(std::string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer);
-
 	// clears all textures from the textureMap
 	void clearAllTexturesFromMap();
 	// clears texture by given id
