@@ -13,14 +13,13 @@ TileLayer::TileLayer(int tileSize, const std::vector<Tileset> &tilesets) :
 
 void TileLayer::update()
 {
-	//m_position += m_velocity;
-	//m_velocity.setX(1);
+	m_position += m_velocity;
+	m_velocity.setX(1);
 }
 
 void TileLayer::render()
 {
-	int x, y, x2, y2;
-	x = y = x2 = y2 = 0;
+	int x, y, x2, y2 = 0;
 
 	x = m_position.getX() / m_tileSize;
 	y = m_position.getY() / m_tileSize;
@@ -32,7 +31,7 @@ void TileLayer::render()
 	{
 		for (int j = 0; j < m_numColumns; j++)
 		{
-			int id = m_tileIDs[i][j];
+			int id = m_tileIDs[i + y][j + x];
 			if (id == 0)
 			{
 				continue;
@@ -41,8 +40,8 @@ void TileLayer::render()
 			id--;
 			TextureManager::Instance()->drawTile(
 				tileset.name, 
-				2,
-				2,
+				tileset.margin,
+				tileset.spacing,
 				(j * m_tileSize) - x2, 
 				(i * m_tileSize) - y2,
 				m_tileSize,
