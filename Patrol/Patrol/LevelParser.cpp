@@ -1,6 +1,6 @@
 #include "LevelParser.h"
-
 #include <iostream>
+
 Level* LevelParser::parseLevel(const char *levelFile)
 {
 	// create a TinyXML document and load the map XML
@@ -14,6 +14,18 @@ Level* LevelParser::parseLevel(const char *levelFile)
 	m_width = pRoot->IntAttribute("width");
 	m_height = pRoot->IntAttribute("height");
 
+	//we know that properties is the first child of the root
+	tinyxml2::XMLElement* pProperties = pRoot->FirstChildElement();
+
+	// we must parse the textures needed for this level, which have been added to properties
+	for (tinyxml2::XMLElement* e = pProperties->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
+	{
+		if (e->Value() == std::string("property"))
+		{
+			parseTextures(e);
+		}
+	}
+
 	// parse the tilesets
 	for (tinyxml2::XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
 	{
@@ -26,13 +38,90 @@ Level* LevelParser::parseLevel(const char *levelFile)
 	// parse any object layers
 	for (tinyxml2::XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
 	{
-		if (e->Value() == std::string("layer"))
+		if (e->Value() == std::string("objectgroup") || e->Value() == std::string("layer"))
 		{
-			parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
+			if (e->FirstChildElement()->Value() == std::string("object"))
+			{
+				parseObjectLayer(e, pLevel->getLayers());
+			}
+			else if (e->FirstChildElement()->Value() == std::string("data"))
+			{
+				parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
+			}
 		}
 	}
 
 	return pLevel;
+}
+
+void LevelParser::parseTextures(tinyxml2::XMLElement* pTextureRoot)
+{
+	TextureManager::Instance()->load(
+		pTextureRoot->Attribute("value"),
+		pTextureRoot->Attribute("name"),
+		Game::Instance().getRenderer()
+	);
+}
+
+void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::vector<Layer*>* pLayers)
+{
+	// create an object layer
+	ObjectLayer* pObjectLayer = new ObjectLayer();
+	std::cout << pObjectElement->FirstChildElement()->Value();
+	for (tinyxml2::XMLElement* e = pObjectElement->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
+	{
+		std::cout << e->Value();
+		if (e->Value() == std::string("object"))
+		{
+			int x, y, width, height, numFrames, callbackID, animSpeed;
+			x= y= width= height= numFrames= callbackID= animSpeed = 0;
+			std::string textureID;
+			// get the initial node values type, x and y
+			x = e->IntAttribute("x");
+			y = e->IntAttribute("y");
+			GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
+			// get the property values
+			for (tinyxml2::XMLElement* properties = e->FirstChildElement();properties != NULL; properties = properties->NextSiblingElement())
+			{
+				if (properties->Value() == std::string("properties"))
+				{
+					for (tinyxml2::XMLElement* property = properties->FirstChildElement();property != NULL; property = property->NextSiblingElement())
+					{
+						if (property->Value() == std::string("property"))
+						{
+							if (property->Attribute("name") == std::string("numFrames"))
+							{
+								numFrames = property->IntAttribute("value");
+							}
+							else if (property->Attribute("name") == std::string("textureHeight"))
+							{
+								height = property->IntAttribute("value");
+							}
+							else if (property->Attribute("name") == std::string("textureID"))
+							{
+								textureID = property->Attribute("value");
+							}
+							else if (property->Attribute("name") == std::string("textureWidth"))
+							{
+								width = property->IntAttribute("value");
+							}
+							else if (property->Attribute("name") == std::string("callbackID"))
+							{
+								callbackID = property->IntAttribute("value");
+							}
+							else if (e->Attribute("name") == std::string("animSpeed"))
+							{
+								animSpeed = property->IntAttribute("value");
+							}
+						}
+					}
+				}
+			}
+			pGameObject->load(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed));
+			pObjectLayer->getGameObjects()->push_back(pGameObject);
+		}
+	}
+	pLayers->push_back(pObjectLayer);
 }
 
 
@@ -109,3 +198,4 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector
 	pTileLayer->setTileIDs(data);
 	pLayers->push_back(pTileLayer);
 }
+
