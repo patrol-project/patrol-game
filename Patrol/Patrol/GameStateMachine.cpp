@@ -20,12 +20,11 @@ void GameStateMachine::changeState()
 	if (nextState != STATE_NULL)
 	{
 		//Delete the current state
-		if (nextState != STATE_EXIT && currentState != 0)
+		/*if (nextState != STATE_EXIT && currentState != 0)
 		{
 			currentState->onExit();
-			//delete currentState;
-		}
-
+			delete currentState;
+		}*/
 		//Change the state
 		switch (nextState)
 		{
