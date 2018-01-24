@@ -3,7 +3,6 @@
 #include "GameState.h"
 #include <vector>
 #include "GameObject.h"
-#include "SDLGameObject.h"
 #include "Level.h"
 #include "LevelParser.h"
 

@@ -31,5 +31,5 @@ private:
 	SoundManager();
 	~SoundManager();
 	SoundManager(const SoundManager&);
-	SoundManager &operator=(const SoundManager&);
+	//SoundManager &operator=(const SoundManager&);
 };

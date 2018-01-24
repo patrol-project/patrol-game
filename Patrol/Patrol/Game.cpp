@@ -62,7 +62,6 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//Register types
 	GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
 	GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
-	GameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
 
 	// start game loop
 	running = true;

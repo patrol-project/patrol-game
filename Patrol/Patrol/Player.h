@@ -1,22 +1,38 @@
 #pragma once
 
-#include "SDLGameObject.h"
+#include "ShooterObject.h"
 #include "GameObjectFactory.h"
+#include "SoundManager.h"
+#include "Game.h"
 
-class Player : public SDLGameObject
+class Player : public ShooterObject
 {
 public:
+	Player();
+	virtual ~Player() {}
+
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
-	virtual void load(const LoaderParams *pParams);
-	void handleInput();
+	virtual void load(std::unique_ptr<LoaderParams> const &pParams);
+
+	virtual void collision();
+
+	virtual std::string type() { return "Player"; }
+
+private:
+	void ressurect();       // bring the player back if there are lives left        
+	void handleInput();     // handle any input from the keyboard, mouse, or joystick        
+	void handleAnimation(); // handle any animation for the player
+
+							// player can be invulnerable for a time
+	int m_invulnerable;
+	int m_invulnerableTime;
+	int m_invulnerableCounter;
 };
 
-class PlayerCreator : public BaseCreator
+// for the factory
+class PlayerCreator : public BaseCreator 
 {
-	GameObject* createGameObject() const
-	{
-		return new Player();
-	}
+	GameObject* createGameObject() const { return new Player(); }
 };

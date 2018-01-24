@@ -1,34 +1,34 @@
 #include "MenuButton.h"
 #include "InputHandler.h"
 
-MenuButton::MenuButton() : SDLGameObject(), m_callback(0), isReleased(true)
+MenuButton::MenuButton() : ShooterObject(), m_callback(0), isReleased(true)
 {
 }
 
-void MenuButton::load(const LoaderParams * pParams)
+void MenuButton::load(std::unique_ptr<LoaderParams> const &pParams)
 {
-	SDLGameObject::load(pParams);
+	ShooterObject::load(std::move(pParams));
 	callbackID = pParams->getCallbackID();
-	currentFrame = MOUSE_OUT; // start at frame 0
+	m_currentFrame = MOUSE_OUT;
 }
 
 void MenuButton::draw()
 {
-	SDLGameObject::draw(); // use the base class drawing
+	ShooterObject::draw(); // use the base class drawing
 }
 
 void MenuButton::update()
 {
 	Vector2D* mousePosition = InputHandler::Instance()->getMousePosition();
 
-	if (mousePosition->getX() < (position.getX() + width)
-		&& mousePosition->getX() > position.getX()
-		&& mousePosition->getY() < (position.getY() + height)
-		&& mousePosition->getY() > position.getY())
+	if (mousePosition->getX() < (m_position.getX() + m_width)
+		&& mousePosition->getX() > m_position.getX()
+		&& mousePosition->getY() < (m_position.getY() + m_height)
+		&& mousePosition->getY() > m_position.getY())
 	{
 		if (InputHandler::Instance()->getMouseButtonState(LEFT) && isReleased)
 		{
-			currentFrame = CLICKED;
+			m_currentFrame = CLICKED;
 
 			m_callback(); // calling the purpose of this button
 
@@ -37,15 +37,15 @@ void MenuButton::update()
 		else if (!InputHandler::Instance()->getMouseButtonState(LEFT))
 		{
 			isReleased = true;
-			currentFrame = MOUSE_OVER;
+			m_currentFrame = MOUSE_OVER;
 		}
 	}
 	else
 	{
-		currentFrame = MOUSE_OUT;
+		m_currentFrame = MOUSE_OUT;
 	}
 }
 void MenuButton::clean()
 {
-	SDLGameObject::clean();
+	ShooterObject::clean();
 }

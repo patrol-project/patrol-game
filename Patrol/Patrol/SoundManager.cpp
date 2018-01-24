@@ -1,5 +1,7 @@
 #include "SoundManager.h"
 
+SoundManager* SoundManager::s_pInstance;
+
 SoundManager::~SoundManager()
 {
 	Mix_CloseAudio();

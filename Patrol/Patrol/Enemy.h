@@ -1,21 +1,15 @@
 #pragma once
 
-#include "SDLGameObject.h"
-#include"GameObjectFactory.h"
+#include "ShooterObject.h"
 
-class Enemy : public SDLGameObject
+class Enemy : public ShooterObject
 {
 public:
-	virtual void draw();
-	virtual void update();
-	virtual void clean();
-	virtual void load(const LoaderParams* pParams);
-};
+	virtual std::string type();
 
-class EnemyCreator : public BaseCreator
-{
-	GameObject* createGameObject() const
-	{
-		return new Enemy();
-	}
+protected:
+	int m_health;
+
+	Enemy();
+	virtual ~Enemy();
 };

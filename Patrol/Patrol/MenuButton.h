@@ -1,13 +1,14 @@
 #pragma once
 
-#include "SDLGameObject.h"
+#include "ShooterObject.h"
 #include "GameObjectFactory.h"
+#include <memory>
 
 /**
 * @brief Game object which is a button in the game
 *
 */
-class MenuButton : public SDLGameObject
+class MenuButton : public ShooterObject
 {
 public:
 	/**
@@ -36,7 +37,7 @@ public:
 	*/
 	virtual void clean();
 
-	virtual void load(const LoaderParams* pParams);
+	virtual void load(std::unique_ptr<LoaderParams> const &pParams);
 
 	void setCallback(void(*callback)()) { m_callback = callback; }
 
