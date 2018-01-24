@@ -75,8 +75,8 @@ bool MainMenuState::onExit()
 	// clean the game objects
 	if (m_loadingComplete && !m_gameObjects.empty())
 	{
-	m_gameObjects.back()->clean();
-	m_gameObjects.pop_back();
+		m_gameObjects.back()->clean();
+		m_gameObjects.pop_back();
 	}
 
 	m_gameObjects.clear();
