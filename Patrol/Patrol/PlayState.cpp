@@ -69,7 +69,7 @@ bool PlayState::onEnter()
 
 	LevelParser levelParser;
 	//pLevel = levelParser.parseLevel(Game::Instance().getLevelFiles()[Game::Instance().getCurrentLevel() - 1].c_str());
-	pLevel = levelParser.parseLevel("tiles.tmx");
+	pLevel = levelParser.parseLevel("bestTill02AM.tmx");
 
 	TextureManager::Instance()->load("bullet1.png", "bullet1", Game::Instance().getRenderer());
 	TextureManager::Instance()->load("bullet2.png", "bullet2", Game::Instance().getRenderer());
