@@ -65,9 +65,6 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	SoundManager::Instance()->load("Resources/Sounds/Theme3.ogg", "music", SOUND_MUSIC);
 	SoundManager::Instance()->load("Resources/Sounds/Laser.wav", "shoot", SOUND_SFX);
 
-	SoundManager::Instance()->playMusic("music", -1);
-	Mix_PauseMusic();
-
 	//Register types
 	GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
 	GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());

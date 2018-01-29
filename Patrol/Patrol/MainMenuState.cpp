@@ -63,6 +63,9 @@ bool MainMenuState::onEnter()
 	// set the callbacks for menu items
 	setCallbacks(m_callbacks);
 
+	SoundManager::Instance()->playMusic("music", -1);
+	Mix_PauseMusic();
+
 	m_loadingComplete = true;
 	std::cout << "entering MenuState\n";
 	return true;
