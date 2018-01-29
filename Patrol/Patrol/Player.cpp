@@ -65,7 +65,7 @@ void Player::handleAnimation() {
 
 	// if the player is not dead then we can change the angle with the velocity 
 	// to give the impression of a moving helicopter
-	if (!m_bDead) {
+	/*if (!m_bDead) {
 		if (m_velocity.getX() < 0) {
 			m_angle = -10.0;
 		}
@@ -75,7 +75,7 @@ void Player::handleAnimation() {
 		else {
 			m_angle = 0.0;
 		}
-	}
+	}*/
 
 	// our standard animation code - for helicopter propellors
 	m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));

@@ -45,7 +45,7 @@ void PlayState::render()
 
 		for (int i = 0; i < Game::Instance().getPlayerLives(); i++)
 		{
-			TextureManager::Instance()->drawFrame("lives", i * 30, 0, 32, 30, 0, 0, Game::Instance().getRenderer(), 0.0, 255);
+			TextureManager::Instance()->drawFrame("lives", i * 32, 0, 32, 32, 0, 0, Game::Instance().getRenderer(), 0.0, 255);
 		}
 
 		BulletHandler::Instance()->drawBullets();
