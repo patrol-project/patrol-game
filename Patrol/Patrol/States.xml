@@ -2,8 +2,8 @@
 <STATES>
   <MENU>
     <TEXTURES>
-      <texture filename="Resources/play.png" ID="playbutton"/>
-      <texture filename="Resources/exit.png" ID="exitbutton"/>
+      <texture filename="Resources/Buttons/play.png" ID="playbutton"/>
+      <texture filename="Resources/Buttons/exit.png" ID="exitbutton"/>
     </TEXTURES>
     <OBJECTS>
       <object type="MenuButton" x="100" y="100" width="400" height="100" textureID="playbutton" numFrames="0" callbackID="1"/>
@@ -12,8 +12,8 @@
   </MENU>
   <PLAY>
     <TEXTURES>
-      <texture filename="Resources/alien.png" ID="alien"/>
-      <texture filename="Resources/knight.png" ID="knight"/>
+      <texture filename="Resources/GameObjects/alien.png" ID="alien"/>
+      <texture filename="Resources/GameObjects/knight.png" ID="knight"/>
     </TEXTURES>
     <OBJECTS>
       <object type="Player" x="100" y="100" width="91" height="100" textureID="alien" numFrames="0" callbackID="0"/>
@@ -22,8 +22,8 @@
   </PLAY>
   <PAUSE>
     <TEXTURES>
-      <texture filename="Resources/resume.png" ID="resumebutton"/>
-      <texture filename="Resources/main.png" ID="mainbutton"/>
+      <texture filename="Resources/Buttons/resume.png" ID="resumebutton"/>
+      <texture filename="Resources/Buttons/main.png" ID="mainbutton"/>
     </TEXTURES>
     <OBJECTS>
       <object type="MenuButton" x="200" y="100" width="200" height="80" textureID="resumebutton" numFrames="0" callbackID="1"/>
@@ -32,9 +32,9 @@
   </PAUSE>    
     <GAMEOVER>
         <TEXTURES>
-            <texture filename="Resources/gameover.png" ID="gameovertext"/>
-            <texture filename="Resources/main.png" ID="mainbutton"/>
-            <texture filename="Resources/restart.png" ID="restartbutton"/>
+            <texture filename="Resources/Buttons/gameover.png" ID="gameovertext"/>
+            <texture filename="Resources/Buttons/main.png" ID="mainbutton"/>
+            <texture filename="Resources/Buttons/restart.png" ID="restartbutton"/>
         </TEXTURES>
         <OBJECTS>
             <object type="AnimatedGraphic" x="200" y="100" width="190" height="30" textureID="gameovertext" numFrames="2" animSpeed="2"/>

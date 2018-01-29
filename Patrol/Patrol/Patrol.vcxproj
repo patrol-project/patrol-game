@@ -207,6 +207,12 @@
   <ItemGroup>
     <Xml Include="States.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bestTill02AM.tmx" />
+    <None Include="Resources\Level (1).tmx" />
+    <None Include="Resources\Level.tmx" />
+    <None Include="Resources\tiles.tmx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

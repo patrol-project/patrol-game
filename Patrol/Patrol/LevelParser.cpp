@@ -63,8 +63,9 @@ Level* LevelParser::parseLevel(const char *levelFile)
 
 void LevelParser::parseTextures(tinyxml2::XMLElement* pTextureRoot)
 {
+	string resourcesPath = "Resources/";
 	TextureManager::Instance()->load(
-		pTextureRoot->Attribute("value"),
+		resourcesPath.append(pTextureRoot->Attribute("value")),
 		pTextureRoot->Attribute("name"),
 		Game::Instance().getRenderer()
 	);
@@ -142,9 +143,11 @@ void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::v
 
 void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<Tileset>* pTilesets)
 {
+	std::string resourcePath = "Resources/";
+	string q = resourcePath.append(pTilesetRoot->FirstChildElement()->Attribute("source"));
 	// first add the tileset to texture manager
 	TextureManager::Instance()->load(
-		pTilesetRoot->FirstChildElement()->Attribute("source"),
+		resourcePath.append(pTilesetRoot->FirstChildElement()->Attribute("source")),
 		pTilesetRoot->Attribute("name"),
 		Game::Instance().getRenderer()
 	);

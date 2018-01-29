@@ -212,4 +212,18 @@
       <Filter>Data</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bestTill02AM.tmx">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Level (1).tmx">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Level.tmx">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\tiles.tmx">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

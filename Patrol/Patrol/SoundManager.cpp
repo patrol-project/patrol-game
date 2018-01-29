@@ -51,6 +51,8 @@ bool SoundManager::load(std::string fileName, std::string id, sound_type type)
 	else if (type == SOUND_SFX)
 	{
 		Mix_Chunk* pChunk = Mix_LoadWAV(fileName.c_str());
+		// set the volume for the sound effect
+		Mix_VolumeChunk(pChunk, 10);
 		if (pChunk == 0)
 		{
 			// std::cout << "Could not load SFX: ERROR - " << Mix_GetError() << std::endl;
@@ -65,4 +67,6 @@ bool SoundManager::load(std::string fileName, std::string id, sound_type type)
 SoundManager::SoundManager()
 {
 	Mix_OpenAudio(22050, AUDIO_S16, 2, 4096);
+	// set the volume for the theme music
+	Mix_VolumeMusic(10);
 }

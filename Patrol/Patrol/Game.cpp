@@ -62,8 +62,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	gameStateMachine = new GameStateMachine();
 	gameStateMachine->set_next_state(STATE_MAIN_MENU);
 
-	SoundManager::Instance()->load("Sounds/Theme1.ogg", "music", SOUND_MUSIC);
-	SoundManager::Instance()->load("Sounds/Laser.wav", "shoot", SOUND_SFX);
+	SoundManager::Instance()->load("Resources/Sounds/Theme1.ogg", "music", SOUND_MUSIC);
+	SoundManager::Instance()->load("Resources/Sounds/Laser.wav", "shoot", SOUND_SFX);
 
 	SoundManager::Instance()->playMusic("music", -1);
 
@@ -113,7 +113,7 @@ void Game::handleInput()
 bool Game::loadMedia()
 {
 	//Default image path
-	char* defaultTexturePath = "Resources/mainBackground.jpg";
+	char* defaultTexturePath = "Resources/Backgrounds/background.png";
 
 	//Load PNG texture
 	bool success = TextureManager::Instance()->load(defaultTexturePath, "background", Game::Instance().getRenderer());
