@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ShooterObject.h"
+#include "PlayerObject.h"
 #include "GameObjectFactory.h"
 
-class AnimatedGraphic : public ShooterObject
+class AnimatedGraphic : public PlayerObject
 {
 public:
 	AnimatedGraphic();

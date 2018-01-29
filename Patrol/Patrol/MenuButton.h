@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ShooterObject.h"
+#include "PlayerObject.h"
 #include "GameObjectFactory.h"
 #include <memory>
 
@@ -8,7 +8,7 @@
 * @brief Game object which is a button in the game
 *
 */
-class MenuButton : public ShooterObject
+class MenuButton : public PlayerObject
 {
 public:
 	/**

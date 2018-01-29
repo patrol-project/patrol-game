@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ShooterObject.h"
+#include "PlayerObject.h"
 #include "GameObjectFactory.h"
 #include "SoundManager.h"
 #include "Game.h"
 
-class Player : public ShooterObject
+class Player : public PlayerObject
 {
 public:
 	Player();

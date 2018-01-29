@@ -6,11 +6,11 @@ PlayerBullet::~PlayerBullet() {}
 std::string PlayerBullet::type() { return "PlayerBullet"; }
 
 void PlayerBullet::load(std::unique_ptr<LoaderParams> &pParams, Vector2D heading) {
-	ShooterObject::load(std::move(pParams));
+	PlayerObject::load(std::move(pParams));
 	m_heading = heading;
 }
 
-void PlayerBullet::draw() { ShooterObject::draw(); }
+void PlayerBullet::draw() { PlayerObject::draw(); }
 
 void PlayerBullet::collision() {
 	// we don't have the smallexplosion texture that's why we won't change it...
@@ -27,7 +27,7 @@ void PlayerBullet::update() {
 		m_velocity.setX(m_heading.getX());
 		m_velocity.setY(m_heading.getY());
 
-		ShooterObject::update();
+		PlayerObject::update();
 	}
 	else {
 		m_velocity.setX(0);
@@ -36,7 +36,7 @@ void PlayerBullet::update() {
 	}
 }
 
-void PlayerBullet::clean() { ShooterObject::clean(); }
+void PlayerBullet::clean() { PlayerObject::clean(); }
 
 EnemyBullet::EnemyBullet() : PlayerBullet() { }
 EnemyBullet::~EnemyBullet() {}

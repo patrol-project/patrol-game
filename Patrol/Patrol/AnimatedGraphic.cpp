@@ -8,13 +8,13 @@ AnimatedGraphic::~AnimatedGraphic()
 }
 void AnimatedGraphic::load(std::unique_ptr<LoaderParams> const &pParams)
 {
-	ShooterObject::load(std::move(pParams));
+	PlayerObject::load(std::move(pParams));
 	animationSpeed = pParams->getAnimSpeed();
 }
 
 void AnimatedGraphic::draw()
 {
-	ShooterObject::draw();
+	PlayerObject::draw();
 }
 
 void AnimatedGraphic::update()
@@ -25,7 +25,7 @@ void AnimatedGraphic::update()
 
 void AnimatedGraphic::clean()
 {
-	ShooterObject::clean();
+	PlayerObject::clean();
 }
 
 GameObject* AnimatedGraphicCreator::createGameObject() const {

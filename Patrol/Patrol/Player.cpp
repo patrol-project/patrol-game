@@ -3,7 +3,7 @@
 #include "InputHandler.h"
 #include "BulletHandler.h"
 
-Player::Player() : ShooterObject(),
+Player::Player() : PlayerObject(),
 m_invulnerable(false),
 m_invulnerableTime(200),
 m_invulnerableCounter(0)
@@ -25,11 +25,11 @@ void Player::collision() {
 
 void Player::draw()
 {
-	ShooterObject::draw();
+	PlayerObject::draw();
 }
 
 void Player::load(std::unique_ptr<LoaderParams> const &pParams) {
-	ShooterObject::load(std::move(pParams));    // inherited load function
+	PlayerObject::load(std::move(pParams));    // inherited load function
 
 												// can set up the players inherited values here    
 												// set up bullets
@@ -90,7 +90,7 @@ void Player::update() {
 		else {
 			m_velocity.setY(0);
 			m_velocity.setX(3);
-			ShooterObject::update();
+			PlayerObject::update();
 			handleAnimation();
 		}
 	}
@@ -105,7 +105,7 @@ void Player::update() {
 			handleInput();
 
 			// do normal position += velocity update
-			ShooterObject::update();
+			PlayerObject::update();
 
 			// update the animation
 			handleAnimation();
@@ -139,7 +139,7 @@ void Player::ressurect() {
 	m_invulnerable = true;
 }
 
-void Player::clean() { ShooterObject::clean(); }
+void Player::clean() { PlayerObject::clean(); }
 
 void Player::handleInput() {
 	if (!m_bDead) {

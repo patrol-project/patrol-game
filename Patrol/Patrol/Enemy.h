@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ShooterObject.h"
+#include "PlayerObject.h"
 
-class Enemy : public ShooterObject
+class Enemy : public PlayerObject
 {
 public:
 	virtual std::string type();

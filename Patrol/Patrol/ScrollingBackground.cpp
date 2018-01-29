@@ -2,7 +2,7 @@
 #include "TextureManager.h"
 #include "Game.h"
 
-ScrollingBackground::ScrollingBackground() : ShooterObject()
+ScrollingBackground::ScrollingBackground() : PlayerObject()
 {
 	count = 0;
 	maxcount = 10;
@@ -10,7 +10,7 @@ ScrollingBackground::ScrollingBackground() : ShooterObject()
 
 void ScrollingBackground::load(std::unique_ptr<LoaderParams> const &pParams)
 {
-	ShooterObject::load(std::move(pParams));
+	PlayerObject::load(std::move(pParams));
 	m_scrollSpeed = pParams->getAnimSpeed();
 
 	m_scrollSpeed = 1;
@@ -83,5 +83,5 @@ void ScrollingBackground::update()
 
 void ScrollingBackground::clean()
 {
-	ShooterObject::clean();
+	PlayerObject::clean();
 }

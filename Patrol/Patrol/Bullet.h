@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ShooterObject.h"
+#include "PlayerObject.h"
 
-class PlayerBullet : public ShooterObject {
+class PlayerBullet : public PlayerObject {
 
 public:
 	PlayerBullet();

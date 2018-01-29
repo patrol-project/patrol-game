@@ -1,20 +1,20 @@
 #include "MenuButton.h"
 #include "InputHandler.h"
 
-MenuButton::MenuButton() : ShooterObject(), m_callback(0), isReleased(true)
+MenuButton::MenuButton() : PlayerObject(), m_callback(0), isReleased(true)
 {
 }
 
 void MenuButton::load(std::unique_ptr<LoaderParams> const &pParams)
 {
-	ShooterObject::load(std::move(pParams));
+	PlayerObject::load(std::move(pParams));
 	callbackID = pParams->getCallbackID();
 	m_currentFrame = MOUSE_OUT;
 }
 
 void MenuButton::draw()
 {
-	ShooterObject::draw(); // use the base class drawing
+	PlayerObject::draw(); // use the base class drawing
 }
 
 void MenuButton::update()
@@ -47,5 +47,5 @@ void MenuButton::update()
 }
 void MenuButton::clean()
 {
-	ShooterObject::clean();
+	PlayerObject::clean();
 }
