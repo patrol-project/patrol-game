@@ -62,6 +62,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	gameStateMachine = new GameStateMachine();
 	gameStateMachine->set_next_state(STATE_MAIN_MENU);
 
+	SoundManager::Instance()->load("Sounds/Theme1.ogg", "music", SOUND_MUSIC);
+	SoundManager::Instance()->load("Sounds/Laser.wav", "shoot", SOUND_SFX);
+
+	SoundManager::Instance()->playMusic("music", -1);
+
 	//Register types
 	GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
 	GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());

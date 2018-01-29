@@ -82,8 +82,8 @@
     <LibraryPath>$(SolutionDir)Dependencies\SDL2-2.0.7\lib\x86;$(SolutionDir)Dependencies\SDL2_image-2.0.2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\SDL2_image-2.0.2\include;$(SolutionDir)Dependencies\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\НБУ\3 Курс\5 Семестър Есен-Зима\Проект за разразботка на компютърна игра\patrol-game\Patrol\Dependencies\zlib\lib;$(SolutionDir)Dependencies\SDL2-2.0.7\lib\x86;$(SolutionDir)Dependencies\SDL2_image-2.0.2\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\SDL2_mixer-2.0.2\include;$(SolutionDir)Dependencies\SDL2_image-2.0.2\include;$(SolutionDir)Dependencies\SDL2-2.0.7\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2_mixer-2.0.2\lib\x86;$(SolutionDir)Dependencies\SDL2-2.0.7\lib\x86;$(SolutionDir)Dependencies\SDL2_image-2.0.2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,8 +119,8 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>zlibwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

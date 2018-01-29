@@ -13,11 +13,12 @@ m_invulnerableCounter(0)
 void Player::collision() {
 	// if the player is not invulnerable then set to dying and change values for death animation tile sheet
 	if (!m_invulnerable && !Game::Instance().getLevelComplete()) {
-		m_textureID = "largeexplosion";
+		// we don't have largeexplosion texure that's why we don't change it..
+		//m_textureID = "largeexplosion";
 		m_currentFrame = 0;
-		m_numFrames = 9;
-		m_width = 60;
-		m_height = 60;
+		//m_numFrames = 9;
+		//m_width = 60;
+		//m_height = 60;
 		m_bDying = true;
 	}
 }
@@ -33,11 +34,11 @@ void Player::load(std::unique_ptr<LoaderParams> const &pParams) {
 												// can set up the players inherited values here    
 												// set up bullets
 	m_bulletFiringSpeed = 13;
-	m_moveSpeed = 3;
+	m_moveSpeed = 1;
 
 	m_bulletCounter = m_bulletFiringSpeed;      // we want to be able to fire instantly
 
-	m_dyingTime = 100;                          // time it takes for death explosion
+	m_dyingTime = 1;                          // time it takes for death explosion
 }
 
 
@@ -127,12 +128,12 @@ void Player::ressurect() {
 	m_position.setY(200);
 	m_bDying = false;
 
-	m_textureID = "player";
+	//m_textureID = "player";
 
 	m_currentFrame = 0;
-	m_numFrames = 5;
+	/*m_numFrames = 5;
 	m_width = 101;
-	m_height = 46;
+	m_height = 46;*/
 
 	m_dyingCounter = 0;
 	m_invulnerable = true;

@@ -13,11 +13,12 @@ void PlayerBullet::load(std::unique_ptr<LoaderParams> &pParams, Vector2D heading
 void PlayerBullet::draw() { ShooterObject::draw(); }
 
 void PlayerBullet::collision() {
-	m_textureID = "smallexplosion";
+	// we don't have the smallexplosion texture that's why we won't change it...
+	//m_textureID = "smallexplosion";
 	m_currentFrame = 0;
-	m_numFrames = 2;
-	m_width = 20;
-	m_height = 20;
+	//m_numFrames = 2;
+	//m_width = 20;
+	//m_height = 20;
 	m_bDying = true;
 }
 

@@ -19,7 +19,8 @@ void AnimatedGraphic::draw()
 
 void AnimatedGraphic::update()
 {
-	m_currentFrame = int(((SDL_GetTicks() / (1000 / animationSpeed)) % numberOfFrames));
+	// in the end it should be 2 instead of numberOfFrames var because crashes..
+	m_currentFrame = int(((SDL_GetTicks() / (1000 / animationSpeed)) % 2));
 }
 
 void AnimatedGraphic::clean()

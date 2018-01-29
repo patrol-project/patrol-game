@@ -66,6 +66,9 @@ bool GameOverState::onEnter()
 	m_callbacks.push_back(gameOverToMain);
 	m_callbacks.push_back(restartPlay);
 	// set the callbacks for menu items
+
+	m_loadingComplete = true;
+
 	setCallbacks(m_callbacks);
 	std::cout << "entering GameOverState\n";
 	return true;
