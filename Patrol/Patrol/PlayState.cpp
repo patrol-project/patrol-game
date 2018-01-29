@@ -76,6 +76,8 @@ bool PlayState::onEnter()
 	TextureManager::Instance()->load("Resources/GameObjects/bullet3.png", "bullet3", Game::Instance().getRenderer());
 	TextureManager::Instance()->load("Resources/GameObjects/lives.png", "lives", Game::Instance().getRenderer());
 
+	Mix_ResumeMusic();
+
 	if (pLevel != 0)
 	{
 		m_loadingComplete = true;
@@ -91,6 +93,8 @@ bool PlayState::onExit()
 
 	InputHandler::Instance()->reset();
 	BulletHandler::Instance()->clearBullets();
+
+	Mix_PauseMusic();
 
 	std::cout << "exiting PlayState\n";
 	return true;
