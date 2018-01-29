@@ -3,7 +3,7 @@
 <properties>
   <property name="clouds" value="Backgrounds/background.png"/>
   <property name="player" value="GameObjects/player.png"/>
-  <property name="turret" value="GameObjects/turret.png"/>
+  <property name="enemy" value="GameObjects/enemy.png"/>
  </properties>
  <tileset firstgid="1" name="Tileset" tilewidth="32" tileheight="32" spacing="2" tilecount="28" columns="7">
   <image source="Tiles/stana.png" trans="000000" width="238" height="134"/>
@@ -34,12 +34,12 @@
     <property name="textureWidth" type="int" value="76"/>
    </properties>
   </object>
-  <object id="10" name="Turret1" type="Turret" x="428" y="216" width="32" height="32">
+  <object id="10" name="Enemy1" type="Enemy" x="428" y="216" width="32" height="32">
    <properties>
     <property name="numFrames" type="int" value="1"/>
-    <property name="textureHeight" type="int" value="52"/>
-    <property name="textureID" value="turret"/>
-    <property name="textureWidth" type="int" value="56"/>
+    <property name="textureHeight" type="int" value="48"/>
+    <property name="textureID" value="enemy"/>
+    <property name="textureWidth" type="int" value="71"/>
    </properties>
   </object>
  </objectgroup>

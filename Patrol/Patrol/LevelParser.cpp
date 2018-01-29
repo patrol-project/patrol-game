@@ -144,7 +144,7 @@ void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::v
 void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<Tileset>* pTilesets)
 {
 	std::string resourcePath = "Resources/";
-	string q = resourcePath.append(pTilesetRoot->FirstChildElement()->Attribute("source"));
+	//string q = resourcePath.append(pTilesetRoot->FirstChildElement()->Attribute("source"));
 	// first add the tileset to texture manager
 	TextureManager::Instance()->load(
 		resourcePath.append(pTilesetRoot->FirstChildElement()->Attribute("source")),
