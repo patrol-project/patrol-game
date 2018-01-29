@@ -7,7 +7,7 @@ TileLayer::TileLayer(int tileSize, const std::vector<Tileset> &tilesets) :
 	m_position(0, 0),
 	m_velocity(0, 0)
 {
-	m_numColumns = (Game::Instance().getGameWidth() / m_tileSize);
+	m_numColumns = (Game::Instance().getGameWidth() / m_tileSize) + 1;
 	m_numRows = (Game::Instance().getGameHeight() / m_tileSize);
 }
 

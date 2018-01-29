@@ -132,7 +132,7 @@ public:
 	Game(Game const&) = delete;
 	void operator=(Game const&) = delete;
 private:
-	Game() { } ///< private constructor to ensure no one creates second instance of this class
+	Game();///< private constructor to ensure no one creates second instance of this class
 
 	bool running; ///< used to control the game loop
 	int m_gameWidth;
