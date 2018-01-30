@@ -25,10 +25,15 @@ private:
 	void handleInput();     // handle any input from the keyboard, mouse, or joystick        
 	void handleAnimation(); // handle any animation for the player
 
+							//handle player movement
+	void handleMovement(Vector2D velocity); 
+
 							// player can be invulnerable for a time
 	int m_invulnerable;
 	int m_invulnerableTime;
 	int m_invulnerableCounter;
+
+	bool m_bPressedJump;
 };
 
 // for the factory
