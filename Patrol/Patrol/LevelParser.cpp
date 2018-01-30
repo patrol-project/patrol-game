@@ -51,9 +51,10 @@ Level* LevelParser::parseLevel(const char *levelFile)
 			{
 				parseObjectLayer(e, pLevel->getLayers(), pLevel);
 			}
-			else if (e->FirstChildElement()->Value() == std::string("data"))
+			else if (e->FirstChildElement()->Value() == std::string("data") ||
+				(e->FirstChildElement()->NextSiblingElement() != 0 && e->FirstChildElement()->NextSiblingElement()->Value() == std::string("data")))
 			{
-				parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
+				parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets(), pLevel->getCollisionLayers());
 			}
 		}
 	}
@@ -128,7 +129,12 @@ void LevelParser::parseObjectLayer(tinyxml2::XMLElement * pObjectElement, std::v
 					}
 				}
 			}
+
+			// load the object
 			pGameObject->load(std::unique_ptr<LoaderParams>(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed)));
+			// set the collision layers
+			pGameObject->setCollisionLayers(pLevel->getCollisionLayers());
+
 			if (type == "Player")
 			{
 				pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
@@ -167,9 +173,9 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
 	pTilesets->push_back(tileset);
 }
 
-void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector<Layer*> *pLayers, const std::vector<Tileset>* pTilesets)
+void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector<Layer*> *pLayers, const std::vector<Tileset>* pTilesets, std::vector<TileLayer*> *pCollisionLayers)
 {
-	TileLayer* pTileLayer = new TileLayer(m_tileSize, *pTilesets);
+	TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
 	// tile data
 	std::vector<std::vector<int>> data;
 	std::string decodedIDs;

@@ -5,6 +5,11 @@
 
 #include <string>
 #include <memory>
+#include <vector>
+
+class TileLayer;
+
+class GameObject;
 
 /**
 * @brief Abstract base class with pure virtual functions to
@@ -40,6 +45,8 @@ public:
 												   // set whether to update the object or not
 	virtual void setUpdating(bool updating);
 
+	void setCollisionLayers(std::vector<TileLayer*>* layers) { m_pCollisionLayers = layers; }
+
 protected:
 	GameObject();
 
@@ -64,4 +71,7 @@ protected:
 	double m_angle;         // rotation    
 
 	int m_alpha;            // blending
+
+	std::vector<TileLayer*>* m_pCollisionLayers;
+	
 };

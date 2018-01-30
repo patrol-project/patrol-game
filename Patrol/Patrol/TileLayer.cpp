@@ -1,14 +1,19 @@
 #include "TileLayer.h"
+#include "TextureManager.h"
+#include "Game.h"
+#include "InputHandler.h"
+#include "Camera.h"
 
-
-TileLayer::TileLayer(int tileSize, const std::vector<Tileset> &tilesets) :
+TileLayer::TileLayer(int tileSize, int mapWidth, int mapHeight, const std::vector<Tileset> &tilesets) :
 	m_tileSize(tileSize),
 	m_tilesets(tilesets),
 	m_position(0, 0),
 	m_velocity(0, 0)
 {
-	m_numColumns = (Game::Instance().getGameWidth() / m_tileSize) + 1;
+	m_numColumns = (Game::Instance().getGameWidth() / m_tileSize);
 	m_numRows = (Game::Instance().getGameHeight() / m_tileSize);
+
+	m_mapWidth = mapWidth;
 }
 
 void TileLayer::update(Level * pLevel)
@@ -40,22 +45,36 @@ void TileLayer::render()
 		for (int j = 0; j < m_numColumns; j++)
 		{
 			int id = m_tileIDs[i + y][j + x];
+			
 			if (id == 0)
 			{
 				continue;
 			}
+
+			// if outside the viewable area then skip the tile
+			if ((
+				(j * m_tileSize) - x2) - Camera::Instance()->getPosition().getX() < -m_tileSize
+				||
+				((j * m_tileSize) - x2) - Camera::Instance()->getPosition().getX() > Game::Instance().getGameWidth())
+			{
+				continue;
+			}
+
 			Tileset tileset = getTilesetByID(id);
+
 			id--;
+
+			// draw the tile into position while offsetting its x position
+			// by subtracting the camera position
 			TextureManager::Instance()->drawTile(
 				tileset.name, 
-				tileset.margin,
+				tileset.margin, 
 				tileset.spacing,
-				(j * m_tileSize) - x2, 
-				(i * m_tileSize) - y2,
-				m_tileSize,
-				m_tileSize, 
-				(id - (tileset.firstGridID - 1)) / tileset.numColumns, 
-				(id - (tileset.firstGridID - 1)) % tileset.numColumns,
+				((j * m_tileSize) - x2) - Camera::Instance()->getPosition().getX(), 
+				((i * m_tileSize) - y2),
+				m_tileSize, m_tileSize, 
+				(id - (tileset.firstGridID - 1)) / tileset.numColumns,
+				(id - (tileset.firstGridID - 1)) % tileset.numColumns, 
 				Game::Instance().getRenderer()
 			);
 		}

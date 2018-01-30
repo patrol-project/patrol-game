@@ -9,7 +9,7 @@
 class TileLayer : public Layer
 {
 public:
-	TileLayer(int tileSize, const std::vector<Tileset> &tilesets);
+	TileLayer(int tileSize, int mapWidth, int mapHeight, const std::vector<Tileset> &tilesets);
 	virtual ~TileLayer() {}
 	virtual void update(Level* pLevel);
 	virtual void render();

@@ -19,9 +19,7 @@ public:
 	// clears texture by given id
 	void clearFromTextureMap(string id);
 
-	void TextureManager::drawTile(std::string id, int margin, int
-		spacing, int x, int y, int width, int height, int currentRow,
-		int currentFrame, SDL_Renderer *pRenderer);
+	void drawTile(std::string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer);
 
 	std::map<std::string, SDL_Texture*> getTextureMap() { return textureMap; }
 

@@ -23,6 +23,8 @@ protected:
 
 	PlayerObject();
 
+	bool checkCollideTile(Vector2D newPos);
+
 	void doDyingAnimation();
 
 	int m_bulletFiringSpeed;
@@ -35,4 +37,18 @@ protected:
 
 	// has the explosion sound played?
 	bool m_bPlayedDeathSound;
+
+	bool m_bFlipped;
+
+	bool m_bMoveLeft;
+	bool m_bMoveRight;
+	bool m_bRunning;
+
+	bool m_bFalling;
+	bool m_bJumping;
+	bool m_bCanJump;
+
+	Vector2D m_lastSafePos;
+
+	int m_jumpHeight;
 };
