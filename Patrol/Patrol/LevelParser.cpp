@@ -7,6 +7,7 @@
 #include "GameObjectFactory.h"
 #include "base64.h"
 #include "Level.h"
+#include "zlib.h"
 
 Level* LevelParser::parseLevel(const char *levelFile)
 {
@@ -176,6 +177,8 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
 void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector<Layer*> *pLayers, const std::vector<Tileset>* pTilesets, std::vector<TileLayer*> *pCollisionLayers)
 {
 	TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
+	bool collidable = false;	
+	
 	// tile data
 	std::vector<std::vector<int>> data;
 	std::string decodedIDs;
@@ -183,6 +186,20 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector
 
 	for (tinyxml2::XMLElement* e = pTileElement->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
 	{
+		if (e->Value() == std::string("properties"))
+		{
+			for (tinyxml2::XMLElement* property = e->FirstChildElement(); property != NULL; property = property->NextSiblingElement())
+			{
+				if (property->Value() == std::string("property"))
+				{
+					if (property->Attribute("name") == std::string("collidable"))
+					{
+						collidable = true;
+					}
+				}
+			}
+		}
+
 		if (e->Value() == std::string("data"))
 		{
 			pDataNode = e;
@@ -199,27 +216,32 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement* pTileElement, std::vector
 		decodedIDs = base64_decode(t);
 	}
 
+	// uncompress zlib compression
+	uLongf sizeofids = m_width * m_height * sizeof(int);
+	std::vector<int> ids(m_width * m_height);
+	uncompress((Bytef*)&ids[0], &sizeofids, (const Bytef*)decodedIDs.c_str(), decodedIDs.size());
+
 	std::vector<int> layerRow(m_width);
 
 	for (int j = 0; j < m_height; j++)
 	{
 		data.push_back(layerRow);
 	}
-	int index = 0;
+	
 	for (int rows = 0; rows < m_height; rows++)
 	{
 		for (int cols = 0; cols < m_width; cols++)
 		{
-			// decodedIDs is a byte array where every 4 char represent int32 using little-endian byte ordering
-			// that's why we shift every char accordingly 
-			// https://stackoverflow.com/questions/17916394/converting-4-bytes-in-little-endian-order-into-an-unsigned-integer
-			uint32_t a = decodedIDs[index] | decodedIDs[index + 1] << 8 | decodedIDs[index + 2] << 16 | decodedIDs[index + 3] << 24;
-			data[rows][cols] = a;
-			index += 4;
+			data[rows][cols] = ids[rows * m_width + cols];
 		}
-		cout << endl;
 	}
 	pTileLayer->setTileIDs(data);
+	
+	if (collidable)
+	{
+		pCollisionLayers->push_back(pTileLayer);
+	}
+
 	pTileLayer->setMapWidth(m_width);
 
 	pLayers->push_back(pTileLayer);

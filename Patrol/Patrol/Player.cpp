@@ -19,17 +19,15 @@ m_bPressedJump(false)
 
 void Player::collision() {
 	// if the player is not invulnerable then set to dying and change values for death animation tile sheet
-	if (!m_invulnerable && !Game::Instance().getLevelComplete()) {
-		// we don't have largeexplosion texure that's why we don't change it..
-		//m_textureID = "largeexplosion";
+	if (m_bDying && m_invulnerable)
+	{
 		m_currentFrame = 0;
-		//m_numFrames = 9;
-		//m_width = 60;
-		//m_height = 60;
 		m_currentRow = 4;
 		m_numFrames = 9;
 		m_width = 50;
 		m_bDying = true;
+
+		std::cout << m_currentFrame;
 	}
 }
 
@@ -52,10 +50,10 @@ void Player::draw()
 void Player::load(std::unique_ptr<LoaderParams> const &pParams) {
 	PlayerObject::load(std::move(pParams));    // inherited load function
 
-												// can set up the players inherited values here    
-												// set up bullets
+											   // can set up the players inherited values here    
+											   // set up bullets
 	m_bulletFiringSpeed = 13;
-	m_moveSpeed = 3;
+	m_moveSpeed = 1;
 
 	m_bulletCounter = m_bulletFiringSpeed;      // we want to be able to fire instantly
 
@@ -67,48 +65,102 @@ void Player::load(std::unique_ptr<LoaderParams> const &pParams) {
 
 void Player::handleAnimation() {
 	// if the player is invulnerable we can flash its alpha to let people know
-	if (m_invulnerable) {
+	if (m_invulnerable)
+	{
 		// invulnerability is finished, set values back
-		if (m_invulnerableCounter == m_invulnerableTime) {
+		if (m_invulnerableCounter == m_invulnerableTime)
+		{
 			m_invulnerable = false;
 			m_invulnerableCounter = 0;
 			m_alpha = 255;
 		}
-		else { // otherwise, flash the alpha on and off  
-			if (m_alpha == 255) {
+		else // otherwise, flash the alpha on and off
+		{
+			if (m_alpha == 255)
+			{
 				m_alpha = 0;
 			}
-			else {
+			else
+			{
 				m_alpha = 255;
 			}
 		}
 
-		m_invulnerableCounter++;        // increment our counter
+		// increment our counter
+		m_invulnerableCounter++;
 	}
 
+	if (!m_bDead && !m_bDying)
+	{
+		if (m_velocity.getY() < 0)
+		{
+			m_currentFrame = 2;
+			m_currentRow = 2;
+			m_numFrames = 2;
+		}
+		else if (m_velocity.getY() > 0)
+		{
+			m_currentRow = 3;
+			m_numFrames = 1;
+		}
+		else
+		{
+			if (m_velocity.getX() < 0)
+			{
+				m_currentRow = 1;
+				m_numFrames = 4;
+				m_bFlipped = true;
+			}
+			else if (m_velocity.getX() > 0)
+			{
+				m_currentRow = 1;
+				m_numFrames = 4;
+				m_bFlipped = false;
+			}
+			else
+			{
+				m_currentRow = 0;
+				m_numFrames = 1;
+			}
+		}
+
+		if (m_bRunning)
+		{
+			m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
+		}
+		else
+		{
+			m_currentFrame = int(((SDL_GetTicks() / (120)) % m_numFrames));
+		}
+
+	}
+	else
+	{
+		m_currentFrame = m_dyingCounter / m_numFrames;//int(((SDL_GetTicks() / (200)) % m_numFrames));
+	}
 	// if the player is not dead then we can change the angle with the velocity 
 	// to give the impression of a moving helicopter
 	/*if (!m_bDead) {
-		if (m_velocity.getX() < 0) {
-			m_angle = -10.0;
-		}
-		else if (m_velocity.getX() > 0) {
-			m_angle = 10.0;
-		}
-		else {
-			m_angle = 0.0;
-		}
+	if (m_velocity.getX() < 0) {
+	m_angle = -10.0;
+	}
+	else if (m_velocity.getX() > 0) {
+	m_angle = 10.0;
+	}
+	else {
+	m_angle = 0.0;
+	}
 	}*/
 
 	// our standard animation code - for helicopter propellors
-	m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
+	//m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
 }
 
 void Player::update()
 {
 	if (!m_bDying)
 	{
-		if (m_position.getX() + m_height >= 470)
+		if (m_position.getY() + m_height >= 470)
 		{
 			collision();
 		}
@@ -123,7 +175,7 @@ void Player::update()
 			}
 			else
 			{
-				m_velocity.setX(2);
+				m_velocity.setX(-2);
 			}
 		}
 		else if (m_bMoveRight)
@@ -170,6 +222,7 @@ void Player::update()
 		m_velocity.setY(5);
 	}
 	handleAnimation();
+
 }
 
 void Player::handleMovement(Vector2D velocity)
@@ -254,7 +307,7 @@ void Player::clean() { PlayerObject::clean(); }
 
 void Player::handleInput()
 {
-	if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) && m_position.getX() < ((*m_pCollisionLayers->begin()).getMapWidth() * 32))
+	if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) && m_position.getX() < ((*m_pCollisionLayers->begin())->getMapWidth() * 32))
 	{
 		if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_A))
 		{

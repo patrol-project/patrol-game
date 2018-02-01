@@ -36,6 +36,8 @@ public:
 	const std::vector<std::vector<int>>& getTileIDs() { return m_tileIDs; }
 
 	const Vector2D getPosition() { return m_position; }
+
+	const int getMapWidth() { return m_mapWidth; }
 private:
 	int m_numColumns;
 	int m_numRows;

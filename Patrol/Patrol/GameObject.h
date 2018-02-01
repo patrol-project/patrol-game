@@ -9,8 +9,6 @@
 
 class TileLayer;
 
-class GameObject;
-
 /**
 * @brief Abstract base class with pure virtual functions to
 * set a blueprint for all the game objects we are creating.
