@@ -1,4 +1,5 @@
 #include "BulletHandler.h"
+#include "Camera.h"
 
 BulletHandler* BulletHandler::s_pInstance = new BulletHandler();
 
@@ -13,10 +14,10 @@ BulletHandler* BulletHandler::Instance() {
 }
 
 void BulletHandler::addPlayerBullet(int x, int y, int width, int height,
-	std::string textureID, int numFrames, Vector2D heading) {
+	std::string textureID, int numFrames, Vector2D heading) 
+{
 	auto pPlayerBullet = std::make_shared<PlayerBullet>();
-	auto pParams = std::make_unique<LoaderParams>(x, y,
-		width, height, textureID, numFrames);
+	auto pParams = std::make_unique<LoaderParams>(x, y, width, height, textureID, numFrames);
 	pPlayerBullet->load(pParams, heading);
 
 	m_playerBullets.push_back(pPlayerBullet);
@@ -38,10 +39,17 @@ void BulletHandler::clearBullets() {
 }
 
 void BulletHandler::updateBullets() {
-	for (auto p_it = m_playerBullets.begin();
-		p_it != m_playerBullets.end();) {
+	for (auto p_it = m_playerBullets.begin(); p_it != m_playerBullets.end();)
+	{
+		bool a = (*p_it)->getPosition().getX() < 0;
+		int bulletX = (*p_it)->getPosition().getX();
+		int cameraEndX = Camera::Instance()->getPosition().getX() + Game::Instance().getGameWidth();
+		bool b = (*p_it)->getPosition().getX() > Camera::Instance()->getPosition().getX() + Game::Instance().getGameWidth();
+		bool c = (*p_it)->getPosition().getY() < 0;
+		bool d = (*p_it)->getPosition().getY() > Game::Instance().getGameHeight();
+		bool e = (*p_it)->dead();
 		if ((*p_it)->getPosition().getX() < 0
-			|| (*p_it)->getPosition().getX() > Game::Instance().getGameWidth()
+			|| (*p_it)->getPosition().getX() > Camera::Instance()->getPosition().getX() + Game::Instance().getGameWidth()
 			|| (*p_it)->getPosition().getY() < 0
 			|| (*p_it)->getPosition().getY() > Game::Instance().getGameHeight()
 			|| (*p_it)->dead()) {
@@ -73,6 +81,8 @@ void BulletHandler::updateBullets() {
 
 void BulletHandler::drawBullets() {
 	for (unsigned int p = 0; p < m_playerBullets.size(); p++) {
+		int x = m_playerBullets[p]->getPosition().getX();
+		int y = m_playerBullets[p]->getPosition().getY();
 		m_playerBullets[p]->draw();
 	}
 

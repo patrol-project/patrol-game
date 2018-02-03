@@ -47,6 +47,6 @@
   <properties>
    <property name="collidable" type="bool" value="true"/>
   </properties>
-  <data encoding="base64" compression="zlib">eJzt1SEKACAQBECjWAz+/692OUGTqDOwxXSwcpcSAAAAP8hB+Fc5PQBH6Z/oJoxpQ3buiHtzt2hH1OBt9ne422r/vEn/2Olv6FR5AbQ=</data>
+  <data encoding="base64" compression="zlib">eJztllELgCAMhH2sXgrC//9Xw7eQJXNOF9x9sJeSde3cNCWCSo4WQEKh/9jkxD2ADP3Hhv5jQ/+xKd5vQhAMpN4/lqsgI0j92xM1Ef7vH6HB8o8rdFlpaX5rmDmrNTW9q+ipu3Wd1Vuv3tDk8vqm9O6qIgppRpzCM01dW/NGyvl3EO5QWv+tuUZzkrl4+l/wPrfJfBC8QtiTD6iCBok=</data>
  </layer>
 </map>

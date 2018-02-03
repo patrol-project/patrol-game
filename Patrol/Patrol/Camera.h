@@ -22,8 +22,6 @@ public:
 
 	Vector2D getPosition() const;
 
-
-
 private:
 
 	Camera();
@@ -37,5 +35,3 @@ private:
 
 	static Camera* s_pCamera;
 };
-
-typedef Camera Camera;

@@ -35,35 +35,54 @@ void Player::draw()
 {
 	if (m_bFlipped)
 	{
-		TextureManager::Instance()->drawFrame(m_textureID, (Uint32)m_position.getX() - Camera::Instance()->getPosition().getX(),
+		TextureManager::Instance()->drawFrame(
+			m_textureID,
+			(Uint32)m_position.getX() - Camera::Instance()->getPosition().getX(),
 			(Uint32)m_position.getY() - Camera::Instance()->getPosition().getY(),
-			m_width, m_height, m_currentRow, m_currentFrame, Game::Instance().getRenderer(), m_angle, m_alpha, SDL_FLIP_HORIZONTAL);
+			m_width,
+			m_height,
+			m_currentRow,
+			m_currentFrame,
+			Game::Instance().getRenderer(),
+			m_angle,
+			m_alpha,
+			SDL_FLIP_HORIZONTAL
+		);
 	}
 	else
 	{
-		TextureManager::Instance()->drawFrame(m_textureID, (Uint32)m_position.getX() - Camera::Instance()->getPosition().getX(),
+		TextureManager::Instance()->drawFrame(
+			m_textureID,
+			(Uint32)m_position.getX() - Camera::Instance()->getPosition().getX(),
 			(Uint32)m_position.getY() - Camera::Instance()->getPosition().getY(),
-			m_width, m_height, m_currentRow, m_currentFrame, Game::Instance().getRenderer(), m_angle, m_alpha);
+			m_width,
+			m_height,
+			m_currentRow,
+			m_currentFrame,
+			Game::Instance().getRenderer(),
+			m_angle,
+			m_alpha
+		);
 	}
 }
 
-void Player::load(std::unique_ptr<LoaderParams> const &pParams) {
+void Player::load(std::unique_ptr<LoaderParams> const &pParams)
+{
 	PlayerObject::load(std::move(pParams));    // inherited load function
 
-											   // can set up the players inherited values here    
-											   // set up bullets
 	m_bulletFiringSpeed = 13;
 	m_moveSpeed = 1;
 
 	m_bulletCounter = m_bulletFiringSpeed;      // we want to be able to fire instantly
 
-	m_dyingTime = 1;                          // time it takes for death explosion
+	m_dyingTime = 100;                          // time it takes for death explosion
 
 	Camera::Instance()->setTarget(&m_position);
 }
 
 
-void Player::handleAnimation() {
+void Player::handleAnimation()
+{
 	// if the player is invulnerable we can flash its alpha to let people know
 	if (m_invulnerable)
 	{
@@ -90,70 +109,14 @@ void Player::handleAnimation() {
 		m_invulnerableCounter++;
 	}
 
-	if (!m_bDead && !m_bDying)
+	if (m_bRunning)
 	{
-		if (m_velocity.getY() < 0)
-		{
-			m_currentFrame = 2;
-			m_currentRow = 2;
-			m_numFrames = 2;
-		}
-		else if (m_velocity.getY() > 0)
-		{
-			m_currentRow = 3;
-			m_numFrames = 1;
-		}
-		else
-		{
-			if (m_velocity.getX() < 0)
-			{
-				m_currentRow = 1;
-				m_numFrames = 4;
-				m_bFlipped = true;
-			}
-			else if (m_velocity.getX() > 0)
-			{
-				m_currentRow = 1;
-				m_numFrames = 4;
-				m_bFlipped = false;
-			}
-			else
-			{
-				m_currentRow = 0;
-				m_numFrames = 1;
-			}
-		}
-
-		if (m_bRunning)
-		{
-			m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
-		}
-		else
-		{
-			m_currentFrame = int(((SDL_GetTicks() / (120)) % m_numFrames));
-		}
-
+		m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
 	}
 	else
 	{
-		m_currentFrame = m_dyingCounter / m_numFrames;//int(((SDL_GetTicks() / (200)) % m_numFrames));
+		m_currentFrame = int(((SDL_GetTicks() / (120)) % m_numFrames));
 	}
-	// if the player is not dead then we can change the angle with the velocity 
-	// to give the impression of a moving helicopter
-	/*if (!m_bDead) {
-	if (m_velocity.getX() < 0) {
-	m_angle = -10.0;
-	}
-	else if (m_velocity.getX() > 0) {
-	m_angle = 10.0;
-	}
-	else {
-	m_angle = 0.0;
-	}
-	}*/
-
-	// our standard animation code - for helicopter propellors
-	//m_currentFrame = int(((SDL_GetTicks() / (100)) % m_numFrames));
 }
 
 void Player::update()
@@ -222,7 +185,6 @@ void Player::update()
 		m_velocity.setY(5);
 	}
 	handleAnimation();
-
 }
 
 void Player::handleMovement(Vector2D velocity)
@@ -287,9 +249,8 @@ void Player::handleMovement(Vector2D velocity)
 
 void Player::ressurect() {
 	Game::Instance().setPlayerLives(Game::Instance().getPlayerLives() - 1);
+	m_position = m_lastSafePos;
 
-	m_position.setX(10);
-	m_position.setY(200);
 	m_bDying = false;
 
 	//m_textureID = "player";
@@ -303,7 +264,10 @@ void Player::ressurect() {
 	m_invulnerable = true;
 }
 
-void Player::clean() { PlayerObject::clean(); }
+void Player::clean()
+{
+	PlayerObject::clean();
+}
 
 void Player::handleInput()
 {
@@ -341,7 +305,7 @@ void Player::handleInput()
 		m_bMoveLeft = false;
 	}
 
-	if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE) && m_bCanJump && !m_bPressedJump)
+	if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) && m_bCanJump && !m_bPressedJump)
 	{
 		SoundManager::Instance()->playSound("jump", 0);
 		if (!m_bPressedJump)
@@ -353,8 +317,32 @@ void Player::handleInput()
 		}
 	}
 
-	if (!InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE) && m_bCanJump)
+	if (!InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) && m_bCanJump)
 	{
 		m_bPressedJump = false;
+	}
+
+	if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
+	{
+		if (m_bulletCounter == m_bulletFiringSpeed)
+		{
+			SoundManager::Instance()->playSound("shoot", 0);
+			BulletHandler::Instance()->addPlayerBullet(
+				m_position.getX() + 90,
+				m_position.getY() + 12,
+				11,
+				11,
+				"bullet1",
+				1,
+				Vector2D(10, 0)
+			);
+			m_bulletCounter = 0;
+		}
+
+		m_bulletCounter++;
+	}
+	else
+	{
+		m_bulletCounter = m_bulletFiringSpeed;
 	}
 }

@@ -10,24 +10,23 @@ TileLayer::TileLayer(int tileSize, int mapWidth, int mapHeight, const std::vecto
 	m_position(0, 0),
 	m_velocity(0, 0)
 {
-	m_numColumns = (Game::Instance().getGameWidth() / m_tileSize);
-	m_numRows = (Game::Instance().getGameHeight() / m_tileSize);
+	m_numColumns = mapWidth;
+	m_numRows = mapHeight;
 
 	m_mapWidth = mapWidth;
 }
 
 void TileLayer::update(Level * pLevel)
 {
-	if (m_position.getX() < ((m_mapWidth * m_tileSize) - Game::Instance().getGameWidth()) - m_tileSize)
+	/*if (m_position.getX() < ((m_mapWidth * m_tileSize) - Game::Instance().getGameWidth()) - m_tileSize)
 	{
 		m_velocity.setX(Game::Instance().getScrollSpeed());
 		m_position += m_velocity;
-
 	}
 	else
 	{
 		m_velocity.setX(0);
-	}
+	}*/
 }
 
 void TileLayer::render()
