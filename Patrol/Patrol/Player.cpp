@@ -284,9 +284,11 @@ void Player::handleInput()
 
 		m_bMoveRight = true;
 		m_bMoveLeft = false;
+		m_bFlipped = false;
 	}
 	else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT) && m_position.getX() > 32)
 	{
+		m_bFlipped = true;
 		if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_A))
 		{
 			m_bRunning = true;
@@ -328,7 +330,7 @@ void Player::handleInput()
 		{
 			SoundManager::Instance()->playSound("shoot", 0);
 			BulletHandler::Instance()->addPlayerBullet(
-				m_position.getX() + 90,
+				m_position.getX() + 90 - Camera::Instance()->getPosition().getX(),
 				m_position.getY() + 12,
 				11,
 				11,
