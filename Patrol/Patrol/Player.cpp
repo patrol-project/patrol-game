@@ -338,6 +338,15 @@ void Player::handleInput()
 				1,
 				Vector2D(10, 0)
 			);
+			BulletHandler::Instance()->addPlayerBullet(
+				m_position.getX() + 35 - Camera::Instance()->getPosition().getX(),
+				m_position.getY() - 20,
+				11,
+				11,
+				"bullet1",
+				1,
+				Vector2D(0, -10)
+			);
 			m_bulletCounter = 0;
 		}
 

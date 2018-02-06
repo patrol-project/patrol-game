@@ -26,7 +26,7 @@
   <data encoding="base64" compression="zlib">eJztlDsOgDAMQ3ORAgOwAPe/HjCwhH4SCoRSP8lbFNm1GiIAAAAAAAAAADXQMw22dsDLzEyjrR2gxNH5D2tUev+p/KXdsz2PxPM+t2zq6NxhjppNLenflPcQy+AuzPkkyS/JE9qt9TQI51J5Ds8h30/0rpHvRkxsJvTu3Hvs3vCd1hlTno7M1v18of/cd87ZadV/Lbqzf+md+ELGnJx/Eu/Muqs3Mv415woihmh+</data>
  </layer>
  <objectgroup name="Object Layer 2">
-  <object id="4" name="Player1" type="Player" x="0" y="68" width="1" height="1">
+  <object id="4" name="Player1" type="Player" x="45" y="176.5" width="32" height="32">
    <properties>
     <property name="numFrames" type="int" value="4"/>
     <property name="textureHeight" type="int" value="32"/>
