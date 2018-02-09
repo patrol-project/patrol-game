@@ -124,33 +124,3 @@ void CollisionManager::checkPlayerEnemyCollision(Player* pPlayer, const std::vec
 	}
 	delete pRect1;
 }
-
-void CollisionManager::checkPlayerTileCollision(Player* pPlayer, const std::vector<TileLayer*>& collisionLayers) {
-	for (auto it = collisionLayers.begin(); it != collisionLayers.end(); ++it) {
-		TileLayer* pTileLayer = (*it);
-		std::vector<std::vector<int>> tiles = pTileLayer->getTileIDs();
-
-		Vector2D layerPos = pTileLayer->getPosition();
-
-		int x, y, tileColumn, tileRow, tileid = 0;
-
-		x = layerPos.getX() / pTileLayer->getTileSize();
-		y = layerPos.getY() / pTileLayer->getTileSize();
-
-		if (pPlayer->getVelocity().getX() >= 0 || pPlayer->getVelocity().getY() >= 0) {
-			tileColumn = ((pPlayer->getPosition().getX() +
-				pPlayer->getWidth()) / pTileLayer->getTileSize());
-			tileRow = ((pPlayer->getPosition().getY() +
-				pPlayer->getHeight()) / pTileLayer->getTileSize());
-			tileid = tiles[tileRow + y][tileColumn + x];
-		}
-		else if (pPlayer->getVelocity().getX() < 0 ||
-			pPlayer->getVelocity().getY() < 0) {
-			tileColumn = pPlayer->getPosition().getX() / pTileLayer->getTileSize();
-			tileRow = pPlayer->getPosition().getY() / pTileLayer->getTileSize();
-			tileid = tiles[tileRow + y][tileColumn + x];
-		}
-
-		if (tileid != 0) { pPlayer->collision(); }
-	}
-}

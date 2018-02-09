@@ -19,15 +19,15 @@ m_bPressedJump(false)
 
 void Player::collision() {
 	// if the player is not invulnerable then set to dying and change values for death animation tile sheet
-	if (m_bDying && m_invulnerable)
+	if (!m_invulnerable)
 	{
-		m_currentFrame = 0;
+		/*m_currentFrame = 0;
 		m_currentRow = 4;
 		m_numFrames = 9;
-		m_width = 50;
+		m_width = 50;*/
 		m_bDying = true;
 
-		std::cout << m_currentFrame;
+		//std::cout << m_currentFrame;
 	}
 }
 
