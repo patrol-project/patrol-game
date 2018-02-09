@@ -34,8 +34,6 @@ public:
 	virtual int getWidth();
 	virtual int getHeight();
 
-	virtual void scroll(float scrollSpeed);         // scroll along with tile map
-
 	virtual bool updating();
 	virtual bool dead();
 	virtual bool dying();                          // is the object doing a death animation?

@@ -8,13 +8,6 @@ Vector2D& GameObject::getVelocity() { return m_velocity; }
 int GameObject::getWidth() { return m_width; }
 int GameObject::getHeight() { return m_height; }
 
-void GameObject::scroll(float scrollSpeed) {
-	if (type() != std::string("Player")) // player is never scrolled
-	{
-		m_position.setX(m_position.getX() - scrollSpeed);
-	}
-}
-
 // is the object currently being updated?
 bool GameObject::updating() { return m_bUpdating; }
 

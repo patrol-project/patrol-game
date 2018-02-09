@@ -345,7 +345,7 @@ void Player::handleInput()
 				11,
 				"bullet1",
 				1,
-				Vector2D(0, -10)
+				Vector2D(10, -14)
 			);
 			m_bulletCounter = 0;
 		}

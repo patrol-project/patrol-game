@@ -30,6 +30,8 @@ protected:
 	int m_bulletFiringSpeed;
 	int m_bulletCounter;
 	int m_moveSpeed;
+	// need for enemies drawing
+	int xPos;
 
 	// how long the death animation takes, along with a counter
 	int m_dyingTime;

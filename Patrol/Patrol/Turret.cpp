@@ -1,6 +1,7 @@
 #include "Turret.h"
 #include "Game.h"
 #include "BulletHandler.h"
+#include "Camera.h"
 
 Turret::Turret() :
 	m_dyingTime(1000), m_health(15), m_bulletFiringSpeed(50) {}
@@ -26,20 +27,17 @@ void Turret::collision() {
 
 void Turret::update() {
 	if (!m_bDying) {
-		// we want to scroll this object with the rest
-		scroll(Game::Instance().getScrollSpeed());
-
+		m_position.setX(xPos - Camera::Instance()->getPosition().getX());
 		if (m_bulletCounter == m_bulletFiringSpeed) {
-			BulletHandler::Instance()->addEnemyBullet(m_position.getX(), m_position.getY(), 16, 16, "bullet2", 1, Vector2D(-3, -3));
-			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 20, m_position.getY(), 16, 16, "bullet2", 1, Vector2D(0, -3));
-			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 40, m_position.getY(), 16, 16, "bullet2", 1, Vector2D(3, -3));
+			BulletHandler::Instance()->addEnemyBullet(m_position.getX(), m_position.getY() + 42, 16, 16, "bullet2", 1, Vector2D(-3, 3));
+			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 20, m_position.getY() + 42, 16, 16, "bullet2", 1, Vector2D(0, 3));
+			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 40, m_position.getY() + 42, 16, 16, "bullet2", 1, Vector2D(3, 3));
 			m_bulletCounter = 0;
 		}
 
 		m_bulletCounter++;
 	}
 	else {
-		scroll(Game::Instance().getScrollSpeed());
 		doDyingAnimation();
 	}
 }

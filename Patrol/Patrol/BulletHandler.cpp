@@ -41,13 +41,13 @@ void BulletHandler::clearBullets() {
 void BulletHandler::updateBullets() {
 	for (auto p_it = m_playerBullets.begin(); p_it != m_playerBullets.end();)
 	{
-		bool a = (*p_it)->getPosition().getX() < 0;
+		/*bool a = (*p_it)->getPosition().getX() < 0;
 		int bulletX = (*p_it)->getPosition().getX();
 		int cameraEndX = Camera::Instance()->getPosition().getX() + Game::Instance().getGameWidth();
 		bool b = (*p_it)->getPosition().getX() > Camera::Instance()->getPosition().getX() + Game::Instance().getGameWidth();
 		bool c = (*p_it)->getPosition().getY() < 0;
 		bool d = (*p_it)->getPosition().getY() > Game::Instance().getGameHeight();
-		bool e = (*p_it)->dead();
+		bool e = (*p_it)->dead();*/
 		if ((*p_it)->getPosition().getX() < 0
 			|| (*p_it)->getPosition().getX() > Camera::Instance()->getPosition().getX() + Game::Instance().getGameWidth()
 			|| (*p_it)->getPosition().getY() < 0
@@ -65,7 +65,7 @@ void BulletHandler::updateBullets() {
 	for (auto e_it = m_enemyBullets.begin();
 		e_it != m_enemyBullets.end();) {
 		if ((*e_it)->getPosition().getX() < 0
-			|| (*e_it)->getPosition().getX() > Game::Instance().getGameWidth()
+			|| (*e_it)->getPosition().getX() > Camera::Instance()->getPosition().getX() + Game::Instance().getGameWidth()
 			|| (*e_it)->getPosition().getY() < 0
 			|| (*e_it)->getPosition().getY() > Game::Instance().getGameHeight()
 			|| (*e_it)->dead()) {
@@ -81,8 +81,8 @@ void BulletHandler::updateBullets() {
 
 void BulletHandler::drawBullets() {
 	for (unsigned int p = 0; p < m_playerBullets.size(); p++) {
-		int x = m_playerBullets[p]->getPosition().getX();
-		int y = m_playerBullets[p]->getPosition().getY();
+		/*int x = m_playerBullets[p]->getPosition().getX();
+		int y = m_playerBullets[p]->getPosition().getY();*/
 		m_playerBullets[p]->draw();
 	}
 

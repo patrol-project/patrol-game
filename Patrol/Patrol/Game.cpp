@@ -82,7 +82,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
 	GameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
 	GameObjectFactory::Instance()->registerType("ScrollingBackground", new ScrollingBackgroundCreator());
-	GameObjectFactory::Instance()->registerType("Enemy", new TurretCreator());
+	GameObjectFactory::Instance()->registerType("Turret", new TurretCreator());
 	// start game loop
 	running = true;
 

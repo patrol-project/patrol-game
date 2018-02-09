@@ -17,7 +17,8 @@ m_bRunning(false),
 m_bFalling(false),
 m_bJumping(false),
 m_bCanJump(false),
-m_lastSafePos(0, 0)
+m_lastSafePos(0, 0),
+xPos(0)
 {
 }
 
@@ -31,6 +32,7 @@ void PlayerObject::load(std::unique_ptr<LoaderParams> const &pParams)
 	m_height = pParams->getHeight();
 	m_textureID = pParams->getTextureID();
 	m_numFrames = pParams->getNumberOfFrames();
+	xPos = m_position.getX();
 }
 
 // draw the object to the screen
