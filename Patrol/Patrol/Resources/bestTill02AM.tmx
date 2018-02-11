@@ -66,6 +66,22 @@
     <property name="textureWidth" type="int" value="71"/>
    </properties>
   </object>
+   <object id="11" name="Enemy2" type="Turret" x="910" y="32" width="32" height="32">
+     <properties>
+       <property name="numFrames" type="int" value="1"/>
+       <property name="textureHeight" type="int" value="48"/>
+       <property name="textureID" value="turret"/>
+       <property name="textureWidth" type="int" value="71"/>
+     </properties>
+   </object>
+   <object id="12" name="Enemy3" type="Turret" x="2000" y="32" width="32" height="32">
+     <properties>
+       <property name="numFrames" type="int" value="1"/>
+       <property name="textureHeight" type="int" value="48"/>
+       <property name="textureID" value="turret"/>
+       <property name="textureWidth" type="int" value="71"/>
+     </properties>
+   </object>
  </objectgroup>
  <layer name="CollisionLayer" width="128" height="15">
   <properties>
