@@ -22,6 +22,7 @@ private:
 	// call back functions for menu items
 	static void s_menuToPlay();
 	static void s_exitFromMenu();
+	static void s_menuToScoreboard();
 
 	static const std::string s_menuID;
 

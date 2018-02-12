@@ -162,6 +162,7 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="ScoreboardState.cpp" />
     <ClCompile Include="ScrollingBackground.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="ScoreboardState.h" />
     <ClInclude Include="ScrollingBackground.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="SoundManager.h" />

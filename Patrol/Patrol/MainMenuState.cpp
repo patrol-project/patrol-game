@@ -23,6 +23,10 @@ void MainMenuState::s_exitFromMenu()
 	Game::Instance().quit();
 }
 
+void MainMenuState::s_menuToScoreboard()
+{
+	Game::Instance().getStateMachine()->set_next_state(STATE_SCOREBOARD);
+}
 // end callbacks
 
 void MainMenuState::update()
@@ -65,6 +69,7 @@ bool MainMenuState::onEnter()
 	m_callbacks.push_back(0);
 	m_callbacks.push_back(s_menuToPlay);
 	m_callbacks.push_back(s_exitFromMenu);
+	m_callbacks.push_back(s_menuToScoreboard);
 
 	// set the callbacks for menu items
 	setCallbacks(m_callbacks);
