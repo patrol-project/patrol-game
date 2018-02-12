@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="128" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1">
+<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="128" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="7">
  <properties>
   <property name="clouds" value="Backgrounds/background.png"/>
   <property name="player" value="GameObjects/player.png"/>
@@ -26,7 +26,7 @@
   <data encoding="base64" compression="zlib">eJztlDsOgDAMQ3ORAgOwAPe/HjCwhH4SCoRSP8lbFNm1GiIAAAAAAAAAADXQMw22dsDLzEyjrR2gxNH5D2tUev+p/KXdsz2PxPM+t2zq6NxhjppNLenflPcQy+AuzPkkyS/JE9qt9TQI51J5Ds8h30/0rpHvRkxsJvTu3Hvs3vCd1hlTno7M1v18of/cd87ZadV/Lbqzf+md+ELGnJx/Eu/Muqs3Mv415woihmh+</data>
  </layer>
  <objectgroup name="Object Layer 2">
-  <object id="4" name="Player1" type="Player" x="45" y="176.5" width="32" height="32">
+  <object id="4" name="Player1" type="Player" x="45" y="176.5" width="76" height="32">
    <properties>
     <property name="numFrames" type="int" value="4"/>
     <property name="textureHeight" type="int" value="32"/>
@@ -34,7 +34,31 @@
     <property name="textureWidth" type="int" value="76"/>
    </properties>
   </object>
-  <object id="10" name="Enemy1" type="Turret" x="509.333" y="32" width="32" height="32">
+  <object id="10" name="Enemy1" type="Turret" x="509.333" y="32" width="71" height="48">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="48"/>
+    <property name="textureID" value="turret"/>
+    <property name="textureWidth" type="int" value="71"/>
+   </properties>
+  </object>
+  <object id="4" name="Enemy2" type="Turret" x="969.833" y="80" width="71" height="48">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="48"/>
+    <property name="textureID" value="turret"/>
+    <property name="textureWidth" type="int" value="71"/>
+   </properties>
+  </object>
+  <object id="5" name="Enemy3" type="Turret" x="1524.5" y="26.6667" width="71" height="48">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="48"/>
+    <property name="textureID" value="turret"/>
+    <property name="textureWidth" type="int" value="71"/>
+   </properties>
+  </object>
+  <object id="6" name="Enemy4" type="Turret" x="2173.83" y="40" width="71" height="48">
    <properties>
     <property name="numFrames" type="int" value="1"/>
     <property name="textureHeight" type="int" value="48"/>

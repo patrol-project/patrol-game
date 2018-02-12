@@ -48,6 +48,12 @@ void MainMenuState::render()
 			m_gameObjects[i]->draw();
 		}
 	}
+	vector<string> a;
+	a.push_back("pesho - 3");
+	a.push_back("gosho - 4");
+	a.push_back("vankata - 5");
+	
+	TextureManager::Instance()->drawScoreboard(a);
 }
 
 bool MainMenuState::onEnter()
