@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include <memory>
+#include "Camera.h"
 
 const int CollisionManager::s_buffer = 4;
 
@@ -29,7 +30,7 @@ bool CollisionManager::RectRect(SDL_Rect* A, SDL_Rect* B)
 
 void CollisionManager::checkPlayerEnemyBulletCollision(Player* pPlayer) {
 	SDL_Rect* pRect1 = new SDL_Rect();
-	pRect1->x = pPlayer->getPosition().getX();
+	pRect1->x = pPlayer->getPosition().getX() - Camera::Instance()->getPosition().getX();
 	pRect1->y = pPlayer->getPosition().getY();
 	pRect1->w = pPlayer->getWidth();
 	pRect1->h = pPlayer->getHeight();
