@@ -21,6 +21,9 @@ protected:
 	int m_dyingTime;
 	int m_health;
 	int m_bulletFiringSpeed;
+	int m_movementSpeed;
+	int m_distanceToTravel;
+	int m_distanceTravelled;
 };
 
 class BomberCreator : public BaseCreator {

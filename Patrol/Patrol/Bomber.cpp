@@ -4,7 +4,7 @@
 #include "Camera.h"
 
 Bomber::Bomber() :
-	m_dyingTime(1000), m_health(10), m_bulletFiringSpeed(80) {}
+	m_dyingTime(1000), m_health(10), m_bulletFiringSpeed(80), m_movementSpeed(20), m_distanceToTravel(100), m_distanceTravelled(0) {}
 
 Bomber::~Bomber() {}
 
@@ -31,6 +31,15 @@ void Bomber::update() {
 		if (m_bulletCounter == m_bulletFiringSpeed) {
 			
 			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 20, m_position.getY() + 42, 32, 32, "missle", 1, Vector2D(0, 3));
+			
+			xPos -= m_movementSpeed;
+			m_distanceTravelled ++;
+			
+			if (m_distanceToTravel == m_distanceTravelled)
+			{
+				xPos += m_distanceTravelled;
+				m_distanceTravelled = 0;
+			}
 			
 			m_bulletCounter = 0;
 		}

@@ -59,7 +59,7 @@
     <property name="textureWidth" type="int" value="71"/>
    </properties>
   </object>
-  <object id="6" name="Enemy4" type="Bomber" x="3173.83" y="40" width="101" height="48">
+  <object id="6" name="Enemy4" type="Bomber" x="3173.83" y="200" width="101" height="48">
    <properties>
     <property name="numFrames" type="int" value="1"/>
     <property name="textureHeight" type="int" value="48"/>
