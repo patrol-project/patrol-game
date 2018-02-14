@@ -97,7 +97,7 @@ void CollisionManager::checkEnemyPlayerBulletCollision(const std::vector<GameObj
 
 void CollisionManager::checkPlayerEnemyCollision(Player* pPlayer, const std::vector<GameObject*> &objects) {
 	SDL_Rect* pRect1 = new SDL_Rect();
-	pRect1->x = pPlayer->getPosition().getX();
+	pRect1->x = pPlayer->getPosition().getX() - Camera::Instance()->getPosition().getX();;
 	pRect1->y = pPlayer->getPosition().getY();
 	pRect1->w = pPlayer->getWidth();
 	pRect1->h = pPlayer->getHeight();
