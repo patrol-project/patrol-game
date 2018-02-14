@@ -12,6 +12,7 @@
 #include "AnimatedGraphic.h"
 #include "ScrollingBackground.h"
 #include "Turret.h"
+#include "Bomber.h"
 
 //Game::Game() :
 //	window(),
@@ -83,6 +84,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	GameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
 	GameObjectFactory::Instance()->registerType("ScrollingBackground", new ScrollingBackgroundCreator());
 	GameObjectFactory::Instance()->registerType("Turret", new TurretCreator());
+	GameObjectFactory::Instance()->registerType("Bomber", new BomberCreator());
 	// start game loop
 	running = true;
 
