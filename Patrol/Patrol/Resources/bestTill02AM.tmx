@@ -5,6 +5,8 @@
   <property name="player" value="GameObjects/player.png"/>
   <property name="turret" value="GameObjects/enemy.png"/>
   <property name="bomber" value="GameObjects/bomber.png"/>
+  <property name="obstacle" value="GameObjects/obstacle.png"/>
+  <property name="largeexplosion" value="GameObjects/largeexplosion.png"/>
  </properties>
  <tileset firstgid="1" name="Tileset" tilewidth="32" tileheight="32" spacing="2" tilecount="28" columns="7">
   <image source="Tiles/stana.png" trans="000000" width="238" height="134"/>
