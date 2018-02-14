@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="138" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="11">
+ <properties>
+  <property name="bomber" value="GameObjects/bomber.png"/>
+  <property name="clouds" value="Backgrounds/background2.png"/>
+  <property name="largeexplosion" value="GameObjects/largeexplosion.png"/>
+  <property name="obstacle" value="GameObjects/obstacle2.png"/>
+  <property name="player" value="GameObjects/player.png"/>
+  <property name="turret" value="GameObjects/enemy.png"/>
+ </properties>
+ <tileset firstgid="1" name="Tileset" tilewidth="32" tileheight="32" spacing="2" tilecount="28" columns="7">
+  <image source="Tiles/stana.png" trans="000000" width="238" height="134"/>
+ </tileset>
+ <tileset firstgid="29" name="Tileset" tilewidth="32" tileheight="32" spacing="2" tilecount="28" columns="7">
+  <image source="Tiles/stana.png" trans="000000" width="238" height="134"/>
+ </tileset>
+ <objectgroup name="Object Layer 1">
+  <object id="1" name="Background" type="ScrollingBackground" x="0" y="0" width="32" height="32">
+   <properties>
+    <property name="animSpeed" type="float" value="0.2"/>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="480"/>
+    <property name="textureID" value="clouds"/>
+    <property name="textureWidth" type="int" value="640"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="Tile Layer 1" width="138" height="15">
+  <data encoding="base64" compression="zlib">eJztl0sOhCAQBdtkFq50jL+ZO3j/84kLE4KfdBhGTFuV1BJo4AFBBAAAAAAAAOC5dIFV3nLgQgpnqXQIHDPUC3monW+l5OS5WM9JK9v3UmsV0Y/Vt9hiTvw9/ci2bq3+/PqINpa4Y06Ozu7ZWU2VDd9vRJ9rG2v3yi858dcxpUd7cjZeqmyk8l9rc4Xh36ZxviQ+J2jTJRPTjtqczIAnJU0=</data>
+ </layer>
+ <objectgroup name="Object Layer 2">
+  <object id="4" name="Player1" type="Player" x="83.6667" y="190.667" width="76" height="32">
+   <properties>
+    <property name="numFrames" type="int" value="4"/>
+    <property name="textureHeight" type="int" value="32"/>
+    <property name="textureID" value="player"/>
+    <property name="textureWidth" type="int" value="76"/>
+   </properties>
+  </object>
+  <object id="40" name="Obstacle1" type="Obstacle" x="160" y="382" width="32" height="32">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="32"/>
+    <property name="textureID" value="obstacle"/>
+    <property name="textureWidth" type="int" value="32"/>
+   </properties>
+  </object>
+  <object id="41" name="Obstacle2" type="Obstacle" x="192" y="382" width="32" height="32">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="32"/>
+    <property name="textureID" value="obstacle"/>
+    <property name="textureWidth" type="int" value="32"/>
+   </properties>
+  </object>
+  <object id="42" name="Obstacle3" type="Obstacle" x="1951.84" y="351.939" width="32" height="32">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="32"/>
+    <property name="textureID" value="obstacle"/>
+    <property name="textureWidth" type="int" value="32"/>
+   </properties>
+  </object>
+  <object id="43" name="Obstacle4" type="Obstacle" x="1983.84" y="351.939" width="32" height="32">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="32"/>
+    <property name="textureID" value="obstacle"/>
+    <property name="textureWidth" type="int" value="32"/>
+   </properties>
+  </object>
+  <object id="44" name="Obstacle5" type="Obstacle" x="3335" y="383.424" width="32" height="32">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="32"/>
+    <property name="textureID" value="obstacle"/>
+    <property name="textureWidth" type="int" value="32"/>
+   </properties>
+  </object>
+  <object id="10" name="Enemy1" type="Turret" x="509.333" y="100" width="71" height="48">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="48"/>
+    <property name="textureID" value="turret"/>
+    <property name="textureWidth" type="int" value="71"/>
+   </properties>
+  </object>
+  <object id="4" name="Enemy2" type="Turret" x="1500" y="80" width="71" height="48">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="48"/>
+    <property name="textureID" value="turret"/>
+    <property name="textureWidth" type="int" value="71"/>
+   </properties>
+  </object>
+  <object id="5" name="Enemy3" type="Turret" x="2800" y="26.6667" width="71" height="48">
+   <properties>
+    <property name="numFrames" type="int" value="1"/>
+    <property name="textureHeight" type="int" value="48"/>
+    <property name="textureID" value="turret"/>
+    <property name="textureWidth" type="int" value="71"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="CollisionLayer" width="138" height="15">
+  <properties>
+   <property name="collidable" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">eJzt17EOgCAMRVHcnHBQ4///qWEjGAlpK5JyT9KxiPiAGAIAAAAAAPM6ior/TgcdLYrey2wWGN2m6CUn8/Cekz0878vWioJxvN7FHnOSf1ON/P1OQY8nI+bkbe/W9qpVNkqSMT2eK5qcJNIzvVaS543oi7XpUenfZi0KsHYDxSYKiQ==</data>
+ </layer>
+</map>
