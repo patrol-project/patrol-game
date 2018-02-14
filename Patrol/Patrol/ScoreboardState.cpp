@@ -4,6 +4,7 @@
 #include "InputHandler.h"
 #include "MenuButton.h"
 #include "Game.h"
+#include <algorithm>
 
 const std::string ScoreboardState::scoreboardID = "SCOREBOARD";
 
@@ -31,6 +32,12 @@ bool ScoreboardState::onEnter()
 
 	ScoreboardParser scoresParser;
 	scoresParser.parseScores("Resources/scores.xml", &m_records);
+	// sort by best result
+	std::sort(m_records.begin(), m_records.end(), [](const SingleRecord* lhs, const SingleRecord* rhs)
+	{
+		return lhs->getPoints() < rhs->getPoints();
+	});
+
 
 	m_callbacks.push_back(0);
 	m_callbacks.push_back(s_returnToMain);

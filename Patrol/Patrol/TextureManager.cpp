@@ -96,15 +96,12 @@ void TextureManager::drawTile(std::string id, int margin, int spacing, int x, in
 	SDL_RenderCopyEx(pRenderer, textureMap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
 }
 
-void TextureManager::drawScoreboard(vector<ScoreRecord> *results)
+void TextureManager::drawScoreboard(vector<SingleRecord*> *results)
 {
 	string text = "";
 
 	for (int i = 0; i < results->size(); i++) {
-		ScoreRecord curr;
-		curr.name = results->at(i).name;
-		curr.points = results->at(i).points;
-		text += curr.name + " - " + curr.points + "\n";
+		text += results->at(i)->getPlayerName() + " " + std::to_string(results->at(i)->getPoints()) + "\n";
 	}
 
 	SDL_Texture* ftexture = NULL; // our font-texture

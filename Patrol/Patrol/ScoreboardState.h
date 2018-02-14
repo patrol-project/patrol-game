@@ -51,5 +51,5 @@ private:
 	static void s_returnToMain(); ///< pauses the game and shows the menu
 	static const string scoreboardID; ///< returns the name of the state
 	vector<GameObject*> gameObjects; ///< stores all game objects which are in this state
-	vector<ScoreRecord> m_records;
+	vector<SingleRecord*> m_records;
 };

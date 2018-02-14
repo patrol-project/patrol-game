@@ -166,6 +166,7 @@
     <ClCompile Include="ScoreboardState.cpp" />
     <ClCompile Include="ScrollingBackground.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
+    <ClCompile Include="SingleRecord.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StateParser.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="ScoreboardState.h" />
     <ClInclude Include="ScrollingBackground.h" />
     <ClInclude Include="PlayerObject.h" />
+    <ClInclude Include="SingleRecord.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateParser.h" />
     <ClInclude Include="TextureManager.h" />

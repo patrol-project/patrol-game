@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "SingleRecord.h"
 
 using namespace std;
 
@@ -13,5 +14,5 @@ struct ScoreRecord
 class ScoreboardParser
 {
 public:
-	void parseScores(const char* stateFile, vector<ScoreRecord> *records);
+	void parseScores(const char* stateFile, vector<SingleRecord*> *records);
 };

@@ -26,7 +26,7 @@ public:
 
 	std::map<std::string, SDL_Texture*> getTextureMap() { return textureMap; }
 
-	void drawScoreboard(vector<ScoreRecord> *results);
+	void drawScoreboard(vector<SingleRecord*> *results);
 
 	static TextureManager* Instance()
 	{
