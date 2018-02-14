@@ -17,7 +17,7 @@ void Obstacle::collision() {
 
 			m_textureID = "largeexplosion";
 			m_currentFrame = 0;
-			m_numFrames = 9;
+			m_numFrames = 13;
 			m_width = 60;
 			m_height = 60;
 			m_bDying = true;

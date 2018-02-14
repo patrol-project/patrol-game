@@ -76,6 +76,7 @@ bool PlayState::onEnter()
 	TextureManager::Instance()->load("Resources/GameObjects/bullet2.png", "bullet2", Game::Instance().getRenderer());
 	TextureManager::Instance()->load("Resources/GameObjects/bullet3.png", "bullet3", Game::Instance().getRenderer());
 	TextureManager::Instance()->load("Resources/GameObjects/lives.png", "lives", Game::Instance().getRenderer());
+	TextureManager::Instance()->load("Resources/GameObjects/largeexplosion.png", "largeexplosion", Game::Instance().getRenderer());
 
 	Mix_ResumeMusic();
 
