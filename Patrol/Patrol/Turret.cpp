@@ -4,7 +4,7 @@
 #include "Camera.h"
 
 Turret::Turret() :
-	m_dyingTime(1000), m_health(15), m_bulletFiringSpeed(50) {}
+	m_dyingTime(1000), m_health(10), m_bulletFiringSpeed(80) {}
 
 Turret::~Turret() {}
 
