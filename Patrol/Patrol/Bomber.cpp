@@ -30,7 +30,7 @@ void Bomber::update() {
 		m_position.setX(xPos - Camera::Instance()->getPosition().getX());
 		if (m_bulletCounter == m_bulletFiringSpeed) {
 			
-			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 20, m_position.getY() + 42, 16, 16, "bullet", 1, Vector2D(0, 3));
+			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 20, m_position.getY() + 42, 32, 32, "missle", 1, Vector2D(0, 3));
 			
 			m_bulletCounter = 0;
 		}
