@@ -4,6 +4,7 @@
 #include "InputHandler.h"
 #include "MenuButton.h"
 #include "Game.h"
+
 const std::string ScoreboardState::scoreboardID = "SCOREBOARD";
 
 void ScoreboardState::update()
@@ -20,6 +21,7 @@ void ScoreboardState::render()
 	{
 		gameObjects[i]->draw();
 	}
+	TextureManager::Instance()->drawScoreboard(&m_records);
 }
 
 bool ScoreboardState::onEnter()
@@ -27,11 +29,13 @@ bool ScoreboardState::onEnter()
 	StateParser stateParser;
 	stateParser.parseState("States.xml", scoreboardID, &gameObjects, &m_textureIDList);
 
+	ScoreboardParser scoresParser;
+	scoresParser.parseScores("Resources/scores.xml", &m_records);
+
 	m_callbacks.push_back(0);
 	m_callbacks.push_back(s_returnToMain);
 	// set the callbacks for menu items
 	setCallbacks(m_callbacks);
-
 	m_loadingComplete = true;
 	std::cout << "entering ScoreboardState\n";
 	return true;

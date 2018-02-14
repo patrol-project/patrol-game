@@ -80,7 +80,6 @@ void Player::load(std::unique_ptr<LoaderParams> const &pParams)
 	Camera::Instance()->setTarget(&m_position);
 }
 
-
 void Player::handleAnimation()
 {
 	// if the player is invulnerable we can flash its alpha to let people know

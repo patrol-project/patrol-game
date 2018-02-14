@@ -1,6 +1,5 @@
 #include "TextureManager.h"
 #include <SDL_image.h>
-#include <SDL_ttf.h>
 #include <iostream>
 #include "Game.h"
 
@@ -17,6 +16,13 @@ bool TextureManager::load(string fileName, string id, SDL_Renderer * renderer)
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
 	SDL_FreeSurface(tempSurface);
 
+	// start of font setting 
+
+	int fontsize = 24;
+	string fontpath = "Resources/Fonts/Roboto-Regular.ttf";	
+	TTF_Init();
+	font = TTF_OpenFont(fontpath.c_str(), fontsize);
+	// end of font setting
 	// everything went ok, add the texture to our list
 
 	if (texture != 0)
@@ -90,22 +96,24 @@ void TextureManager::drawTile(std::string id, int margin, int spacing, int x, in
 	SDL_RenderCopyEx(pRenderer, textureMap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
 }
 
-void TextureManager::drawScoreboard(vector<string> results)
+void TextureManager::drawScoreboard(vector<ScoreRecord> *results)
 {
-	int fontsize = 24;
-	int t_width = 0; // width of the loaded font-texture
-	int t_height = 0; // height of the loaded font-texture
-	SDL_Color text_color = { 0,0,0 };
-	string fontpath = "Resources/Fonts/Roboto-Regular.ttf";
 	string text = "";
-	for (int i = 0; i < results.size(); i++) {
-		text += results[i] + "\n";
+
+	for (int i = 0; i < results->size(); i++) {
+		ScoreRecord curr;
+		curr.name = results->at(i).name;
+		curr.points = results->at(i).points;
+		text += curr.name + " - " + curr.points + "\n";
 	}
-	TTF_Init();
-	TTF_Font* font = TTF_OpenFont(fontpath.c_str(), fontsize);
+
 	SDL_Texture* ftexture = NULL; // our font-texture
 
-								  // check to see that the font was loaded correctly
+	SDL_Color text_color = { 0,0,0 };
+	int t_width = 0; // width of the loaded font-texture
+	int t_height = 0; // height of the loaded font-texture
+
+	// check to see that the font was loaded correctly
 	if (font == NULL) {
 		cout << "Failed the load the font!\n";
 		cout << "SDL_TTF Error: " << TTF_GetError() << "\n";
@@ -133,10 +141,16 @@ void TextureManager::drawScoreboard(vector<string> results)
 				int y = 0;
 				SDL_Rect dst = { x, y, t_width, t_height };
 				SDL_RenderCopy(Game::Instance().getRenderer(), ftexture, NULL, &dst);
-											// clean up after ourselves (destroy the surface)
+				
+				// clean up after ourselves (destroy the surface)
 				SDL_FreeSurface(text_surface);
 			}
 		}
-	}
-	
+	}	
+	SDL_DestroyTexture(ftexture);
 }
+
+void TextureManager::updateScoreboard()
+{
+}
+

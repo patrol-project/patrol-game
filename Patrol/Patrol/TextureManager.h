@@ -4,6 +4,8 @@
 #include "SDL.h"
 #include <map>
 #include <vector>
+#include "ScoreboardParser.h"
+#include <SDL_ttf.h>
 
 using namespace std;
 
@@ -24,7 +26,7 @@ public:
 
 	std::map<std::string, SDL_Texture*> getTextureMap() { return textureMap; }
 
-	void drawScoreboard(vector<string> results);
+	void drawScoreboard(vector<ScoreRecord> *results);
 
 	static TextureManager* Instance()
 	{
@@ -39,4 +41,6 @@ private:
 	map<string, SDL_Texture*> textureMap;
 	TextureManager() {}
 	static TextureManager* texture_instance;
+	TTF_Font* font;
+	void updateScoreboard();
 };
