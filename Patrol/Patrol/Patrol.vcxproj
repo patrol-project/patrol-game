@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedGraphic.cpp" />
     <ClCompile Include="base64.cpp" />
+    <ClCompile Include="Bomber.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletHandler.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -177,6 +178,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedGraphic.h" />
     <ClInclude Include="base64.h" />
+    <ClInclude Include="Bomber.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletHandler.h" />
     <ClInclude Include="Camera.h" />
@@ -217,7 +219,9 @@
     <Xml Include="States.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bestTill02AM.tmx" />
+    <None Include="Resources\bestTill02AM.tmx">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\Level (1).tmx" />
     <None Include="Resources\Level.tmx" />
     <None Include="Resources\tiles.tmx" />

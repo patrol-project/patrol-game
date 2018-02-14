@@ -1,14 +1,14 @@
-#include "Turret.h"
+#include "Bomber.h"
 #include "Game.h"
 #include "BulletHandler.h"
 #include "Camera.h"
 
-Turret::Turret() :
+Bomber::Bomber() :
 	m_dyingTime(1000), m_health(10), m_bulletFiringSpeed(80) {}
 
-Turret::~Turret() {}
+Bomber::~Bomber() {}
 
-void Turret::collision() {
+void Bomber::collision() {
 	m_health -= 1;
 
 	if (m_health == 0) {
@@ -25,13 +25,13 @@ void Turret::collision() {
 	}
 }
 
-void Turret::update() {
+void Bomber::update() {
 	if (!m_bDying) {
 		m_position.setX(xPos - Camera::Instance()->getPosition().getX());
 		if (m_bulletCounter == m_bulletFiringSpeed) {
-			BulletHandler::Instance()->addEnemyBullet(m_position.getX(), m_position.getY() + 42, 16, 16, "bullet2", 1, Vector2D(-3, 3));
-			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 20, m_position.getY() + 42, 16, 16, "bullet2", 1, Vector2D(0, 3));
-			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 40, m_position.getY() + 42, 16, 16, "bullet2", 1, Vector2D(3, 3));
+			
+			BulletHandler::Instance()->addEnemyBullet(m_position.getX() + 20, m_position.getY() + 42, 32, 32, "missle", 1, Vector2D(0, 3));
+			
 			m_bulletCounter = 0;
 		}
 
@@ -42,6 +42,6 @@ void Turret::update() {
 	}
 }
 
-GameObject* TurretCreator::createGameObject() const {
-	return new Turret();
+GameObject* BomberCreator::createGameObject() const {
+	return new Bomber();
 }

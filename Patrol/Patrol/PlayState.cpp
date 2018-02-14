@@ -71,6 +71,7 @@ bool PlayState::onEnter()
 	//pLevel = levelParser.parseLevel(Game::Instance().getLevelFiles()[Game::Instance().getCurrentLevel() - 1].c_str());
 	pLevel = levelParser.parseLevel("Resources/bestTill02AM.tmx");
 
+	TextureManager::Instance()->load("Resources/GameObjects/missle.png", "missle", Game::Instance().getRenderer());
 	TextureManager::Instance()->load("Resources/GameObjects/bullet1.png", "bullet1", Game::Instance().getRenderer());
 	TextureManager::Instance()->load("Resources/GameObjects/bullet2.png", "bullet2", Game::Instance().getRenderer());
 	TextureManager::Instance()->load("Resources/GameObjects/bullet3.png", "bullet3", Game::Instance().getRenderer());
