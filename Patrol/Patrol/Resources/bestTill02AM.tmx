@@ -36,12 +36,20 @@
     <property name="textureWidth" type="int" value="76"/>
    </properties>
   </object>
-   <object id="10" name="Obstacle1" type="Obstacle" x="180" y="278" width="48" height="48">
+   <object id="40" name="Obstacle1" type="Obstacle" x="160" y="296" width="32" height="32">
      <properties>
        <property name="numFrames" type="int" value="1"/>
-       <property name="textureHeight" type="int" value="48"/>
+       <property name="textureHeight" type="int" value="32"/>
        <property name="textureID" value="obstacle"/>
-       <property name="textureWidth" type="int" value="48"/>
+       <property name="textureWidth" type="int" value="32"/>
+     </properties>
+   </object>
+   <object id="41" name="Obstacle2" type="Obstacle" x="192" y="296" width="32" height="32">
+     <properties>
+       <property name="numFrames" type="int" value="1"/>
+       <property name="textureHeight" type="int" value="32"/>
+       <property name="textureID" value="obstacle"/>
+       <property name="textureWidth" type="int" value="32"/>
      </properties>
    </object>
   <object id="10" name="Enemy1" type="Turret" x="509.333" y="32" width="71" height="48">
