@@ -8,7 +8,8 @@
 
 GameStateMachine::GameStateMachine()
 {
-	int nextState = STATE_NULL;
+	nextState = STATE_NULL;
+	stateID = STATE_MAIN_MENU;
 	gameStatesMap[STATE_MAIN_MENU] = new MainMenuState();
 	gameStatesMap[STATE_PAUSE_MENU] = new PauseState();
 	gameStatesMap[STATE_GAME_OVER] = new GameOverState();
@@ -24,8 +25,13 @@ void GameStateMachine::changeState()
 		//Delete the current state
 		if (nextState != STATE_EXIT && currentState != 0)
 		{
-			currentState->onExit();
-			//delete currentState;
+			int currentIsPlay = stateID == STATE_PLAY;
+			int nextIsPause = nextState == STATE_PAUSE_MENU;
+
+			if (!(currentIsPlay && nextIsPause)) {
+				currentState->onExit();
+				//delete currentState;
+			}
 		}
 
 		//Change the state
@@ -57,13 +63,19 @@ void GameStateMachine::changeState()
 			break;
 		}
 
-		currentState->onEnter();
+		int currentIsPause = stateID == STATE_PAUSE_MENU;
+		int nextIsPlay = nextState == STATE_PLAY;
 
+		if (!(currentIsPause && nextIsPlay)) {
+			currentState->onEnter();
+		}
 		//Change the current state ID
 		stateID = nextState;
 
 		//NULL the next state ID
 		nextState = STATE_NULL;
+
+
 	}
 }
 
