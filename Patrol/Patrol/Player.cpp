@@ -10,7 +10,7 @@
 
 Player::Player() : PlayerObject(),
 m_invulnerable(false),
-m_invulnerableTime(200),
+m_invulnerableTime(1000),
 m_invulnerableCounter(0),
 m_bPressedJump(false)
 {

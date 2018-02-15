@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="138" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="11">
+<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="138" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="13">
  <properties>
   <property name="bomber" value="GameObjects/bomber.png"/>
   <property name="clouds" value="Backgrounds/background2.png"/>
+  <property name="endlevel" value="GameObjects/EndLevelTexture.png"/>
   <property name="largeexplosion" value="GameObjects/largeexplosion.png"/>
   <property name="obstacle" value="GameObjects/obstacle2.png"/>
   <property name="player" value="GameObjects/player.png"/>
@@ -99,6 +100,14 @@
     <property name="textureHeight" type="int" value="48"/>
     <property name="textureID" value="turret"/>
     <property name="textureWidth" type="int" value="71"/>
+   </properties>
+  </object>
+  <object id="11" name="Level2End" type="EndLevelObject" x="3965.91" y="217.896" width="38" height="198">
+   <properties>
+    <property name="numFrames" type="int" value="2"/>
+    <property name="textureHeight" type="int" value="198"/>
+    <property name="textureID" value="endlevel"/>
+    <property name="textureWidth" type="int" value="38"/>
    </properties>
   </object>
  </objectgroup>

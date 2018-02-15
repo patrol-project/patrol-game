@@ -5,6 +5,7 @@
 #include "PauseState.h"
 #include "GameOverState.h"
 #include "ScoreboardState.h"
+#include "WinState.h"
 
 GameStateMachine::GameStateMachine()
 {
@@ -15,6 +16,8 @@ GameStateMachine::GameStateMachine()
 	gameStatesMap[STATE_GAME_OVER] = new GameOverState();
 	gameStatesMap[STATE_PLAY] = new PlayState();
 	gameStatesMap[STATE_SCOREBOARD] = new ScoreboardState();
+	gameStatesMap[STATE_WIN] = new WinState();
+
 }
 
 void GameStateMachine::changeState()
@@ -60,6 +63,9 @@ void GameStateMachine::changeState()
 			break;
 		case STATE_SCOREBOARD:
 			currentState = gameStatesMap[STATE_SCOREBOARD];
+			break;
+		case STATE_WIN:
+			currentState = gameStatesMap[STATE_WIN];
 			break;
 		}
 

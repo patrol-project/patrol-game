@@ -147,6 +147,7 @@
     <ClCompile Include="BulletHandler.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="EndLevelObject.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="TileLayer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Turret.cpp" />
+    <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedGraphic.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="BulletHandler.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="EndLevelObject.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -216,6 +219,7 @@
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="States.xml" />

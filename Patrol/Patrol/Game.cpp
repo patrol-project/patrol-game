@@ -14,19 +14,20 @@
 #include "Turret.h"
 #include "Bomber.h"
 #include "Obstacle.h"
+#include "EndLevelObject.h"
 
-//Game::Game() :
-//	window(),
-//	renderer(),
-//	running(false),
-//	gameStateMachine(),
-//	m_playerLives(3),
-//	m_scrollSpeed(0.2),
-//	m_bLevelComplete(false),
-//	m_bChangingState(false) {
-//	// start at this level
-//	m_currentLevel = 1;
-//}
+Game::Game() :
+	running(false),
+	m_playerLives(3),
+	m_bLevelComplete(false),
+	m_bChangingState(false) 
+{
+	m_levelFiles.push_back("Resources/Level.tmx");
+	m_levelFiles.push_back("Resources/Level2.tmx");
+
+	// start at this level
+	m_currentLevel = 1;
+}
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool showWindow)
 {
 	//Initialize SDL
@@ -87,6 +88,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	GameObjectFactory::Instance()->registerType("Turret", new TurretCreator());
 	GameObjectFactory::Instance()->registerType("Bomber", new BomberCreator());
 	GameObjectFactory::Instance()->registerType("Obstacle", new ObstacleCreator());
+	GameObjectFactory::Instance()->registerType("EndLevelObject", new EndLevelObjectCreator());
 	// start game loop
 	running = true;
 
@@ -161,7 +163,12 @@ int Game::getPlayerLives() { return m_playerLives; }
 
 void Game::setCurrentLevel(int currentLevel) {
 	m_currentLevel = currentLevel;
-	gameStateMachine->set_next_state(STATE_GAME_OVER);
+	if (m_currentLevel - 1 < m_levelFiles.size()) {
+		gameStateMachine->set_next_state(STATE_PLAY);
+	}
+	else {
+		gameStateMachine->set_next_state(STATE_GAME_OVER);
+	}
 	m_bLevelComplete = false;
 }
 const int Game::getCurrentLevel() { return m_currentLevel; }
