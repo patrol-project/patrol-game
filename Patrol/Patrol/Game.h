@@ -113,6 +113,9 @@ public:
 	bool changingState();
 	void changingState(bool cs);
 
+	void setLatestResult(int time) { latestResult = time; }
+	int getLatestResult() const { return latestResult; }
+
 	std::vector<std::string> getLevelFiles();
 
 	/**
@@ -149,6 +152,8 @@ private:
 	int m_currentLevel;
 	int m_nextLevel;
 	bool m_bLevelComplete;
+
+	int latestResult;
 
 	std::vector<std::string> m_levelFiles;
 

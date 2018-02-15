@@ -86,11 +86,14 @@ bool PlayState::onEnter()
 	}
 
 	std::cout << "entering PlayState\n";
+	startTime = SDL_GetTicks();
 	return true;
 }
 
 bool PlayState::onExit()
 {
+	endTime = SDL_GetTicks();
+	Game::Instance().setLatestResult(endTime-startTime);
 	//m_exiting = true;
 
 	InputHandler::Instance()->reset();

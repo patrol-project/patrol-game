@@ -56,6 +56,19 @@ void WinState::render()
 		{
 			gameObjects[i]->draw();
 		}
+		string fontpath = "Resources/Fonts/Roboto-Regular.ttf";
+		SDL_Surface* text_surface = TTF_RenderText_Blended_Wrapped(TTF_OpenFont(fontpath.c_str(), 24), std::to_string(Game::Instance().getLatestResult()).c_str(), { 0, 0, 0 }, 400);
+		SDL_Texture* ftexture = SDL_CreateTextureFromSurface(Game::Instance().getRenderer(), text_surface);
+		int t_width = text_surface->w; // assign the width of the texture
+		int t_height = text_surface->h; // assign the height of the texture
+		int x = 0;
+		int y = 0;
+		SDL_Rect dst = { x, y, t_width, t_height };
+		SDL_RenderCopy(Game::Instance().getRenderer(), ftexture, NULL, &dst);
+
+		// clean up after ourselves (destroy the surface)
+		SDL_FreeSurface(text_surface);
+		SDL_DestroyTexture(ftexture);
 	}
 }
 

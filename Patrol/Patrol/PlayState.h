@@ -18,4 +18,6 @@ private:
 	static const string playId;
 	vector<GameObject*> gameObjects;
 	Level* pLevel;
+	int startTime;
+	int endTime;
 };

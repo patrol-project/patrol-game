@@ -54,12 +54,16 @@
     </SCOREBOARD>
      <WIN>
         <TEXTURES>
-            <texture filename="Resources/Buttons/main.png" ID="mainbutton"/>
-            <texture filename="Resources/Buttons/restart.png" ID="restartbutton"/>
+            <texture filename="Resources/Buttons/main_menu_a.png" ID="mainbutton"/>
+            <texture filename="Resources/Buttons/next_lvl.png" ID="nextlvlbutton"/>
+            <texture filename="Resources/Buttons/badge_a.png" ID="badge"/>
+            <texture filename="Resources/Buttons/type_a.png" ID="type_name"/>
         </TEXTURES>
         <OBJECTS>
-            <object type="MenuButton" x="200" y="200" width="200" height="80" textureID="mainbutton" numFrames="0" callbackID="1"/>
-            <object type="MenuButton" x="200" y="300" width="200" height="80" textureID="restartbutton" numFrames="0" callbackID="2"/>
+            <object type="MenuButton" x="120" y="250" width="400" height="100" textureID="mainbutton" numFrames="0" callbackID="1"/>
+            <object type="MenuButton" x="120" y="370" width="400" height="100" textureID="nextlvlbutton" numFrames="0" callbackID="2"/>
+            <object type="AnimatedGraphic" x="5" y="5" width="227" height="227" textureID="badge" numFrames="2" animSpeed="2"/>
+            <object type="AnimatedGraphic" x="300" y="50" width="204" height="100" textureID="type_name" numFrames="2" animSpeed="2"/>
         </OBJECTS>
     </WIN>
 </STATES>
