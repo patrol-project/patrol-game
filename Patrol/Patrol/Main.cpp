@@ -31,7 +31,13 @@ int main(int argc, char* args[])
 	{
 		printf("SDL failed to initialize!\n");
 		return 1;
-	}
+	}	
+	//The frames per second timer
+	LTimer fpsTimer;
+
+	//The frames per second cap timer
+	LTimer capTimer;
+	int countedFrames = 0;
 
 	/**
 	 * @brief Load media needed for the start of the game
@@ -43,12 +49,18 @@ int main(int argc, char* args[])
 		return 2;
 	}
 
+	const int SCREEN_FPS = 90;
+	const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
+
+
 	/**
 	 * @brief Main game loop
 	 * 
 	 */
 	while (Game::Instance().get_running())
 	{
+		fpsTimer.start();
+		capTimer.start();
 		Game::Instance().handleInput();
 
 		Game::Instance().update();
@@ -56,6 +68,19 @@ int main(int argc, char* args[])
 		Game::Instance().getStateMachine()->changeState();
 
 		Game::Instance().render();
+		//Calculate and correct fps
+		float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
+		if (avgFPS > 2000000)
+		{
+			avgFPS = 0;
+		}
+		++countedFrames;
+		int frameTicks = capTimer.getTicks();
+		if (frameTicks < SCREEN_TICKS_PER_FRAME)
+		{
+			//Wait remaining time
+			SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+		}
 	}
 
 	/**

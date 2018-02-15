@@ -1,7 +1,7 @@
 #pragma once
 
-#include "SDL.h"
 #include "GameStateMachine.h"
+#include "Timer.h"
 
 /**
  * @brief 
